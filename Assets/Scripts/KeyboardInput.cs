@@ -17,10 +17,12 @@ public class KeyboardInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Get wasd held + sprint key
         float verticalAxis = Input.GetAxis("Vertical");
         float horizontalAxis = Input.GetAxis("Horizontal");
         float sprintAxis = Input.GetAxis("Sprint");
 
+        //If sprint key is held and forward is held then add the sprint axis to the forward axis
         if (sprintAxis > 0.01f && verticalAxis > 0.01f)
         {
             _walkSpeed += sprintAcceleration * Time.deltaTime;
@@ -30,9 +32,8 @@ public class KeyboardInput : MonoBehaviour
         {
             _walkSpeed += Input.GetAxis("Mouse ScrollWheel");
         }
-        
-        _walkSpeed = Mathf.Clamp(_walkSpeed, 0.5f, 2f);
 
+        _walkSpeed = Mathf.Clamp(_walkSpeed, 0.5f, 2f);
 
         verticalAxis *= _walkSpeed;
 
