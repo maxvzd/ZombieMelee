@@ -929,6 +929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 816031489}
+  sprintAcceleration: 0.5
 --- !u!114 &816031494
 MonoBehaviour:
   m_ObjectHideFlags: 0
