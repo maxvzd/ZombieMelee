@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 75105517}
   - component: {fileID: 75105516}
   - component: {fileID: 75105515}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bollard 4
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 191602132}
   - component: {fileID: 191602131}
   - component: {fileID: 191602130}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -408,6 +408,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
       addedObject: {fileID: 816031494}
+    - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 816031495}
   m_SourcePrefab: {fileID: 100100000, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
 --- !u!1 &384031635
 GameObject:
@@ -421,7 +424,7 @@ GameObject:
   - component: {fileID: 384031639}
   - component: {fileID: 384031638}
   - component: {fileID: 384031637}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bollard 2
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -526,7 +529,7 @@ GameObject:
   - component: {fileID: 598066093}
   - component: {fileID: 598066092}
   - component: {fileID: 598066091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bollard 3
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -725,7 +728,7 @@ GameObject:
   - component: {fileID: 716961095}
   - component: {fileID: 716961094}
   - component: {fileID: 716961093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bollard 1
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -827,7 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 790788309}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -945,6 +948,22 @@ MonoBehaviour:
   sensitivity: 200
   firstPersonCamera: {fileID: 963194227}
   maxVerticalAngle: 70
+--- !u!114 &816031495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816031488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc27c6fad396974fb4f731a14bac990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 816031489}
+  capsuleCollider: {fileID: 816031492}
+  physicsObject: {fileID: 816031491}
+  jumpForce: 5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1073,7 @@ GameObject:
   - component: {fileID: 1929891161}
   - component: {fileID: 1929891160}
   - component: {fileID: 1929891159}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ramp 1
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -1159,7 +1178,7 @@ GameObject:
   - component: {fileID: 2117263797}
   - component: {fileID: 2117263796}
   - component: {fileID: 2117263795}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HigherFloor
   m_TagString: Terrain
   m_Icon: {fileID: 0}
