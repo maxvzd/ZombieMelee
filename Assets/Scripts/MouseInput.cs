@@ -4,7 +4,8 @@ public class MouseInput : MonoBehaviour
 {
     public Camera firstPersonCamera;
     public GameObject mouseTarget;
-
+    public float turnSpeed = 0.5f;
+    
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -14,7 +15,11 @@ public class MouseInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        firstPersonCamera.transform.LookAt(mouseTarget.transform.position);
-        transform.LookAt(new Vector3(mouseTarget.transform.position.x, 0,  mouseTarget.transform.position.z));
+        var mouseTargetPosition = mouseTarget.transform.position;
+        firstPersonCamera.transform.LookAt(mouseTargetPosition);
+        
+        Vector3 relativePos = new Vector3(mouseTargetPosition.x, 0,  mouseTargetPosition.z) - transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
     }
 }

@@ -218,7 +218,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8884455347164085475}
-  - component: {fileID: 128805433722650498}
   m_Layer: 0
   m_Name: MouseTargetBase
   m_TagString: Untagged
@@ -242,20 +241,6 @@ Transform:
   - {fileID: 6495879651000350025}
   m_Father: {fileID: 3969552464322097778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &128805433722650498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2813349711899441980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a329b6d5b26ba4a8292112e9ce2e85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxVerticalAngle: 70
-  sensitivity: 100
 --- !u!1 &3326735958971022968
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,10 +610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3e3504b1a0e34478127cc5ab087269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 200
   firstPersonCamera: {fileID: 531260425385090154}
-  maxVerticalAngle: 30
-  MouseTarget: {fileID: 3326735958971022968}
+  mouseTarget: {fileID: 0}
+  turnSpeed: 0.5
 --- !u!1 &7284357814735042625
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +910,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8651900516536268197}
   sprintAcceleration: 0.5
-  mainCamera: {fileID: 531260425385090154}
 --- !u!114 &7039522825531946008
 MonoBehaviour:
   m_ObjectHideFlags: 0
