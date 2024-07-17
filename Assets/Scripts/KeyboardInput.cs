@@ -35,8 +35,7 @@ public class KeyboardInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var myTransform = transform;
-        myTransform.parent.transform.position = myTransform.position;
-        myTransform.localPosition = Vector3.zero;
+        transform.parent.transform.position = transform.position;
+        transform.localPosition = Vector3.zero;
     }
 }
