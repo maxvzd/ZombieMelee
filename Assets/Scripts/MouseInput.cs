@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MouseInput : MonoBehaviour
 {
@@ -16,5 +15,6 @@ public class MouseInput : MonoBehaviour
     void Update()
     {
         firstPersonCamera.transform.LookAt(mouseTarget.transform.position);
+        transform.LookAt(new Vector3(mouseTarget.transform.position.x, 0,  mouseTarget.transform.position.z));
     }
 }
