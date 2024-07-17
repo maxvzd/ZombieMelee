@@ -35,12 +35,6 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(float damage)
     {
         HealthPoints -= damage;

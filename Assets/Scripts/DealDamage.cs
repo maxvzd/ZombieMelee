@@ -1,16 +1,9 @@
-using System;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-
     public Animator animator;
     public Collider weaponCollider;
-    
-    private void OnCollisionEnter(Collision other)
-    {
-        
-    }
 
     private void Update()
     {

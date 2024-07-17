@@ -9,12 +9,6 @@ public class JumpScript : MonoBehaviour
     public Rigidbody physicsObject;
     public float jumpForce;
     private bool _isGrounded;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     
     public void OnAnimatorMove()
     {
@@ -80,5 +74,4 @@ public class JumpScript : MonoBehaviour
         rotatedPoint = rotation * rotatedPoint;
         return centrePoint + rotatedPoint;
     }
-    
 }

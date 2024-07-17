@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class KeyboardInput : MonoBehaviour
 {
@@ -8,12 +6,6 @@ public class KeyboardInput : MonoBehaviour
     private float _walkSpeed = 1f;
     public float sprintAcceleration = 0.3f;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -39,5 +31,12 @@ public class KeyboardInput : MonoBehaviour
 
         animator.SetFloat("Vertical", verticalAxis);
         animator.SetFloat("Horizontal", horizontalAxis);
+    }
+
+    private void FixedUpdate()
+    {
+        var myTransform = transform;
+        myTransform.parent.transform.position = myTransform.position;
+        myTransform.localPosition = Vector3.zero;
     }
 }
