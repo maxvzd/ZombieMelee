@@ -18,7 +18,7 @@ public class MouseInput : MonoBehaviour
         var mouseTargetPosition = mouseTarget.transform.position;
         firstPersonCamera.transform.LookAt(mouseTargetPosition);
         
-        Vector3 relativePos = new Vector3(mouseTargetPosition.x, 0,  mouseTargetPosition.z) - transform.position;
+        Vector3 relativePos = new Vector3(mouseTargetPosition.x, transform.position.y,  mouseTargetPosition.z) - transform.position;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
         transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
     }
