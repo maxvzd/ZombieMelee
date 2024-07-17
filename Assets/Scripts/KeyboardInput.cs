@@ -1,11 +1,22 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class KeyboardInput : MonoBehaviour
 {
     public Animator animator;
-    private float _walkSpeed = 1f;
+    private float _walkSpeedModifier = 1f;
     public float sprintAcceleration = 0.3f;
-    
+    public float maxSpeed = 3f;
+    public float weaponSlowDebuff = 0.5f;
+
+    private Attack _attackClass;
+
+    private void Start()
+    {
+        _attackClass = GetComponent<Attack>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -14,20 +25,32 @@ public class KeyboardInput : MonoBehaviour
         float horizontalAxis = Input.GetAxis("Horizontal");
         float sprintAxis = Input.GetAxis("Sprint");
 
+
+        float maxSpeedModifier = 0.66f;
         //If sprint key is held and forward is held then add the sprint axis to the forward axis
-        if (sprintAxis > 0.01f && verticalAxis > 0.01f)
+        if (sprintAxis > 0.01f && verticalAxis > 0.01f && !_attackClass.IsWeaponRaised)
         {
-            _walkSpeed += sprintAcceleration * Time.deltaTime;
-            verticalAxis += sprintAxis;
+            _walkSpeedModifier += sprintAcceleration * Time.deltaTime;
+            maxSpeedModifier = 1f;
         }
         else
         {
-            _walkSpeed += Input.GetAxis("Mouse ScrollWheel");
+            _walkSpeedModifier += Input.GetAxis("Mouse ScrollWheel");
         }
 
-        _walkSpeed = Mathf.Clamp(_walkSpeed, 0.5f, 2f);
+        _walkSpeedModifier = Mathf.Clamp(_walkSpeedModifier, 0.5f, maxSpeed * maxSpeedModifier);
 
-        verticalAxis *= _walkSpeed;
+        if (verticalAxis > 0.01f)
+        {
+            verticalAxis *= _walkSpeedModifier;
+        }
+        
+        
+        if (_attackClass.IsWeaponRaised)
+        {
+            verticalAxis *= weaponSlowDebuff;
+            horizontalAxis *= weaponSlowDebuff;
+        }
 
         animator.SetFloat("Vertical", verticalAxis);
         animator.SetFloat("Horizontal", horizontalAxis);

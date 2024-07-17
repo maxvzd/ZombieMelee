@@ -857,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headLocationObject: {fileID: 2813349711899441980}
   mouseTargetPosition: {fileID: 3326735958971022968}
-  targetableRange: 5
+  targetableRange: 1.2
   reticule: {fileID: 528820241810472607}
 --- !u!1 &6329646400842651577
 GameObject:
@@ -1158,7 +1158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8651900516536268197}
-  sprintAcceleration: 0.5
+  sprintAcceleration: 1
+  maxSpeed: 3
+  weaponSlowDebuff: 0.66
 --- !u!114 &7039522825531946008
 MonoBehaviour:
   m_ObjectHideFlags: 0
