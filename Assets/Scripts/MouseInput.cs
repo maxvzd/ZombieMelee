@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MouseInput : MonoBehaviour
 {
@@ -14,6 +11,12 @@ public class MouseInput : MonoBehaviour
 
     void Start()
     {
+    }
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
