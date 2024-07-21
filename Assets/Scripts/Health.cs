@@ -5,6 +5,7 @@ public class Health : MonoBehaviour
 {
     private float _healthPoints = 100;
     private RagdollControl _ragdollControl;
+    private AudioSource _hitAudioSource;
 
     public delegate void OnDeathEventHandler(object sender, EventArgs e);
     public event OnDeathEventHandler OnDeath;
@@ -44,11 +45,13 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HealthPoints -= damage;
+        _hitAudioSource.Play();
         Debug.Log("HealthLeft: " + HealthPoints);
     }
 
     private void Awake()
     {
         _ragdollControl = GetComponent<RagdollControl>();
+        _hitAudioSource = GetComponent<AudioSource>();
     }
 }

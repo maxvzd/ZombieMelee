@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
     public Animator animator;
     public Collider weaponCollider;
+    private AudioSource _weaponSwingAudioSource;
 
     private void Update()
     {
@@ -11,6 +13,17 @@ public class DealDamage : MonoBehaviour
         {
             weaponCollider.enabled = true;
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            _weaponSwingAudioSource.Play();
+
+        }
+    }
+
+    private void Awake()
+    {
+        _weaponSwingAudioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
