@@ -4,6 +4,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private float _healthPoints = 100;
+    private RagdollControl _ragdollControl;
+
     public delegate void OnDeathEventHandler(object sender, EventArgs e);
     public event OnDeathEventHandler OnDeath;
 
@@ -32,12 +34,21 @@ public class Health : MonoBehaviour
     private void OnOnDeath(object sender, EventArgs e)
     {
         Debug.Log("dying!!!!!");
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        if (_ragdollControl != null)
+        {
+            _ragdollControl.EnableRagdoll();
+        }
     }
 
     public void TakeDamage(float damage)
     {
         HealthPoints -= damage;
         Debug.Log("HealthLeft: " + HealthPoints);
+    }
+
+    private void Awake()
+    {
+        _ragdollControl = GetComponent<RagdollControl>();
     }
 }
