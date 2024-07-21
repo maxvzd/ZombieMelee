@@ -718,7 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonCamera: {fileID: 531260425385090154}
   mouseTarget: {fileID: 3326735958971022968}
-  turnSpeed: 1.5
+  turnSpeed: 20
 --- !u!95 &6760424528720446547
 Animator:
   serializedVersion: 5

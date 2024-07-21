@@ -1464,14 +1464,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 107362332999463201, guid: 035b143795a7f6549898e86ace37f124, type: 3}
-      propertyPath: weaponSlowDebuff
-      value: 0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 107362332999463201, guid: 035b143795a7f6549898e86ace37f124, type: 3}
-      propertyPath: sprintAcceleration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1079844492086881775, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
@@ -1528,10 +1520,6 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 882587811}
-    - target: {fileID: 4971957867237892885, guid: 035b143795a7f6549898e86ace37f124, type: 3}
-      propertyPath: targetableRange
-      value: 1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5911794851141068260, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Name
       value: Player
