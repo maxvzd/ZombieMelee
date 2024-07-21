@@ -35,6 +35,7 @@ public class DealDamage : MonoBehaviour
             {
                 healthComponent.TakeDamage(50f);
             }
+            animator.SetTrigger("SwingImpact");
             weaponCollider.enabled = false;
         }
     }
