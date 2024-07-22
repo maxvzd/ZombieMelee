@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class MainHealth : MonoBehaviour
 {
     private float _healthPoints = 100;
     private RagdollControl _ragdollControl;
@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     [SerializeField] Animator animator;
 
     private Renderer _renderer;
+
+    private LimbHealth[] _limbHealth;
     //private Collider[] _ragdollColliders;
 
     public delegate void OnDeathEventHandler(object sender, EventArgs e);
@@ -44,7 +46,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage, Vector3 hitLocation)
+    private void TakeDamage(float damage, Vector3 hitLocation)
     {
         HealthPoints -= damage;
         _hitAudioSource.Play();
@@ -59,6 +61,17 @@ public class Health : MonoBehaviour
     {
         _ragdollControl = GetComponent<RagdollControl>();
         _hitAudioSource = GetComponent<AudioSource>();
+
+        _limbHealth = GetComponentsInChildren<LimbHealth>();
+        foreach (LimbHealth limbHealth in _limbHealth)
+        {
+            limbHealth.OnLimbHit += OnLimbHit; 
+        }
+    }
+
+    private void OnLimbHit(object sender, HitEventArgs e)
+    {
+        TakeDamage(e.Damage, e.HitLocation);
     }
 
     private void HitReact(Vector3 hitLocation)

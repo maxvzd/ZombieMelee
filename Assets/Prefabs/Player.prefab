@@ -205,7 +205,7 @@ Transform:
   - {fileID: 4312542545937046249}
   - {fileID: 247409511595500586}
   - {fileID: 8149578262336809689}
-  m_Father: {fileID: 3969552464322097778}
+  m_Father: {fileID: 8651900516546075199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5089313394056168304
 MonoBehaviour:
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a329b6d5b26ba4a8292112e9ce2e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVerticalAngle: 75
+  maxVerticalAngle: 60
   sensitivity: 100
 --- !u!1 &2958428929448130037
 GameObject:
@@ -718,7 +718,6 @@ Transform:
   m_Children:
   - {fileID: 8651900516546075199}
   - {fileID: 8884455347164085475}
-  - {fileID: 5775532708737805178}
   - {fileID: 8964417722998665791}
   - {fileID: 3347805203071417508}
   m_Father: {fileID: 0}
@@ -818,11 +817,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5911794851141068260}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
   m_Controller: {fileID: 9100000, guid: 08b21c0deb49d48469485b5a054c7cd4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1248,7 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530ef940e37340b47b43306d26da62a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8651900516536268197}
+  animator: {fileID: 0}
   weaponCollider: {fileID: 4558186537830987779}
   weaponDamage: 5
   impactWait: 0.25
@@ -1415,9 +1414,13 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 08b21c0deb49d48469485b5a054c7cd4, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 400122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5775532708737805178}
     - targetCorrespondingSourceObject: {fileID: 400066, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3482972300317483914}
@@ -1441,11 +1444,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 125574527067819037}
   m_SourcePrefab: {fileID: 100100000, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
---- !u!95 &8651900516536268197 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
-  m_PrefabInstance: {fileID: 8651900516545675461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8651900516545644511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
@@ -1463,7 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d32c4de74f49b428316837e8767032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8651900516536268197}
+  animator: {fileID: 6760424528720446547}
   sprintAcceleration: 1
   maxSpeed: 3
   weaponSlowDebuff: 0.66
@@ -1479,7 +1477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc27c6fad396974fb4f731a14bac990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8651900516536268197}
+  animator: {fileID: 6760424528720446547}
   capsuleCollider: {fileID: 980586074602730404}
   physicsObject: {fileID: 215542514212098997}
   jumpForce: 5
@@ -1545,7 +1543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b82a9892f14d14b8015f1d68e5d475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8651900516536268197}
+  animator: {fileID: 6760424528720446547}
 --- !u!4 &8651900516546075141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400064, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
