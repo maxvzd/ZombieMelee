@@ -4,6 +4,7 @@ using UnityEngine;
 public class LimbHealth : MonoBehaviour
 {
     private float _health = 100f;
+    [SerializeField] ParticleSystem BloodSplatter;  
 
     public float Health
     {
@@ -27,6 +28,7 @@ public class LimbHealth : MonoBehaviour
     public void HitLimb(float damage, Vector3 hitLocation)
     {
         Health -= damage;
+        Destroy(Instantiate(BloodSplatter, hitLocation, transform.rotation).gameObject, .5f);
         OnLimbHit?.Invoke(this, new HitEventArgs(damage, hitLocation));
     }
 }
