@@ -1199,10 +1199,34 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 882587811}
+    - target: {fileID: 1295521365530647670, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 882587811}
+    - target: {fileID: 1475652056532221617, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 882587811}
+    - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Length
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item1.weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 882587811}
+    - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item1.transform
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3633618567472193379, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 

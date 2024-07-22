@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
@@ -6,6 +7,9 @@ public class DealDamage : MonoBehaviour
     public Animator animator;
     public Collider weaponCollider;
     private AudioSource _weaponSwingAudioSource;
+    [SerializeField] private float weaponDamage;
+    [SerializeField] private float impactWait;
+    [SerializeField] private float recoilAmount;
 
     private void Update()
     {
@@ -30,13 +34,27 @@ public class DealDamage : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(1).IsName("swing bat"))
         {
+            Debug.Log(other.transform.parent.name);
+            
             Health healthComponent = other.gameObject.GetComponent<Health>();
             if (healthComponent != null)
             {
-                healthComponent.TakeDamage(50f);
+                healthComponent.TakeDamage(weaponDamage);
             }
-            animator.SetTrigger("SwingImpact");
+            animator.SetFloat("SwingSpeed", -recoilAmount);
             weaponCollider.enabled = false;
+            StartCoroutine(WaitForSwingSpeed(animator));
         }
     }
+
+    private IEnumerator WaitForSwingSpeed(Animator a)
+    {
+        yield return new WaitForSeconds(impactWait);
+        
+        a.SetFloat("SwingSpeed", 1f);
+        animator.SetTrigger("SwingImpact");
+
+    }
+    
+    
 }

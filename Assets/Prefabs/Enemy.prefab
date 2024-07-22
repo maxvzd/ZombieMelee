@@ -9,8 +9,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Height
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Radius
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Center.y
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 3882500667899693184, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Name
