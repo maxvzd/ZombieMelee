@@ -6,6 +6,10 @@ public class Health : MonoBehaviour
     private float _healthPoints = 100;
     private RagdollControl _ragdollControl;
     private AudioSource _hitAudioSource;
+    [SerializeField] Animator animator;
+
+    private Renderer _renderer;
+    //private Collider[] _ragdollColliders;
 
     public delegate void OnDeathEventHandler(object sender, EventArgs e);
     public event OnDeathEventHandler OnDeath;
@@ -34,18 +38,20 @@ public class Health : MonoBehaviour
 
     private void OnOnDeath(object sender, EventArgs e)
     {
-        Debug.Log("dying!!!!!");
-        //Destroy(gameObject);
         if (_ragdollControl != null)
         {
             _ragdollControl.EnableRagdoll();
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector3 hitLocation)
     {
         HealthPoints -= damage;
         _hitAudioSource.Play();
+        
+        HitReact(hitLocation);
+        //Debug.DrawLine (sourcePosition, sourcePosition + direction * Vector3.Distance(posIgnoreY, sourcePosition), Color.red, Mathf.Infinity);
+        
         Debug.Log("HealthLeft: " + HealthPoints);
     }
 
@@ -53,5 +59,21 @@ public class Health : MonoBehaviour
     {
         _ragdollControl = GetComponent<RagdollControl>();
         _hitAudioSource = GetComponent<AudioSource>();
+    }
+
+    private void HitReact(Vector3 hitLocation)
+    {
+        Vector3 pos = transform.position;
+        Vector3 posIgnoreY = new Vector3(pos.x, hitLocation.y, pos.z);
+        Vector3 direction = (posIgnoreY - hitLocation).normalized;
+        
+        animator.SetFloat("XForce", direction.x);
+        animator.SetFloat("ZForce", -direction.z);
+
+        float hitHeight = hitLocation.y - pos.y;
+        animator.SetFloat("HitHeight", hitHeight);
+        
+        
+        animator.SetTrigger("DamageTrigger");
     }
 }

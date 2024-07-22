@@ -892,6 +892,11 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 4898577013709514951, guid: 41a363de6b113d14fbd0e7e81a83186c, type: 3}
   m_PrefabInstance: {fileID: 1798844625856231094}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1769635180 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7866569154905024758, guid: 41a363de6b113d14fbd0e7e81a83186c, type: 3}
+  m_PrefabInstance: {fileID: 1798844625856231094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1929891157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1139,10 @@ PrefabInstance:
       propertyPath: m_Swing1Limit.limit
       value: 43
       objectReference: {fileID: 0}
+    - target: {fileID: 3523915452576082854, guid: 41a363de6b113d14fbd0e7e81a83186c, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1769635180}
     - target: {fileID: 7866569154905024758, guid: 41a363de6b113d14fbd0e7e81a83186c, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1270,6 +1279,10 @@ PrefabInstance:
     - target: {fileID: 3969552464322097778, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326459995356156972, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: maxVerticalAngle
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4553608705365279037, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform

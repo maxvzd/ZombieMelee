@@ -34,12 +34,14 @@ public class DealDamage : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(1).IsName("swing bat"))
         {
-            Debug.Log(other.transform.parent.name);
+            //Debug.Log(other.transform.parent.name);
+
+            Vector3 closestPointOfWeapon = weaponCollider.ClosestPoint(other.transform.position);
             
             Health healthComponent = other.gameObject.GetComponent<Health>();
             if (healthComponent != null)
             {
-                healthComponent.TakeDamage(weaponDamage);
+                healthComponent.TakeDamage(weaponDamage, closestPointOfWeapon);
             }
             animator.SetFloat("SwingSpeed", -recoilAmount);
             weaponCollider.enabled = false;
@@ -55,6 +57,4 @@ public class DealDamage : MonoBehaviour
         animator.SetTrigger("SwingImpact");
 
     }
-    
-    
 }

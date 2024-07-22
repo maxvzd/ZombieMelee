@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a329b6d5b26ba4a8292112e9ce2e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVerticalAngle: 60
+  maxVerticalAngle: 75
   sensitivity: 100
 --- !u!1 &2958428929448130037
 GameObject:

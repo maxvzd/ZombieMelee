@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Height
-      value: 0.26
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Radius
-      value: 0.09
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Enabled
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715293496669692385, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Center.y
-      value: 0.13
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 3882500667899693184, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Name
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3882500667900122464, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.19
+      value: 0.173
       objectReference: {fileID: 0}
     - target: {fileID: 3882500667900122464, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3882500667909192442, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7286859bae5b792408df2466d7102633, type: 2}
     - target: {fileID: 4894846958770459170, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: _animator
       value: 
@@ -84,14 +88,38 @@ PrefabInstance:
       propertyPath: mainRigidBody
       value: 
       objectReference: {fileID: 3153987190789984}
+    - target: {fileID: 4981218403906211289, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Swing1Limit.limit
+      value: 43
+      objectReference: {fileID: 0}
     - target: {fileID: 5520148629821711668, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Height
       value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500569676113042459, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.28138602
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500569676113042459, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.000000013969839
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500569676113042459, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.00000007718336
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500569676113042459, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: m_Swing1Limit.limit
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 6613626062194036532, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
       propertyPath: m_Height
       value: 0.43
       objectReference: {fileID: 0}
+    - target: {fileID: 7506855516893067690, guid: f9bf7569121268b42a1d32da99ef7da0, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 7866569154905024758}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
