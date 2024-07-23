@@ -319,7 +319,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 75
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -611,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1162170882682391956
 Transform:
   m_ObjectHideFlags: 0
@@ -639,14 +639,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 0.5
   m_Data:
-    m_ConstrainedObject: {fileID: 8651900516546075543}
+    m_ConstrainedObject: {fileID: 8651900516546075567}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
         transform: {fileID: 0}
-        weight: 0
+        weight: 1
       m_Item1:
         transform: {fileID: 0}
         weight: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
     m_Offset: {x: 0, y: 0, z: 0}
     m_MinLimit: -180
     m_MaxLimit: 180
-    m_AimAxis: 2
+    m_AimAxis: 1
     m_UpAxis: 4
     m_WorldUpType: 0
     m_WorldUpObject: {fileID: 0}
@@ -679,7 +679,7 @@ MonoBehaviour:
     m_MaintainOffset: 0
     m_ConstrainedAxes:
       x: 1
-      y: 1
+      y: 0
       z: 1
 --- !u!1 &5911794851141068260
 GameObject:
@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2130098311077234062}
+  armAimConstraint: {fileID: 1295521365530647670}
 --- !u!114 &1571821473718881962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ MonoBehaviour:
     m_WorldUpType: 0
     m_WorldUpObject: {fileID: 0}
     m_WorldUpAxis: 4
-    m_MaintainOffset: 0
+    m_MaintainOffset: 1
     m_ConstrainedAxes:
       x: 0
       y: 1
@@ -1100,9 +1101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2130098311077234062}
   weaponCollider: {fileID: 4558186537830987779}
-  weaponDamage: 5
+  weaponDamage: 25
   impactWait: 0.25
   recoilAmount: 0.1
+  weaponSwingTime: 1
 --- !u!82 &6082914547903230843
 AudioSource:
   m_ObjectHideFlags: 0

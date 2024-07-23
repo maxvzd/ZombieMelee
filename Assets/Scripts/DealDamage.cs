@@ -1,33 +1,26 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-    public Animator animator;
-    public Collider weaponCollider;
-    private AudioSource _weaponSwingAudioSource;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Collider weaponCollider;
     [SerializeField] private float weaponDamage;
     [SerializeField] private float impactWait;
     [SerializeField] private float recoilAmount;
+    [SerializeField] private float weaponSwingTime;
+    
+    public float WeaponSwingTime => weaponSwingTime;
+    public AudioSource WeaponSwingAudioSource { get; private set; }
 
-    private void Update()
+    public void ReadyWeaponForSwing()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            weaponCollider.enabled = true;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            _weaponSwingAudioSource.Play();
-
-        }
+        weaponCollider.enabled = true;
     }
 
     private void Awake()
     {
-        _weaponSwingAudioSource = GetComponent<AudioSource>();
+        WeaponSwingAudioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,11 +36,11 @@ public class DealDamage : MonoBehaviour
             }
             animator.SetFloat("SwingSpeed", -recoilAmount);
             weaponCollider.enabled = false;
-            StartCoroutine(WaitForSwingSpeed(animator));
+            StartCoroutine(WaitForImpactFinish(animator));
         }
     }
 
-    private IEnumerator WaitForSwingSpeed(Animator a)
+    private IEnumerator WaitForImpactFinish(Animator a)
     {
         yield return new WaitForSeconds(impactWait);
         
