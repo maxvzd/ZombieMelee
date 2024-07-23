@@ -40,10 +40,10 @@ public class KeyboardInput : MonoBehaviour
 
         _walkSpeedModifier = Mathf.Clamp(_walkSpeedModifier, 0.5f, maxSpeed * maxSpeedModifier);
 
-        if (verticalAxis > 0.01f)
-        {
+        //if (verticalAxis > 0.01f)
+        //{
             verticalAxis *= _walkSpeedModifier;
-        }
+        //}
         
         
         if (_attackClass.IsWeaponRaised)
@@ -58,7 +58,9 @@ public class KeyboardInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.parent.transform.position = transform.position;
-        transform.localPosition = Vector3.zero;
+
+        Transform childTransform = transform.GetChild(0);
+        transform.position = childTransform.position;
+        childTransform.localPosition = Vector3.zero;
     }
 }

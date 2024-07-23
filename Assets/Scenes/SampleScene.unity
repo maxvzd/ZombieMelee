@@ -333,6 +333,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 790788309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &277372904 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2130098311077234062, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+  m_PrefabInstance: {fileID: 2812753210375332732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &330511075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1229,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 2984745637406916529, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 2812753210375332733}
+      objectReference: {fileID: 277372904}
     - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
@@ -1291,6 +1296,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7039522825531946008, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 277372904}
+    - target: {fileID: 7039522825531946008, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: jumpForce
       value: 400
       objectReference: {fileID: 0}
@@ -1299,11 +1308,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 035b143795a7f6549898e86ace37f124, type: 3}
---- !u!95 &2812753210375332733 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6760424528720446547, guid: 035b143795a7f6549898e86ace37f124, type: 3}
-  m_PrefabInstance: {fileID: 2812753210375332732}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
