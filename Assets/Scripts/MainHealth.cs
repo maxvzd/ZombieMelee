@@ -52,8 +52,6 @@ public class MainHealth : MonoBehaviour
         _hitAudioSource.Play();
         
         HitReact(hitLocation);
-        //Debug.DrawLine (sourcePosition, sourcePosition + direction * Vector3.Distance(posIgnoreY, sourcePosition), Color.red, Mathf.Infinity);
-        
         Debug.Log("HealthLeft: " + HealthPoints);
     }
 
@@ -78,14 +76,15 @@ public class MainHealth : MonoBehaviour
     {
         Vector3 pos = transform.position;
         Vector3 posIgnoreY = new Vector3(pos.x, hitLocation.y, pos.z);
-        Vector3 direction = (posIgnoreY - hitLocation).normalized;
+        Vector3 direction = (hitLocation - posIgnoreY).normalized;
         
+        //Debug.DrawLine (hitLocation, hitLocation + direction * Vector3.Distance(posIgnoreY, hitLocation), Color.red, 2);
+
         animator.SetFloat("XForce", direction.x);
         animator.SetFloat("ZForce", -direction.z);
 
         float hitHeight = hitLocation.y - pos.y;
         animator.SetFloat("HitHeight", hitHeight);
-        
         
         animator.SetTrigger("DamageTrigger");
     }

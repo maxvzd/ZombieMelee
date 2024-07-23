@@ -1226,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 882587811}
+    - target: {fileID: 2984745637406916529, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: weaponDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3337122017997718216, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
@@ -1281,6 +1285,10 @@ PrefabInstance:
     - target: {fileID: 5911794851141068260, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082914547903230843, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: MinDistance
+      value: 0.74354553
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

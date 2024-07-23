@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class DealDamage : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(1).IsName("swing bat") && !other.CompareTag("IgnoreWeapon"))
         {
-            Vector3 closestPointOfWeapon = weaponCollider.ClosestPoint(other.transform.position);
+            Vector3 closestPointOfWeapon = weaponCollider.gameObject.transform.parent.transform.position;
             
             LimbHealth healthComponent = other.gameObject.GetComponent<LimbHealth>();
             if (healthComponent != null)
