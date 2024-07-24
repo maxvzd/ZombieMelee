@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 public class KeyboardInput : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] private Animator animator;
     private float _walkSpeedModifier = 1f;
     public float sprintAcceleration = 0.3f;
     public float maxSpeed = 3f;
@@ -19,6 +19,11 @@ public class KeyboardInput : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        Movement();
+    }
+
+    private void Movement()
     {
         // Get wasd held + sprint key
         float verticalAxis = Input.GetAxis("Vertical");
@@ -42,7 +47,7 @@ public class KeyboardInput : MonoBehaviour
 
         //if (verticalAxis > 0.01f)
         //{
-            verticalAxis *= _walkSpeedModifier;
+        verticalAxis *= _walkSpeedModifier;
         //}
         
         
