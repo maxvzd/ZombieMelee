@@ -35,6 +35,7 @@ public class AimingReticule : MonoBehaviour
         {
             Debug.DrawRay(headLocation, -rayDirection, Color.red);
             reticule.SetActive(false);
+            CurrentlySelectedItem = null;
         }
         //
     }
