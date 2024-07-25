@@ -27,7 +27,8 @@ public class DealDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (animator.GetCurrentAnimatorStateInfo(1).IsName("swing bat") && !other.CompareTag("IgnoreWeapon"))
+        //TODO IMPROVE THIS TO USE ANIMATION EVENTS AND NOT CHECK ANIMATOR STATE
+        if (animator.GetCurrentAnimatorStateInfo(3).IsName("swing bat") && !other.CompareTag("IgnoreWeapon"))
         {
             Vector3 closestPointOfWeapon = weaponCollider.gameObject.transform.parent.transform.position;
             

@@ -14,23 +14,22 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!ReferenceEquals(_holsterUnHolsterScript, null) && _holsterUnHolsterScript.IsWeaponEquipped && !ReferenceEquals(_weapon, null))
+        if (ReferenceEquals(_holsterUnHolsterScript, null) || !_holsterUnHolsterScript.IsWeaponEquipped || ReferenceEquals(_weapon, null)) return;
+        
+        if (Input.GetMouseButton(0) && !_isSwingingWeapon)
         {
-            if (Input.GetMouseButton(0) && !_isSwingingWeapon)
-            {
-                IsWeaponRaised = true;
-                _weapon.ReadyWeaponForSwing();
-            }
-            else if(IsWeaponRaised && !_isSwingingWeapon)
-            {
-                IsWeaponRaised = false;
-                _isSwingingWeapon = true;
-                _weapon.WeaponSwingAudioSource.Play();
-                armAimConstraint.weight = 0.5f;
-                StartCoroutine(WeaponSwingCooldown());
-            }
-            animator.SetBool(Constants.IsMouseHeld, IsWeaponRaised); 
+            IsWeaponRaised = true;
+            _weapon.ReadyWeaponForSwing();
         }
+        else if(IsWeaponRaised && !_isSwingingWeapon)
+        {
+            IsWeaponRaised = false;
+            _isSwingingWeapon = true;
+            _weapon.WeaponSwingAudioSource.Play();
+            armAimConstraint.weight = 0.5f;
+            StartCoroutine(WeaponSwingCooldown());
+        }
+        animator.SetBool(Constants.IsMouseHeld, IsWeaponRaised);
     }
 
     private void Awake()

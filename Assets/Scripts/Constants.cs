@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class Constants
 {
+    //Animator
     public static readonly int HandIKWeightAnimator = Animator.StringToHash("HandIKWeight");
     public static readonly int WeaponEquipped = Animator.StringToHash("IsWeaponEquipped");
     public static readonly int EquipWeaponTrigger = Animator.StringToHash("EquipWeaponTrigger");
@@ -12,14 +13,29 @@ public static class Constants
     public static readonly int ZForce = Animator.StringToHash("ZForce");
     public static readonly int HitHeight = Animator.StringToHash("HitHeight");
     public static readonly int DamageTrigger = Animator.StringToHash("DamageTrigger");
+    public static readonly int Vertical = Animator.StringToHash("Vertical");
+    public static readonly int Horizontal = Animator.StringToHash("Horizontal");
+    public static readonly int IsBackpackOut = Animator.StringToHash("IsBackpackOut");
+    public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
+    
+    //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 
 
     public const float
         AnimatorDampingCoefficient =
             4.5f; //https://discussions.unity.com/t/damptime-and-deltatime-in-setfloat-parameters/91994/4
 
-    public const string MouseX = "Mouse X";
-    public const string MouseY = "Mouse Y";
+    //Key Names
+    public const string InputMouseX = "Mouse X";
+    public const string InputMouseY = "Mouse Y";
+    public const string InputInventory = "Inventory";
+    public const string InputVertical = "Vertical";
+    public const string InputHorizontal = "Horizontal";
+    public const string InputSprint = "Sprint";
+    public const string InputMouseScrollWheel = "Mouse ScrollWheel";
+    public const string InputUse = "Use";
+    
+    //Layers
     public const string HittableObjectLayer = "HittableObject";
     public const string PickupableObjectLayer = "PickupableObject";
 }

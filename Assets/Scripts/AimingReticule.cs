@@ -8,10 +8,8 @@ public class AimingReticule : MonoBehaviour
 
     public GameObject reticule;
     public GameObject CurrentlySelectedItem { get; private set; }
-
-    // Start is called before the first frame update
-
-    // Update is called once per frame
+    public GameObject ItemAtTimeOfSelection { get; private set; }
+    
     void Update()
     {
         var headLocation = headLocationObject.transform.position;
@@ -24,12 +22,15 @@ public class AimingReticule : MonoBehaviour
             if (CurrentlySelectedItem != hitInfo.transform.gameObject)
             {
                 CurrentlySelectedItem = hitInfo.transform.gameObject;
-                //Debug.Log(CurrentlySelectedItem.name);
             }
 
             Debug.DrawRay(headLocation, -rayDirection, Color.green);
             reticule.transform.position = hitInfo.point;
             reticule.SetActive(true);
+            if (Input.GetButtonDown(Constants.InputUse))
+            {
+                ItemAtTimeOfSelection = CurrentlySelectedItem;
+            }
         }
         else
         {

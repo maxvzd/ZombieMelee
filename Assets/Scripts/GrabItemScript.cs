@@ -10,8 +10,18 @@ public class GrabItemScript : MonoBehaviour
     [SerializeField] private TwoBoneIKConstraint rightArmIKConstraint;
     [SerializeField] private Collider handCollider;
     [SerializeField] private GameObject handSocket;
-    private bool _itemPickedUp;
+    private bool _isHoldingItem;
     private Collider _pickedUpItem;
+    
+    private bool IsHoldingItem
+    {
+        get => _isHoldingItem;
+        set
+        {
+            animator.SetBool(Constants.IsHoldingItem, value);
+            _isHoldingItem = value;
+        }
+    }
 
     private bool IsReachingForItem => rightArmIKConstraint.weight > 0.2f;
 
@@ -23,12 +33,12 @@ public class GrabItemScript : MonoBehaviour
 
     private void OnTriggerEnterHeard(Collider other)
     {
-        //TODO
         GameObject itemToBePickedUp = other.gameObject;
 
-        if (itemToBePickedUp == _reticule.CurrentlySelectedItem && IsReachingForItem)
+        if (itemToBePickedUp == _reticule.ItemAtTimeOfSelection && IsReachingForItem)
         {
-            _itemPickedUp = true;
+            IsHoldingItem = true;
+            
             rightArmIKConstraint.weight = 0;
             animator.SetFloat(Constants.HandIKWeightAnimator, 0);
 
@@ -45,25 +55,23 @@ public class GrabItemScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Use"))
+        if (Input.GetButtonDown(Constants.InputUse))
         {
-            if (!_itemPickedUp && _reticule.CurrentlySelectedItem != null)
+            if (!IsHoldingItem && _reticule.CurrentlySelectedItem != null)
             {
                 ikHandTarget.transform.parent = _reticule.CurrentlySelectedItem.transform;
                 ikHandTarget.transform.localPosition = Vector3.zero;
 
                 ikHandTarget.transform.localEulerAngles = _reticule.CurrentlySelectedItem.transform.rotation * rightArmIKConstraint.transform.forward;
-                _itemPickedUp = false;
+                IsHoldingItem = false;
                 StartCoroutine(UpdateIKWeight());
             }
-            else if(_itemPickedUp)
+            else if(IsHoldingItem)
             {
-                Debug.Log("Dropping item...");
                 _pickedUpItem.transform.SetParent(null);
-                //_pickedUpItem.gameObject.transform.parent = null;
                 _pickedUpItem.attachedRigidbody.isKinematic = false;
                 _pickedUpItem.isTrigger = false;
-                _itemPickedUp = false;
+                IsHoldingItem = false;
             }
         }
     }
@@ -72,7 +80,7 @@ public class GrabItemScript : MonoBehaviour
     {
         float weight = 0f;
 
-        while (weight < 1 && !_itemPickedUp)
+        while (weight < 1 && !IsHoldingItem)
         {
             animator.SetFloat(Constants.HandIKWeightAnimator, 1, 1 / Constants.AnimatorDampingCoefficient, Time.deltaTime);
             weight = animator.GetFloat(Constants.HandIKWeightAnimator);
