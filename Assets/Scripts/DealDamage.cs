@@ -10,7 +10,8 @@ public class DealDamage : MonoBehaviour
     [SerializeField] private float impactWait;
     [SerializeField] private float recoilAmount;
     [SerializeField] private float weaponSwingTime;
-    
+
+
     public float WeaponSwingTime => weaponSwingTime;
     public AudioSource WeaponSwingAudioSource { get; private set; }
 
@@ -35,7 +36,7 @@ public class DealDamage : MonoBehaviour
             {
                 healthComponent.HitLimb(weaponDamage, closestPointOfWeapon);
             }
-            animator.SetFloat("SwingSpeed", -recoilAmount);
+            animator.SetFloat(Constants.SwingSpeed, -recoilAmount);
             weaponCollider.enabled = false;
             StartCoroutine(WaitForImpactFinish(animator));
         }
@@ -45,7 +46,7 @@ public class DealDamage : MonoBehaviour
     {
         yield return new WaitForSeconds(impactWait);
         
-        a.SetFloat("SwingSpeed", 1f);
-        animator.SetTrigger("SwingImpact");
+        a.SetFloat(Constants.SwingSpeed, 1f);
+        animator.SetTrigger(Constants.SwingImpact);
     }
 }

@@ -3,15 +3,12 @@ using UnityEngine;
 
 public class MainHealth : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     private float _healthPoints = 100;
     private RagdollControl _ragdollControl;
     private AudioSource _hitAudioSource;
-    [SerializeField] Animator animator;
-
     private Renderer _renderer;
-
     private LimbHealth[] _limbHealth;
-    //private Collider[] _ragdollColliders;
 
     public delegate void OnDeathEventHandler(object sender, EventArgs e);
     public event OnDeathEventHandler OnDeath;
@@ -80,12 +77,12 @@ public class MainHealth : MonoBehaviour
         
         //Debug.DrawLine (hitLocation, hitLocation + direction * Vector3.Distance(posIgnoreY, hitLocation), Color.red, 2);
 
-        animator.SetFloat("XForce", direction.x);
-        animator.SetFloat("ZForce", -direction.z);
+        animator.SetFloat(Constants.XForce, direction.x);
+        animator.SetFloat(Constants.ZForce, -direction.z);
 
         float hitHeight = hitLocation.y - pos.y;
-        animator.SetFloat("HitHeight", hitHeight);
+        animator.SetFloat(Constants.HitHeight, hitHeight);
         
-        animator.SetTrigger("DamageTrigger");
+        animator.SetTrigger(Constants.DamageTrigger);
     }
 }

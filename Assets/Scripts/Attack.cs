@@ -9,12 +9,12 @@ public class Attack : MonoBehaviour
     private bool _isSwingingWeapon;
     private DealDamage _weapon;
     [SerializeField] private MultiAimConstraint armAimConstraint;
-    private EquipWeapon _equipScript;
-    
+    private HolsterUnHolsterWeapon _holsterUnHolsterScript;
+
     // Update is called once per frame
     void Update()
     {
-        if (!ReferenceEquals(_equipScript, null) && _equipScript.IsWeaponEquipped && !ReferenceEquals(_weapon, null))
+        if (!ReferenceEquals(_holsterUnHolsterScript, null) && _holsterUnHolsterScript.IsWeaponEquipped && !ReferenceEquals(_weapon, null))
         {
             if (Input.GetMouseButton(0) && !_isSwingingWeapon)
             {
@@ -29,14 +29,14 @@ public class Attack : MonoBehaviour
                 armAimConstraint.weight = 0.5f;
                 StartCoroutine(WeaponSwingCooldown());
             }
-            animator.SetBool("IsMouseHeld", IsWeaponRaised); 
+            animator.SetBool(Constants.IsMouseHeld, IsWeaponRaised); 
         }
     }
 
     private void Awake()
     {
         _weapon = GetComponentInChildren<DealDamage>();
-        _equipScript = GetComponentInChildren<EquipWeapon>();
+        _holsterUnHolsterScript = GetComponentInChildren<HolsterUnHolsterWeapon>();
         armAimConstraint.weight = 0f;
     }
 
