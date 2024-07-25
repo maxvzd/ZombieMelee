@@ -26,10 +26,10 @@ public class Attack : MonoBehaviour
             IsWeaponRaised = false;
             _isSwingingWeapon = true;
             _weapon.WeaponSwingAudioSource.Play();
-            armAimConstraint.weight = 0.5f;
+            //armAimConstraint.weight = 0.5f;
             StartCoroutine(WeaponSwingCooldown());
         }
-        animator.SetBool(Constants.IsMouseHeld, IsWeaponRaised);
+        animator.SetBool(Constants.IsMouseDown, IsWeaponRaised);
     }
 
     private void Awake()

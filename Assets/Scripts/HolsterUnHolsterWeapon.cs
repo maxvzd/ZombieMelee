@@ -13,7 +13,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     [SerializeField] private TwoBoneIKConstraint equipArmIk;
     [SerializeField] private GameObject equipArmTarget;
     [SerializeField] private GameObject ikTargetObject;
-    [SerializeField] private WhenToEquipWeaponListener equipWeaponListener;
+    [SerializeField] private AnimationEventListener animEventListener;
     [SerializeField] public GameObject currentlyEquippedWeapon;
     private WeaponPositionController _weaponPositionController;
     private bool _shouldChangeHandWeight;
@@ -38,12 +38,12 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     {
         IsWeaponEquipped = wieldedSocket.transform.childCount > 0;
         animator.SetBool(Constants.WeaponEquipped, _isWeaponEquipped);
-        equipWeaponListener.OnWeaponEquip += OnEquipListenerSaysEquip;
-        equipWeaponListener.OnStartChangeWeaponIk += EquipWeaponListenerOnOnStartChangeWeaponIk;
+        animEventListener.OnWeaponEquip += OnEquipListenerSaysEquip;
+        animEventListener.OnStartChangeWeaponIk += OnStartChangeWeaponIk;
         _weaponPositionController = currentlyEquippedWeapon.GetComponent<WeaponPositionController>();
     }
 
-    private void EquipWeaponListenerOnOnStartChangeWeaponIk(object sender, EventArgs e)
+    private void OnStartChangeWeaponIk(object sender, EventArgs e)
     {
         if (sender is not int senderAsInt) return;
 

@@ -986,7 +986,7 @@ MonoBehaviour:
   equipArmIk: {fileID: 7269406315646908416}
   equipArmTarget: {fileID: 4739467371647697544}
   ikTargetObject: {fileID: 0}
-  equipWeaponListener: {fileID: 3159470646595701745}
+  animEventListener: {fileID: 3159470646595701745}
   currentlyEquippedWeapon: {fileID: 2987938863292886900}
 --- !u!114 &9214290880460922482
 MonoBehaviour:
@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAnimator: {fileID: 2130098311077234062}
   backpackAnimator: {fileID: 5029876206304135293}
+  animEventListener: {fileID: 3159470646595701745}
 --- !u!1 &6222377203606879105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,12 +1441,44 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.393
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.191
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.62554646
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.76679635
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.11647109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.08455388
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -100.34
+      value: -101.754
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -4.5169983
       objectReference: {fileID: 0}
     - target: {fileID: 7782254114549410314, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 10.65
+      value: 20.947998
       objectReference: {fileID: 0}
     - target: {fileID: 8055782946248907413, guid: 52c27ccc2333dbe478c5ffc7aa0191ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

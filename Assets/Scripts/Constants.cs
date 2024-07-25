@@ -6,7 +6,7 @@ public static class Constants
     public static readonly int HandIKWeightAnimator = Animator.StringToHash("HandIKWeight");
     public static readonly int WeaponEquipped = Animator.StringToHash("IsWeaponEquipped");
     public static readonly int EquipWeaponTrigger = Animator.StringToHash("EquipWeaponTrigger");
-    public static readonly int IsMouseHeld = Animator.StringToHash("IsMouseHeld");
+    public static readonly int IsMouseDown = Animator.StringToHash("IsMouseHeld");
     public static readonly int SwingSpeed = Animator.StringToHash("SwingSpeed");
     public static readonly int SwingImpact = Animator.StringToHash("SwingImpact");
     public static readonly int XForce = Animator.StringToHash("XForce");
@@ -17,6 +17,7 @@ public static class Constants
     public static readonly int Horizontal = Animator.StringToHash("Horizontal");
     public static readonly int IsBackpackOut = Animator.StringToHash("IsBackpackOut");
     public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
+    public static readonly int PutItemAwayTrigger = Animator.StringToHash("PutItemAwayTrigger");
     
     //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 

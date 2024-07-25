@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class GrabItemScript : MonoBehaviour
+public class GrabItem : MonoBehaviour
 {
     private AimingReticule _reticule;
     [SerializeField] private GameObject ikHandTarget;
@@ -12,7 +12,20 @@ public class GrabItemScript : MonoBehaviour
     [SerializeField] private GameObject handSocket;
     private bool _isHoldingItem;
     private Collider _pickedUpItem;
-    
+
+    public GameObject HeldItem
+    {
+        get
+        {
+            if (_pickedUpItem != null)
+            {
+                return _pickedUpItem.gameObject;
+            }
+
+            return null;
+        }
+    }
+
     private bool IsHoldingItem
     {
         get => _isHoldingItem;
@@ -38,13 +51,13 @@ public class GrabItemScript : MonoBehaviour
         if (itemToBePickedUp == _reticule.ItemAtTimeOfSelection && IsReachingForItem)
         {
             IsHoldingItem = true;
-            
+
             rightArmIKConstraint.weight = 0;
             animator.SetFloat(Constants.HandIKWeightAnimator, 0);
 
             other.attachedRigidbody.isKinematic = true;
             other.isTrigger = true;
-            
+
             itemToBePickedUp.transform.parent = handSocket.gameObject.transform;
             itemToBePickedUp.transform.localPosition = Vector3.zero;
             itemToBePickedUp.transform.localEulerAngles = Vector3.zero;
@@ -66,7 +79,7 @@ public class GrabItemScript : MonoBehaviour
                 IsHoldingItem = false;
                 StartCoroutine(UpdateIKWeight());
             }
-            else if(IsHoldingItem)
+            else if (IsHoldingItem)
             {
                 _pickedUpItem.transform.SetParent(null);
                 _pickedUpItem.attachedRigidbody.isKinematic = false;
@@ -87,5 +100,11 @@ public class GrabItemScript : MonoBehaviour
             rightArmIKConstraint.weight = weight;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void DeactivateHeldItem()
+    {
+        _pickedUpItem.gameObject.SetActive(false);
+        IsHoldingItem = false;
     }
 }
