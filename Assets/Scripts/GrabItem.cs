@@ -12,20 +12,21 @@ public class GrabItem : MonoBehaviour
     [SerializeField] private Collider handCollider;
     [SerializeField] private GameObject handSocket;
     private bool _isHoldingItem;
-    private Collider _heldItem;
+    private GameObject _heldItemGameObject;
+    private Item _heldItem;
     private InventoryMediator _inventoryMediator;
 
-    public Collider HeldItem
+    public GameObject HeldItemGameObject
     {
         private set
         {
-            _heldItem = value;
+            _heldItemGameObject = value;
             animator.SetBool(Constants.IsHoldingItem, value != null);
         }
-        get => _heldItem;
+        get => _heldItemGameObject;
     }
 
-    public bool IsHoldingItem => HeldItem != null;
+    public bool IsHoldingItem => HeldItemGameObject != null;
 
     private bool IsReachingForItem => rightArmIKConstraint.weight > 0.2f;
 
@@ -40,11 +41,11 @@ public class GrabItem : MonoBehaviour
 
     private void OnTriggerEnterHeard(Collider other)
     {
-        GameObject itemToBePickedUp = other.gameObject;
+        GameObject itemInReticule = other.gameObject;
 
-        if (itemToBePickedUp == _reticule.ItemAtTimeOfSelection && IsReachingForItem)
+        if (itemInReticule == _reticule.ItemAtTimeOfSelection && IsReachingForItem)
         {
-            HeldItem = other;
+            HeldItemGameObject = itemInReticule.transform.parent.parent.gameObject;
 
             rightArmIKConstraint.weight = 0;
             animator.SetFloat(Constants.HandIKWeightAnimator, 0);
@@ -52,10 +53,18 @@ public class GrabItem : MonoBehaviour
             other.attachedRigidbody.isKinematic = true;
             other.isTrigger = true;
 
-            itemToBePickedUp.transform.parent = handSocket.gameObject.transform;
-            itemToBePickedUp.transform.localPosition = Vector3.zero;
-            itemToBePickedUp.transform.localEulerAngles = Vector3.zero;
+            HeldItemGameObject.transform.parent = handSocket.gameObject.transform;
+            HeldItemGameObject.transform.localPosition = Vector3.zero;
+            HeldItemGameObject.transform.localEulerAngles = Vector3.zero;
+
+            _heldItem = HeldItemGameObject.GetComponent<Item>();
+            SetIsBeingHeldOnCurrentItem(true);
         }
+    }
+
+    private void SetIsBeingHeldOnCurrentItem(bool isBeingHeld)
+    {
+        _heldItem.SetIsBeingHeld(isBeingHeld);
     }
 
     private void Update()
@@ -72,10 +81,13 @@ public class GrabItem : MonoBehaviour
             }
             else if (IsHoldingItem)
             {
-                HeldItem.transform.SetParent(null);
-                HeldItem.attachedRigidbody.isKinematic = false;
-                HeldItem.isTrigger = false;
-                HeldItem = null;
+                Collider heldItemCollider = _heldItem.ActualItem.GetComponent<Collider>();
+                heldItemCollider.attachedRigidbody.isKinematic = false;
+                heldItemCollider.isTrigger = false;
+                
+                SetIsBeingHeldOnCurrentItem(false);
+                _heldItem = null;
+                HeldItemGameObject = null;
             }
         }
     }
@@ -95,8 +107,9 @@ public class GrabItem : MonoBehaviour
 
     public void DeactivateHeldItem()
     {
-        HeldItem.transform.SetParent(null);
-        HeldItem.gameObject.SetActive(false);
-        HeldItem = null;
+        HeldItemGameObject.transform.SetParent(null);
+        HeldItemGameObject.gameObject.SetActive(false);
+        HeldItemGameObject = null;
+        _heldItem = null;
     }
 }

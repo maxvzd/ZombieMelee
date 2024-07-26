@@ -10,7 +10,7 @@ public class InventoryMediator : MonoBehaviour
     public bool IsHoldingItem => _itemHeldController.IsHoldingItem;
     public bool IsBackPackOpen => _inventory.IsBackpackOpen;
     public bool IsWeaponWielded => _holsterController.IsWeaponWielded;
-    public Collider HeldItem => _itemHeldController.HeldItem;
+    public GameObject HeldItem => _itemHeldController.HeldItemGameObject;
         
     // Start is called before the first frame update
     private void Start()
