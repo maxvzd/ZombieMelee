@@ -35,8 +35,7 @@ public class GrabItem : MonoBehaviour
         _reticule = GetComponent<AimingReticule>();
         handCollider.GetComponent<HandColliderListener>().OnTriggerEnterHeard += OnTriggerEnterHeard;
         
-        _inventoryMediator = GetComponentInParent<InventoryMediator>();
-        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
+        _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
     }
 
     private void OnTriggerEnterHeard(Collider other)

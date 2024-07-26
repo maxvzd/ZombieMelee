@@ -16,9 +16,8 @@ public class InventorySystem : MonoBehaviour
     private void Start()
     {
         _items = new List<GameObject>();
-        
-        _inventoryMediator = GetComponentInParent<InventoryMediator>();
-        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
+
+        _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         
         animEventListener.OnItemInBag += OnItemIsInBag;
     }
@@ -44,7 +43,7 @@ public class InventorySystem : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputInventory) && !_inventoryMediator.IsWeaponWielded)
+        if (Input.GetButtonDown(Constants.InputInventory))
         {
             IsBackpackOpen = !IsBackpackOpen;
         }

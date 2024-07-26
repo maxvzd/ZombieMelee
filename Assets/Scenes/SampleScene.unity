@@ -1807,10 +1807,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 531260425385090154, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1079844492086881775, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 882587811}
+    - target: {fileID: 1295521365530647670, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_Weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1295521365530647670, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 

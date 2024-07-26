@@ -41,8 +41,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
         animEventListener.OnWeaponEquip += OnEquipListenerSaysEquip;
         animEventListener.OnStartChangeWeaponIk += OnStartChangeWeaponIk;
         
-        _inventoryMediator = GetComponentInParent<InventoryMediator>();
-        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
+        _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         
         _weaponPositionController = currentlyEquippedWeapon.GetComponent<WeaponPositionController>();
     }
@@ -86,7 +85,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("EquipToggle") && !_inventoryMediator.IsBackPackOpen && !_inventoryMediator.IsHoldingItem)
+        if (Input.GetButtonDown("EquipToggle") && !_inventoryMediator.IsHoldingItem)
         {
              ikTargetObject.transform.parent = equipArmTarget.transform;
              ikTargetObject.transform.localPosition = Vector3.zero;

@@ -29,4 +29,11 @@ public class InventoryMediator : MonoBehaviour
     {
         _itemHeldController.DeactivateHeldItem();
     }
+    
+    public static InventoryMediator GetInventoryMediator(MonoBehaviour itemToGetFrom)
+    {
+        InventoryMediator inventoryMediator = itemToGetFrom.GetComponentInParent<InventoryMediator>();
+        if (!inventoryMediator) throw new Exception("Inventory mediator not found");
+        return inventoryMediator;
+    }
 }

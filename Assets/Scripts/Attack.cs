@@ -9,12 +9,13 @@ public class Attack : MonoBehaviour
     private bool _isSwingingWeapon;
     private DealDamage _weapon;
     [SerializeField] private MultiAimConstraint armAimConstraint;
-    private HolsterUnHolsterWeapon _holsterUnHolsterScript;
+
+    private InventoryMediator _inventoryMediator;
 
     // Update is called once per frame
     void Update()
     {
-        if (ReferenceEquals(_holsterUnHolsterScript, null) || !_holsterUnHolsterScript.IsWeaponWielded || ReferenceEquals(_weapon, null)) return;
+        if (!_inventoryMediator.IsWeaponWielded || ReferenceEquals(_weapon, null) || _inventoryMediator.IsBackPackOpen) return;
         
         if (Input.GetMouseButton(0) && !_isSwingingWeapon)
         {
@@ -35,7 +36,7 @@ public class Attack : MonoBehaviour
     private void Awake()
     {
         _weapon = GetComponentInChildren<DealDamage>();
-        _holsterUnHolsterScript = GetComponentInChildren<HolsterUnHolsterWeapon>();
+        _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         armAimConstraint.weight = 0f;
     }
 
