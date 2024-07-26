@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 public class HolsterUnHolsterWeapon : MonoBehaviour
 {
-    private bool _isWeaponEquipped;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject wieldedSocket;
     [SerializeField] private GameObject holsterSocket;
@@ -15,18 +13,20 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     [SerializeField] private GameObject ikTargetObject;
     [SerializeField] private AnimationEventListener animEventListener;
     [SerializeField] public GameObject currentlyEquippedWeapon;
+    
+    private InventoryMediator _inventoryMediator;
+    private bool _isWeaponWielded;
     private WeaponPositionController _weaponPositionController;
     private bool _shouldChangeHandWeight;
-
     private readonly float _dampTime = 0.2f;
     private float _targetIkWeight = 1f;
 
-    public bool IsWeaponEquipped
+    public bool IsWeaponWielded
     {
-        get => _isWeaponEquipped;
+        get => _isWeaponWielded;
         private set
         {
-            _isWeaponEquipped = value;
+            _isWeaponWielded = value;
             if (_weaponPositionController)
             {
                 _weaponPositionController.IsWielded = value;
@@ -36,10 +36,14 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
     private void Awake()
     {
-        IsWeaponEquipped = wieldedSocket.transform.childCount > 0;
-        animator.SetBool(Constants.WeaponEquipped, _isWeaponEquipped);
+        IsWeaponWielded = wieldedSocket.transform.childCount > 0;
+        animator.SetBool(Constants.WeaponEquipped, _isWeaponWielded);
         animEventListener.OnWeaponEquip += OnEquipListenerSaysEquip;
         animEventListener.OnStartChangeWeaponIk += OnStartChangeWeaponIk;
+        
+        _inventoryMediator = GetComponentInParent<InventoryMediator>();
+        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
+        
         _weaponPositionController = currentlyEquippedWeapon.GetComponent<WeaponPositionController>();
     }
 
@@ -67,7 +71,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
     private void OnEquipListenerSaysEquip(object sender, EventArgs e)
     {
-        if (IsWeaponEquipped)
+        if (IsWeaponWielded)
         {
             ChangeObjectParent(wieldedSocket, holsterSocket);
         }
@@ -76,17 +80,16 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
             ChangeObjectParent(holsterSocket, wieldedSocket);
         }
 
-        IsWeaponEquipped = !IsWeaponEquipped;
-        animator.SetBool(Constants.WeaponEquipped, IsWeaponEquipped);
+        IsWeaponWielded = !IsWeaponWielded;
+        animator.SetBool(Constants.WeaponEquipped, IsWeaponWielded);
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("EquipToggle"))
+        if (Input.GetButtonDown("EquipToggle") && !_inventoryMediator.IsBackPackOpen && !_inventoryMediator.IsHoldingItem)
         {
              ikTargetObject.transform.parent = equipArmTarget.transform;
              ikTargetObject.transform.localPosition = Vector3.zero;
-             //ikTargetObject.transform.localEulerAngles = Vector3.zero;
 
             animator.SetTrigger(Constants.EquipWeaponTrigger);
         }

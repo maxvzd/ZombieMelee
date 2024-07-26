@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ReferenceEquals(_holsterUnHolsterScript, null) || !_holsterUnHolsterScript.IsWeaponEquipped || ReferenceEquals(_weapon, null)) return;
+        if (ReferenceEquals(_holsterUnHolsterScript, null) || !_holsterUnHolsterScript.IsWeaponWielded || ReferenceEquals(_weapon, null)) return;
         
         if (Input.GetMouseButton(0) && !_isSwingingWeapon)
         {
@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
             IsWeaponRaised = false;
             _isSwingingWeapon = true;
             _weapon.WeaponSwingAudioSource.Play();
-            //armAimConstraint.weight = 0.5f;
+            armAimConstraint.weight = 0.5f;
             StartCoroutine(WeaponSwingCooldown());
         }
         animator.SetBool(Constants.IsMouseDown, IsWeaponRaised);

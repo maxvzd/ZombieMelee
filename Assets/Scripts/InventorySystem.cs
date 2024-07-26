@@ -7,28 +7,32 @@ public class InventorySystem : MonoBehaviour
 {
     [SerializeField] private Animator characterAnimator;
     [SerializeField] private Animator backpackAnimator;
-    private bool _isBackpackOpen;
-    private List<GameObject>  _items;
-    private GrabItem _grabItem;
     [SerializeField] private AnimationEventListener animEventListener;
+    
+    private InventoryMediator _inventoryMediator;
+    private bool _isBackpackOpen;
+    private List<GameObject> _items;
 
-    private void Awake()
+    private void Start()
     {
         _items = new List<GameObject>();
-        _grabItem = GetComponentInParent<GrabItem>();
+        
+        _inventoryMediator = GetComponentInParent<InventoryMediator>();
+        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
+        
         animEventListener.OnItemInBag += OnItemIsInBag;
     }
 
     private void OnItemIsInBag(object sender, EventArgs e)
     {
-        _items.Add(_grabItem.HeldItem);
-        _grabItem.DeactivateHeldItem();
+        _items.Add(_inventoryMediator.HeldItem.gameObject);
+        _inventoryMediator.DeactivateHeldItem();
     }
 
-    private bool IsBackpackOpen
+    public bool IsBackpackOpen
     {
         get => _isBackpackOpen;
-        set
+        private set
         {
             characterAnimator.SetBool(Constants.IsBackpackOut, value);
             backpackAnimator.SetBool(Constants.IsBackpackOut, value);
@@ -38,14 +42,14 @@ public class InventorySystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputInventory))
+        if (Input.GetButtonDown(Constants.InputInventory) && !_inventoryMediator.IsWeaponWielded)
         {
             IsBackpackOpen = !IsBackpackOpen;
         }
 
-        if (Input.GetMouseButtonDown(0) && _grabItem.HeldItem != null)
+        if (Input.GetMouseButtonDown(0) && IsBackpackOpen && _inventoryMediator.IsHoldingItem)
         {
             characterAnimator.SetTrigger(Constants.PutItemAwayTrigger);
         }

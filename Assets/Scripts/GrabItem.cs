@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -11,37 +12,30 @@ public class GrabItem : MonoBehaviour
     [SerializeField] private Collider handCollider;
     [SerializeField] private GameObject handSocket;
     private bool _isHoldingItem;
-    private Collider _pickedUpItem;
+    private Collider _heldItem;
+    private InventoryMediator _inventoryMediator;
 
-    public GameObject HeldItem
+    public Collider HeldItem
     {
-        get
+        private set
         {
-            if (_pickedUpItem != null)
-            {
-                return _pickedUpItem.gameObject;
-            }
-
-            return null;
+            _heldItem = value;
+            animator.SetBool(Constants.IsHoldingItem, value != null);
         }
+        get => _heldItem;
     }
 
-    private bool IsHoldingItem
-    {
-        get => _isHoldingItem;
-        set
-        {
-            animator.SetBool(Constants.IsHoldingItem, value);
-            _isHoldingItem = value;
-        }
-    }
+    public bool IsHoldingItem => HeldItem != null;
 
     private bool IsReachingForItem => rightArmIKConstraint.weight > 0.2f;
 
-    private void Awake()
+    private void Start()
     {
         _reticule = GetComponent<AimingReticule>();
         handCollider.GetComponent<HandColliderListener>().OnTriggerEnterHeard += OnTriggerEnterHeard;
+        
+        _inventoryMediator = GetComponentInParent<InventoryMediator>();
+        if (!_inventoryMediator) throw new Exception("Inventory mediator not found");
     }
 
     private void OnTriggerEnterHeard(Collider other)
@@ -50,7 +44,7 @@ public class GrabItem : MonoBehaviour
 
         if (itemToBePickedUp == _reticule.ItemAtTimeOfSelection && IsReachingForItem)
         {
-            IsHoldingItem = true;
+            HeldItem = other;
 
             rightArmIKConstraint.weight = 0;
             animator.SetFloat(Constants.HandIKWeightAnimator, 0);
@@ -61,30 +55,27 @@ public class GrabItem : MonoBehaviour
             itemToBePickedUp.transform.parent = handSocket.gameObject.transform;
             itemToBePickedUp.transform.localPosition = Vector3.zero;
             itemToBePickedUp.transform.localEulerAngles = Vector3.zero;
-
-            _pickedUpItem = other;
         }
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputUse))
+        if (Input.GetButtonDown(Constants.InputUse) && !_inventoryMediator.IsWeaponWielded)
         {
-            if (!IsHoldingItem && _reticule.CurrentlySelectedItem != null)
+            if (!IsHoldingItem && !ReferenceEquals(_reticule.CurrentlySelectedItem, null))
             {
                 ikHandTarget.transform.parent = _reticule.CurrentlySelectedItem.transform;
                 ikHandTarget.transform.localPosition = Vector3.zero;
 
                 ikHandTarget.transform.localEulerAngles = _reticule.CurrentlySelectedItem.transform.rotation * rightArmIKConstraint.transform.forward;
-                IsHoldingItem = false;
                 StartCoroutine(UpdateIKWeight());
             }
             else if (IsHoldingItem)
             {
-                _pickedUpItem.transform.SetParent(null);
-                _pickedUpItem.attachedRigidbody.isKinematic = false;
-                _pickedUpItem.isTrigger = false;
-                IsHoldingItem = false;
+                HeldItem.transform.SetParent(null);
+                HeldItem.attachedRigidbody.isKinematic = false;
+                HeldItem.isTrigger = false;
+                HeldItem = null;
             }
         }
     }
@@ -104,7 +95,8 @@ public class GrabItem : MonoBehaviour
 
     public void DeactivateHeldItem()
     {
-        _pickedUpItem.gameObject.SetActive(false);
-        IsHoldingItem = false;
+        HeldItem.transform.SetParent(null);
+        HeldItem.gameObject.SetActive(false);
+        HeldItem = null;
     }
 }
