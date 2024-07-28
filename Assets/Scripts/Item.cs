@@ -2,42 +2,56 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private Transform _heldSocket;
-    private Transform _originalParent;
-    private Transform _actualItem;
-    public GameObject ActualItem => _actualItem.gameObject;
-    
+    protected Transform HeldSocket;
+    protected Transform ActualItem;
+    public GameObject GetActualItem => ActualItem.gameObject;
+
     private void Start()
     {
-        _originalParent = transform.parent;
+        GetSockets();
+    }
+
+    protected void GetSockets()
+    {
+        //OriginalParent = transform.parent;
         foreach (Transform child in transform)
         {
             if (child.gameObject.name != "HeldSocket") continue;
-            
-            _heldSocket = child;
+
+            HeldSocket = child;
             break;
         }
-        
         
         foreach (Transform child in transform)
         {
             if (child.gameObject.name != "Item") continue;
-            
-            _originalParent = child;
-            _actualItem = child.GetChild(0);
+
+            //OriginalParent = child;
+            ActualItem = child.GetChild(0);
             break;
         }
     }
 
-    public void SetIsBeingHeld(bool isBeingHeld)
+    public virtual void HoldItem(GameObject heldBy)
     {
-        if (!isBeingHeld)
-        {
-            transform.SetParent(null);
-        }
+        Transform currentTransform = transform;
+        currentTransform.parent = heldBy.transform;
+        currentTransform.localEulerAngles = Vector3.zero;
+        currentTransform.localPosition = Vector3.zero;
         
-        _actualItem.SetParent(isBeingHeld ? _heldSocket : _originalParent);
-        _actualItem.localPosition = Vector3.zero;
-        _actualItem.localEulerAngles = Vector3.zero;
+        ActualItem.SetParent(HeldSocket);
+        ResetItemPosition(ActualItem);
+    }
+
+    public virtual void DropItem()
+    {
+        transform.SetParent(null);
+        ResetItemPosition(ActualItem);
+    }
+
+    protected void ResetItemPosition(Transform item)
+    {
+        item.localPosition = Vector3.zero;
+        item.localEulerAngles = Vector3.zero;
     }
 }

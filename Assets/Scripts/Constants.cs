@@ -4,7 +4,7 @@ public static class Constants
 {
     //Animator
     public static readonly int HandIKWeightAnimator = Animator.StringToHash("HandIKWeight");
-    public static readonly int WeaponEquipped = Animator.StringToHash("IsWeaponEquipped");
+    public static readonly int IsWeaponEquipped = Animator.StringToHash("IsWeaponEquipped");
     public static readonly int EquipWeaponTrigger = Animator.StringToHash("EquipWeaponTrigger");
     public static readonly int IsMouseDown = Animator.StringToHash("IsMouseHeld");
     public static readonly int SwingSpeed = Animator.StringToHash("SwingSpeed");
@@ -35,8 +35,10 @@ public static class Constants
     public const string InputSprint = "Sprint";
     public const string InputMouseScrollWheel = "Mouse ScrollWheel";
     public const string InputUse = "Use";
+    public const string EquipToggle = "EquipToggle";
     
     //Layers
     public const string HittableObjectLayer = "HittableObject";
-    public const string PickupableObjectLayer = "PickupableObject";
+    public const string ItemObjectLayer = "Item";
+    public const string WeaponObjectLayer = "WeaponItem";
 }

@@ -12,6 +12,7 @@ public class InventorySystem : MonoBehaviour
     private InventoryMediator _inventoryMediator;
     private bool _isBackpackOpen;
     private List<GameObject> _items;
+    private bool _puttingItemAway;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class InventorySystem : MonoBehaviour
 
     private void OnItemIsInBag(object sender, EventArgs e)
     {
+        _puttingItemAway = false;
         _items.Add(_inventoryMediator.HeldItem.gameObject);
         _inventoryMediator.DeactivateHeldItem();
     }
@@ -48,8 +50,9 @@ public class InventorySystem : MonoBehaviour
             IsBackpackOpen = !IsBackpackOpen;
         }
 
-        if (Input.GetMouseButtonDown(0) && IsBackpackOpen && _inventoryMediator.IsHoldingItem)
+        if (Input.GetMouseButtonDown(0) && IsBackpackOpen && _inventoryMediator.IsHoldingItem && !_puttingItemAway)
         {
+            _puttingItemAway = true;
             characterAnimator.SetTrigger(Constants.PutItemAwayTrigger);
         }
     }

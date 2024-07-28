@@ -17,12 +17,25 @@ public class AimingReticule : MonoBehaviour
         Ray targetRay = new Ray(headLocation, -rayDirection);
 
         if (Physics.Raycast(targetRay, out RaycastHit hitInfo, targetableRange,
-                LayerMask.GetMask(Constants.HittableObjectLayer, Constants.PickupableObjectLayer)))
+                LayerMask.GetMask(Constants.HittableObjectLayer, Constants.ItemObjectLayer, Constants.WeaponObjectLayer)))
         {
             if (CurrentlySelectedItem != hitInfo.transform.gameObject)
             {
                 CurrentlySelectedItem = hitInfo.transform.gameObject;
             }
+
+
+            // GameObject hitObject = hitInfo.transform.gameObject;
+            // if(hitObject.layer.Equals(LayerMask.GetMask(Constants.ItemObjectLayer, Constants.WeaponObjectLayer)))
+            // {
+            //     //TODO - IMPROVE THIS??
+            //
+            //     Item hitObjectAsItem = hitObject.transform.parent.transform.parent.GetComponent<Item>();
+            //     if (!ReferenceEquals(hitObjectAsItem, null))
+            //     {
+            //         
+            //     }
+            // }
 
             Debug.DrawRay(headLocation, -rayDirection, Color.green);
             reticule.transform.position = hitInfo.point;
@@ -38,6 +51,5 @@ public class AimingReticule : MonoBehaviour
             reticule.SetActive(false);
             CurrentlySelectedItem = null;
         }
-        //
     }
 }

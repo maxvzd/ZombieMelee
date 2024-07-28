@@ -6,14 +6,14 @@ public class Attack : MonoBehaviour
 {
     public Animator animator;
     public bool IsWeaponRaised { get; private set; }
+    
     private bool _isSwingingWeapon;
-    private DealDamage _weapon;
-    [SerializeField] private MultiAimConstraint armAimConstraint;
-
+    private WeaponItem _weapon;
     private InventoryMediator _inventoryMediator;
-
-    // Update is called once per frame
-    void Update()
+    
+    [SerializeField] private MultiAimConstraint armAimConstraint;
+    
+    private void Update()
     {
         if (!_inventoryMediator.IsWeaponWielded || ReferenceEquals(_weapon, null) || _inventoryMediator.IsBackPackOpen) return;
         
@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
         {
             IsWeaponRaised = false;
             _isSwingingWeapon = true;
-            _weapon.WeaponSwingAudioSource.Play();
+            _weapon.PlayWeaponSwing();
             armAimConstraint.weight = 0.5f;
             StartCoroutine(WeaponSwingCooldown());
         }
@@ -35,7 +35,7 @@ public class Attack : MonoBehaviour
 
     private void Awake()
     {
-        _weapon = GetComponentInChildren<DealDamage>();
+        //_weapon = GetComponentInChildren<DealDamage>();
         _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         armAimConstraint.weight = 0f;
     }
@@ -46,5 +46,11 @@ public class Attack : MonoBehaviour
         
         armAimConstraint.weight = 0f;
         _isSwingingWeapon = false;
-    } 
+    }
+
+    public void SetEquippedWeapon(WeaponItem weapon)
+    {
+        weapon.SetAnimator(animator);
+        _weapon = weapon;
+    }
 }

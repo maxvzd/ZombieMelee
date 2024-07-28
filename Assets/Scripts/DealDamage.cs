@@ -4,50 +4,74 @@ using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private Collider weaponCollider;
-    [SerializeField] private float weaponDamage;
-    [SerializeField] private float impactWait;
-    [SerializeField] private float recoilAmount;
-    [SerializeField] private float weaponSwingTime;
+    private float _weaponDamage;
+    private float _recoilAmount;
+    private float _impactWait;
 
+    private bool _readyToDealDamage;
+    
+    private Collider _weaponCollider;
+    private Animator _animator;
 
-    public float WeaponSwingTime => weaponSwingTime;
-    public AudioSource WeaponSwingAudioSource { get; private set; }
-
+    public delegate void OnDealDamageEventHandler(object sender, EventArgs e);
+    public event OnDealDamageEventHandler OnDealDamage;
+    
     public void ReadyWeaponForSwing()
     {
-        weaponCollider.enabled = true;
+        _readyToDealDamage = true;
     }
 
-    private void Awake()
+    private void Start()
     {
-        WeaponSwingAudioSource = GetComponent<AudioSource>();
+        Collider[] colliders = gameObject.GetComponents<Collider>();
+        foreach (Collider c in colliders)
+        {
+            if (c.isTrigger)
+            {
+                _weaponCollider = c;
+                break;
+            }
+        }
+        _readyToDealDamage = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO IMPROVE THIS TO USE ANIMATION EVENTS AND NOT CHECK ANIMATOR STATE
-        if (animator.GetCurrentAnimatorStateInfo(2).IsName("swing bat") && !other.CompareTag("IgnoreWeapon"))
-        {
-            Vector3 closestPointOfWeapon = weaponCollider.gameObject.transform.parent.transform.position;
+        if(!_readyToDealDamage || other.CompareTag("IgnoreWeapon") || ReferenceEquals(_animator, null)) return;
+        
+        _readyToDealDamage = false;
+        Vector3 closestPointOfWeapon = _weaponCollider.gameObject.transform.parent.transform.position;
             
-            LimbHealth healthComponent = other.gameObject.GetComponent<LimbHealth>();
-            if (healthComponent != null)
-            {
-                healthComponent.HitLimb(weaponDamage, closestPointOfWeapon);
-            }
-            animator.SetFloat(Constants.SwingSpeed, -recoilAmount);
-            weaponCollider.enabled = false;
-            StartCoroutine(WaitForImpactFinish(animator));
+        LimbHealth healthComponent = other.gameObject.GetComponent<LimbHealth>();
+        if (healthComponent != null)
+        {
+            healthComponent.HitLimb(_weaponDamage, closestPointOfWeapon);
         }
+        
+        OnDealDamage?.Invoke(this, EventArgs.Empty);
+        
+        _animator.SetFloat(Constants.SwingSpeed, -_recoilAmount);
+        StartCoroutine(WaitForImpactFinish(_animator));
     }
 
     private IEnumerator WaitForImpactFinish(Animator a)
     {
-        yield return new WaitForSeconds(impactWait);
+        yield return new WaitForSeconds(_impactWait);
         
         a.SetFloat(Constants.SwingSpeed, 1f);
-        animator.SetTrigger(Constants.SwingImpact);
+        _animator.SetTrigger(Constants.SwingImpact);
+    }
+
+    public void Setup(WeaponItem weapon)
+    {
+        _weaponDamage = weapon.WeaponDamage;
+        _recoilAmount = weapon.RecoilAmount;
+        _impactWait = weapon.ImpactWait;
+        _readyToDealDamage = false;
+    }
+
+    public void SetAnimator(Animator animator)
+    {
+        _animator = animator;
     }
 }
