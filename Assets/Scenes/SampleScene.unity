@@ -887,13 +887,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseBallBatPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
+      propertyPath: impactWait
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
+      propertyPath: recoilAmount
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
+      propertyPath: weaponDamage
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.485715
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.065
+      value: 1.127
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1360,7 +1372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.065
+      value: 1.1012
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 6c9037132674ee742b024cc3a72efeaa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1932,6 +1944,22 @@ PrefabInstance:
     - target: {fileID: 528820241810472607, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 531260425385090154, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 531260425385090154, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 531260425385090154, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_FocalLength
+      value: 11.958185
+      objectReference: {fileID: 0}
+    - target: {fileID: 531260425385090154, guid: 035b143795a7f6549898e86ace37f124, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1026749145516359843, guid: 035b143795a7f6549898e86ace37f124, type: 3}
       propertyPath: m_Layer

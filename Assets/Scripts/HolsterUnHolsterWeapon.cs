@@ -93,7 +93,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.EquipToggle) && HasWeaponEquipped && (!_inventoryMediator.IsHoldingItem || _inventoryMediator.IsHoldingWeapon))
+        if (Input.GetButtonUp(Constants.EquipToggle) && HasWeaponEquipped && (!_inventoryMediator.IsHoldingItem || _inventoryMediator.IsHoldingWeapon))
         {
             ikTargetObject.transform.parent = equipArmTarget.transform;
             ikTargetObject.transform.localPosition = Vector3.zero;

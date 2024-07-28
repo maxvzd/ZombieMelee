@@ -33,9 +33,8 @@ public class Attack : MonoBehaviour
         animator.SetBool(Constants.IsMouseDown, IsWeaponRaised);
     }
 
-    private void Awake()
+    private void Start()
     {
-        //_weapon = GetComponentInChildren<DealDamage>();
         _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         armAimConstraint.weight = 0f;
     }

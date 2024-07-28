@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: bfb0c990155e78140881fa17aa905626, type: 3}
       propertyPath: m_TagString
-      value: Weapon
+      value: IgnoreWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bfb0c990155e78140881fa17aa905626, type: 3}
       propertyPath: m_LocalScale.x
@@ -230,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 677748923192665234, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 677748923192665234, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
+      propertyPath: m_TagString
+      value: IgnoreWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 1237972838822203117, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
       propertyPath: m_LocalPosition.x

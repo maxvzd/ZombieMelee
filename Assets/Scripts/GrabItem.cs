@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -15,6 +17,8 @@ public class GrabItem : MonoBehaviour
     private GameObject _heldItemGameObject;
     private Item _heldItem;
     private InventoryMediator _inventoryMediator;
+
+    private IEnumerator _reachCoroutine;
     
     private bool _isReachingForItem;// => rightArmIKConstraint.weight > 0.2f;
 
@@ -44,6 +48,8 @@ public class GrabItem : MonoBehaviour
         GameObject itemInReticule = other.gameObject;
 
         if (itemInReticule != _reticule.ItemAtTimeOfSelection || !_isReachingForItem) return;
+        
+        StopCoroutine(_reachCoroutine);
 
         HeldItemGameObject = itemInReticule.transform.parent.parent.gameObject;
         _heldItem = HeldItemGameObject.GetComponent<Item>();
@@ -61,7 +67,6 @@ public class GrabItem : MonoBehaviour
 
         if (IsHoldingWeapon)
         {
-            Debug.Log("Equipping item");
             _inventoryMediator.EquipWeaponFromPickup(_heldItem as WeaponItem);
         }
     }
@@ -81,9 +86,9 @@ public class GrabItem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputUse) && !_inventoryMediator.IsWeaponWielded)
+        if (Input.GetButtonUp(Constants.InputUse) && !_inventoryMediator.IsWeaponWielded)
         {
-            if (!IsHoldingItem && !ReferenceEquals(_reticule.CurrentlySelectedItem, null))
+            if (!IsHoldingItem && !_isReachingForItem && !ReferenceEquals(_reticule.CurrentlySelectedItem, null))
             {
                 // if (_reticule.CurrentlySelectedItem.layer == LayerMask.GetMask(Constants.ItemObjectLayer, Constants.WeaponObjectLayer))
                 // {
@@ -99,10 +104,20 @@ public class GrabItem : MonoBehaviour
                 //}
 
                 ikHandTarget.transform.localPosition = Vector3.zero;
-
                 ikHandTarget.transform.localEulerAngles = _reticule.CurrentlySelectedItem.transform.rotation * rightArmIKConstraint.transform.forward;
+                
                 _isReachingForItem = true;
-                StartCoroutine(UpdateIKWeight());
+                _reachCoroutine = SmoothMoveIkWeightToOne();
+
+                StartCoroutine(_reachCoroutine);
+            }
+            else if (_isReachingForItem)
+            {
+                StopCoroutine(_reachCoroutine);
+                _reachCoroutine = SmoothMoveIkWeightToZero();
+                StartCoroutine(_reachCoroutine);
+                
+                _isReachingForItem = false;
             }
             else if (IsHoldingItem)
             {
@@ -117,13 +132,26 @@ public class GrabItem : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateIKWeight()
+    private IEnumerator SmoothMoveIkWeightToOne()
     {
-        float weight = 0f;
-
-        while (weight < 1 && !IsHoldingItem)
+        float weight = rightArmIKConstraint.weight;
+        
+        while (weight < 1)
         {
             animator.SetFloat(Constants.HandIKWeightAnimator, 1, 1 / Constants.AnimatorDampingCoefficient, Time.deltaTime);
+            weight = animator.GetFloat(Constants.HandIKWeightAnimator);
+            rightArmIKConstraint.weight = weight;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    
+    private IEnumerator SmoothMoveIkWeightToZero()
+    {
+        float weight = rightArmIKConstraint.weight;
+        
+        while (weight > 0.01)
+        {
+            animator.SetFloat(Constants.HandIKWeightAnimator, 0, 1 / Constants.AnimatorDampingCoefficient, Time.deltaTime);
             weight = animator.GetFloat(Constants.HandIKWeightAnimator);
             rightArmIKConstraint.weight = weight;
             yield return new WaitForEndOfFrame();
@@ -142,8 +170,7 @@ public class GrabItem : MonoBehaviour
     {
         if (handSocket.transform.childCount > 0)
         {
-            Debug.Log("Found item in hand slot");
-             _heldItem = handSocket.transform.GetChild(0).gameObject.GetComponent<Item>();
+            _heldItem = handSocket.transform.GetChild(0).gameObject.GetComponent<Item>();
              HeldItemGameObject = _heldItem.gameObject;
         }
         else
