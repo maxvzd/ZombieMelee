@@ -50,10 +50,17 @@ public class InventorySystem : MonoBehaviour
             IsBackpackOpen = !IsBackpackOpen;
         }
 
-        if (Input.GetMouseButtonDown(0) && IsBackpackOpen && _inventoryMediator.IsHoldingItem && !_puttingItemAway)
+        if (Input.GetMouseButtonDown(0) && IsBackpackOpen  && !_puttingItemAway)
         {
-            _puttingItemAway = true;
-            characterAnimator.SetTrigger(Constants.PutItemAwayTrigger);
+            if (_inventoryMediator.IsHoldingItem)
+            {
+                _puttingItemAway = true;
+                characterAnimator.SetTrigger(Constants.PutItemAwayTrigger);
+            }
+            else
+            {
+                
+            }
         }
     }
 }

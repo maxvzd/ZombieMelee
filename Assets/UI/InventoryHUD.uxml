@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: center; justify-content: center; align-self: stretch;">
+        <ui:ListView focusable="true" show-foldout-header="false" selection-type="Multiple" picking-mode="Ignore" name="InventoryItems" style="width: 33%; justify-content: space-around; height: 70%; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; align-self: flex-start; background-color: rgba(0, 0, 0, 0.47);" />
+    </ui:VisualElement>
+</ui:UXML>
