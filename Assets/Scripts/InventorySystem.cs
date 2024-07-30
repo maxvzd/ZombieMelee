@@ -13,6 +13,7 @@ public class InventorySystem : MonoBehaviour
     private bool _isBackpackOpen;
     private List<GameObject> _items;
     private bool _puttingItemAway;
+    private bool _inventoryIsOpen;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class InventorySystem : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputInventory))
+        if (Input.GetButtonDown(Constants.InputInventory) && !_inventoryIsOpen)
         {
             IsBackpackOpen = !IsBackpackOpen;
         }
@@ -59,8 +60,15 @@ public class InventorySystem : MonoBehaviour
             }
             else
             {
-                
+                _inventoryMediator.ShowInventory();
+                _inventoryIsOpen = true;
             }
+        }
+
+        if (Input.GetMouseButtonDown(1) && _inventoryIsOpen)
+        {
+            _inventoryMediator.HideInventory();
+            _inventoryIsOpen = false;
         }
     }
 }

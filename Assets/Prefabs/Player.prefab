@@ -320,7 +320,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 11.958185
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -867,6 +867,8 @@ GameObject:
   - component: {fileID: 9214290880460922482}
   - component: {fileID: 5987136005876335022}
   - component: {fileID: 8602209990135758344}
+  - component: {fileID: 6008613331794254342}
+  - component: {fileID: 7753556820511790103}
   m_Layer: 0
   m_Name: Player
   m_TagString: IgnoreWeapon
@@ -889,6 +891,7 @@ Transform:
   m_Children:
   - {fileID: 8651900516546075199}
   - {fileID: 3347805203071417508}
+  - {fileID: 8218982175579200452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2612860244890871930
@@ -1031,6 +1034,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13f6b9afcce524798f4a2bdb48f5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6008613331794254342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911794851141068260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 9e51626bed5425148aca3f8bf579c85d, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 57fe564cc65ca714493c289f46a3f731, type: 3}
+  m_SortingOrder: 0
+--- !u!114 &7753556820511790103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911794851141068260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f882e051219e0e45a968b0a368b7d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryItemVisualTemplate: {fileID: 9197481963319205126, guid: c1c91d5e279c558438edcf193657e4fc, type: 3}
 --- !u!1 &6222377203606879105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1180,37 @@ MonoBehaviour:
       x: 0
       y: 1
       z: 0
+--- !u!1 &7260071903584950170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8218982175579200452}
+  m_Layer: 5
+  m_Name: InventoryHUD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8218982175579200452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260071903584950170}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.13, y: -1.0036129, z: 4.542018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3969552464322097778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8193769645029345051
 GameObject:
   m_ObjectHideFlags: 0

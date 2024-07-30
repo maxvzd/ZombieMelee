@@ -1,4 +1,5 @@
 using System;
+using UI;
 using UnityEngine;
 
 public class InventoryMediator : MonoBehaviour
@@ -7,6 +8,7 @@ public class InventoryMediator : MonoBehaviour
     private InventorySystem _inventory;
     private GrabItem _itemHeldController;
     private Attack _attackController;
+    private InventoryMainView _mainView;
 
     public bool IsHoldingItem => _itemHeldController.IsHoldingItem;
     public bool IsBackPackOpen => _inventory.IsBackpackOpen;
@@ -21,6 +23,8 @@ public class InventoryMediator : MonoBehaviour
         _inventory = GetComponentInParent<InventorySystem>();
         _itemHeldController = GetComponentInParent<GrabItem>();
         _attackController = GetComponent<Attack>();
+        _mainView = GetComponent<InventoryMainView>();
+        _mainView.HideInventory();
 
         if (!_holsterController || !_inventory || !_itemHeldController || !_attackController)
         {
@@ -50,5 +54,15 @@ public class InventoryMediator : MonoBehaviour
         InventoryMediator inventoryMediator = itemToGetFrom.GetComponentInParent<InventoryMediator>();
         if (!inventoryMediator) throw new Exception("Inventory mediator not found");
         return inventoryMediator;
+    }
+
+    public void ShowInventory()
+    {
+        _mainView.ShowInventory();
+    }
+
+    public void HideInventory()
+    {
+        _mainView.HideInventory();
     }
 }

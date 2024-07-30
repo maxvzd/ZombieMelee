@@ -12,7 +12,7 @@ namespace UI
 
         private VisualTreeAsset _inventoryItemTemplate;
 
-        public void InitializeCharacterList(VisualElement root, VisualTreeAsset listElementTemplate)
+        public void InitialiseItemList(VisualElement root, VisualTreeAsset listElementTemplate)
         {
             // populate list of  inventory items??/
             ItemUIElement itemToAdd = Resources.Load<ItemUIElement>("Data/BaseBallBatUIElement");
