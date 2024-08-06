@@ -359,6 +359,7 @@ MonoBehaviour:
     volume: 10
     weight: 3
     description: Bash some zombies heads in
+    thumbnailPath: ThumbNails/BaseballBat
   weaponDamage: 50
   recoilAmount: 0.5
   weaponSwingTime: 1

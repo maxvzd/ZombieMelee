@@ -16,8 +16,8 @@ namespace UI
 
         public void SetModel(ItemUIElement model)
         {
-            _itemName.text = model.ItemName;
-            _itemImage.style.backgroundImage = Resources.Load<Texture2D>(model.ItemImagePath);
+            _itemName.text = model.itemName;
+            _itemImage.style.backgroundImage = Resources.Load<Texture2D>(model.itemImagePath);
         }
     }
 }

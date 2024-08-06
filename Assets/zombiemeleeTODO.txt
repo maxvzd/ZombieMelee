@@ -14,12 +14,25 @@ Stomping
 Climbing over fences/big fences
 Hand Ik for climbing/pickig up items
 Levels + experience
-Fix Jumping
-Fix Hit detection x 
+Wading in water
+Opening/Closing doors
+Hunger/thirst/tiredness (pee + poo lol?)
+Foot IK
+Shooting
+    -Relies on character skill
+    -Hold right click to aim weapon
+    -Red dot appears on zombie (similar to pick up)
+    -More skill = the more consistent the character hits the red dot
 
-Improve hit direction calculation in hit directions
-Fix strange judder at end of sprint
+
+
 Use animation events when turning on collider for attack
+
+Level creation
+-Based on newcastle (tyne down the middle).
+    -South shields is more infested and you have to go over the bridge or through the tunnel to get there
+    -Military bases however with better loot
+
 
 
 TODO NEXT
@@ -32,6 +45,12 @@ TODO NEXT
 	
 Bugs
 -item not being picked up sometimes?
+-Picking up zombies lol
+-Fix Jumping
+-Fix Hit detection 
+    -Improve hit direction calculation in hit directions
+-Fix strange judder at end of sprint
+-Take a look at general locomotion to improve it (juddering camera)
 
 
 	

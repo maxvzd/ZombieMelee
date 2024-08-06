@@ -6,7 +6,7 @@ namespace UI
 {
     public class InventoryListController
     {
-        private List<ItemUIElement> _inventoryItems = new List<ItemUIElement>();
+        private readonly List<ItemUIElement> _inventoryItems = new();
         private VisualTreeAsset _listElementTemplate;
         private ListView _inventoryListView;
 
@@ -14,19 +14,20 @@ namespace UI
 
         public void InitialiseItemList(VisualElement root, VisualTreeAsset listElementTemplate, IEnumerable<Item> items)
         {
-            // populate list of  inventory items??
-            // ItemUIElement itemToAdd = Resources.Load<ItemUIElement>("Data/BaseBallBatUIElement");
-            // _inventoryItems.Add(itemToAdd);
-
             foreach (Item item in items)
             {
                 if (item is WeaponItem weapon)
                 {
-                    WeaponUIElement weaponUIElement = ScriptableObject.CreateInstance<WeaponUIElement>();
-                    //weaponUIElement.ItemName = weapon.ItemProperties.Name;
+                    WeaponUIElement weaponUIElement = ItemUIElementCreator.Create(weapon);
+                    _inventoryItems.Add(weaponUIElement);
+                }
+                else
+                {
+                    ItemUIElement weaponUIElement = ItemUIElementCreator.Create(item);
+                    _inventoryItems.Add(weaponUIElement);
                 }
             }
-
+            
             _inventoryItemTemplate = listElementTemplate;
             _inventoryListView = root.Q<ListView>("InventoryItems");
             

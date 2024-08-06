@@ -22,14 +22,14 @@ namespace UI
             _uiDoc = GetComponent<UIDocument>();
         }
 
-        public void ShowInventory()
+        public void ShowInventory(List<Item> items)
         {
             _uiDoc.enabled = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             
             InventoryListController inventoryListController = new InventoryListController();
-            inventoryListController.InitialiseItemList(_uiDoc.rootVisualElement, inventoryItemVisualTemplate, new List<Item>());
+            inventoryListController.InitialiseItemList(_uiDoc.rootVisualElement, inventoryItemVisualTemplate, items);
         }
 
         public void HideInventory()

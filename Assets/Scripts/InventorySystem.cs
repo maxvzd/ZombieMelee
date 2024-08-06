@@ -11,13 +11,15 @@ public class InventorySystem : MonoBehaviour
     
     private InventoryMediator _inventoryMediator;
     private bool _isBackpackOpen;
-    private List<GameObject> _items;
+    private List<Item> _items;
     private bool _puttingItemAway;
     private bool _inventoryIsOpen;
 
+    public IReadOnlyList<Item> Items => _items.AsReadOnly();
+
     private void Start()
     {
-        _items = new List<GameObject>();
+        _items = new List<Item>();
 
         _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         
@@ -27,7 +29,7 @@ public class InventorySystem : MonoBehaviour
     private void OnItemIsInBag(object sender, EventArgs e)
     {
         _puttingItemAway = false;
-        _items.Add(_inventoryMediator.HeldItem.gameObject);
+        _items.Add(_inventoryMediator.HeldItem.gameObject.GetComponent<Item>());
         _inventoryMediator.DeactivateHeldItem();
     }
 

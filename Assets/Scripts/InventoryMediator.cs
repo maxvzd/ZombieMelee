@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ public class InventoryMediator : MonoBehaviour
 
     public void ShowInventory()
     {
-        _mainView.ShowInventory();
+        _mainView.ShowInventory(_inventory.Items.ToList());
     }
 
     public void HideInventory()

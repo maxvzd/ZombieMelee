@@ -141,6 +141,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2730807563519599629, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
+      propertyPath: ItemProperties.name
+      value: Cubie <3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2730807563519599629, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
+      propertyPath: ItemProperties.volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2730807563519599629, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
+      propertyPath: ItemProperties.weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2730807563519599629, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
+      propertyPath: ItemProperties.description
+      value: I love cube
+      objectReference: {fileID: 0}
     - target: {fileID: 75098499435095325, guid: 0c44e700dea87e247bf2238e6cfdbe42, type: 3}
       propertyPath: m_Layer
       value: 9
