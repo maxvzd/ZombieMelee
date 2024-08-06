@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
     protected Transform ActualItem;
     public GameObject GetActualItem => ActualItem.gameObject;
 
+    public ItemProperties ItemProperties;
+
     private void Start()
     {
         GetSockets();
@@ -32,7 +34,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    public virtual void HoldItem(GameObject heldBy)
+    public void HoldItem(GameObject heldBy)
     {
         Transform currentTransform = transform;
         currentTransform.parent = heldBy.transform;

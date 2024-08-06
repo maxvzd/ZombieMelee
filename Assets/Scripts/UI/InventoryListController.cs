@@ -12,11 +12,20 @@ namespace UI
 
         private VisualTreeAsset _inventoryItemTemplate;
 
-        public void InitialiseItemList(VisualElement root, VisualTreeAsset listElementTemplate)
+        public void InitialiseItemList(VisualElement root, VisualTreeAsset listElementTemplate, IEnumerable<Item> items)
         {
-            // populate list of  inventory items??/
-            ItemUIElement itemToAdd = Resources.Load<ItemUIElement>("Data/BaseBallBatUIElement");
-            _inventoryItems.Add(itemToAdd);
+            // populate list of  inventory items??
+            // ItemUIElement itemToAdd = Resources.Load<ItemUIElement>("Data/BaseBallBatUIElement");
+            // _inventoryItems.Add(itemToAdd);
+
+            foreach (Item item in items)
+            {
+                if (item is WeaponItem weapon)
+                {
+                    WeaponUIElement weaponUIElement = ScriptableObject.CreateInstance<WeaponUIElement>();
+                    //weaponUIElement.ItemName = weapon.ItemProperties.Name;
+                }
+            }
 
             _inventoryItemTemplate = listElementTemplate;
             _inventoryListView = root.Q<ListView>("InventoryItems");

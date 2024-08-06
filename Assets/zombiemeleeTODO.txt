@@ -29,6 +29,9 @@ TODO NEXT
 -UI
 	-Separate inventory input from actual system
 	-inventory input talks to actual system through mediator
+	
+Bugs
+-item not being picked up sometimes?
 
 
 	

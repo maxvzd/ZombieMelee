@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
@@ -28,7 +29,7 @@ namespace UI
             Cursor.lockState = CursorLockMode.Confined;
             
             InventoryListController inventoryListController = new InventoryListController();
-            inventoryListController.InitialiseItemList(_uiDoc.rootVisualElement, inventoryItemVisualTemplate);
+            inventoryListController.InitialiseItemList(_uiDoc.rootVisualElement, inventoryItemVisualTemplate, new List<Item>());
         }
 
         public void HideInventory()

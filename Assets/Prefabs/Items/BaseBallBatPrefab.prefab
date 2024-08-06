@@ -354,6 +354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ee79f350966174581acaac31b50581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemProperties:
+    name: Baseball Bat
+    volume: 10
+    weight: 3
+    description: Bash some zombies heads in
   weaponDamage: 50
   recoilAmount: 0.5
   weaponSwingTime: 1

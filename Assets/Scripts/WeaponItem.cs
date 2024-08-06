@@ -18,9 +18,12 @@ public class WeaponItem : Item
     public float WeaponDamage => weaponDamage;
     public float RecoilAmount => recoilAmount;
     public float ImpactWait => impactWait;
+    
 
     private AudioSource _weaponAudioSource;
     private DealDamage _damageDealer;
+    
+    
     
     private void Start()
     {
