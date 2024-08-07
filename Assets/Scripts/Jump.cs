@@ -6,10 +6,12 @@ public class JumpScript : MonoBehaviour
 {
     public Animator animator;
     public CapsuleCollider capsuleCollider;
+
     public Rigidbody physicsObject;
-    public float jumpForce;
+
+    //public float jumpForce;
     private bool _isGrounded;
-    
+
     // public void OnAnimatorMove()
     // {
     //     // we implement this function to override the default root motion.
@@ -23,45 +25,45 @@ public class JumpScript : MonoBehaviour
     //         physicsObject.velocity = v;
     //     }
     // }
-    
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Transform currentTransform = transform;
-        // var position = currentTransform.position;
-        // var up = currentTransform.up;
+        Transform currentTransform = transform;
+        var position = currentTransform.position;
+        var up = currentTransform.up;
         //
-        // var bounds = capsuleCollider.bounds;
-        // float halfCharacterHeight = bounds.extents.y;
-        // float halfCharacterWidth = bounds.extents.x;
+        var bounds = capsuleCollider.bounds;
+        float halfCharacterHeight = bounds.extents.y;
+        float halfCharacterWidth = bounds.extents.x;
+        
+        Vector3 characterMidPoint =
+            new Vector3(position.x, position.y + halfCharacterHeight, position.z);
+        
+        Vector3 characterRightFootWidth =
+            new Vector3(position.x + halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
+        
+        Vector3 characterLeftFootWidth =
+            new Vector3(position.x - halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
         //
-        // Vector3 characterMidPoint =
-        //     new Vector3(position.x, position.y + halfCharacterHeight, position.z);
+         Vector3 rightFootPoint = RotatePointAroundPoint(characterRightFootWidth, characterMidPoint, currentTransform.rotation);
+         Vector3 leftFootPoint = RotatePointAroundPoint(characterLeftFootWidth, characterMidPoint, currentTransform.rotation);
         //
-        // Vector3 characterRightFootWidth =
-        //     new Vector3(position.x + halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
+         _isGrounded = 
+             Physics.Raycast(
+             rightFootPoint, 
+             -up * (halfCharacterHeight + 0.1f), 
+             halfCharacterHeight + 0.1f,
+             LayerMask.GetMask("Terrain")) 
+             || 
+             Physics.Raycast(
+                 leftFootPoint, 
+                 -up * (halfCharacterHeight + 0.1f), 
+                 halfCharacterHeight + 0.1f,
+                 LayerMask.GetMask("Terrain"));
         //
-        // Vector3 characterLeftFootWidth =
-        //     new Vector3(position.x - halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
-        //
-        // Vector3 rightFootPoint = RotatePointAroundPoint(characterRightFootWidth, characterMidPoint, currentTransform.rotation);
-        // Vector3 leftFootPoint = RotatePointAroundPoint(characterLeftFootWidth, characterMidPoint, currentTransform.rotation);
-        //
-        // _isGrounded = 
-        //     Physics.Raycast(
-        //     rightFootPoint, 
-        //     -up * (halfCharacterHeight + 0.1f), 
-        //     halfCharacterHeight + 0.1f,
-        //     LayerMask.GetMask("Terrain")) 
-        //     || 
-        //     Physics.Raycast(
-        //         leftFootPoint, 
-        //         -up * (halfCharacterHeight + 0.1f), 
-        //         halfCharacterHeight + 0.1f,
-        //         LayerMask.GetMask("Terrain"));
-        //
-        // animator.SetBool("IsGrounded", _isGrounded);
-         animator.SetBool("IsGrounded", true);
+         animator.SetBool("IsGrounded", _isGrounded);
+        //animator.SetBool("IsGrounded", true);
         //
         // if (Input.GetButtonDown("Jump") && _isGrounded)
         // {
@@ -69,6 +71,7 @@ public class JumpScript : MonoBehaviour
         //     animator.SetTrigger("JumpTrigger");
         // }
     }
+
     private Vector3 RotatePointAroundPoint(Vector3 point, Vector3 centrePoint, Quaternion rotation)
     {
         Vector3 rotatedPoint = point - centrePoint;

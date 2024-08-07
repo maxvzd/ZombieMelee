@@ -32,7 +32,7 @@ Level creation
 -Based on newcastle (tyne down the middle).
     -South shields is more infested and you have to go over the bridge or through the tunnel to get there
     -Military bases however with better loot
-
+-Clamp horizontal look angle until turn 
 
 
 TODO NEXT

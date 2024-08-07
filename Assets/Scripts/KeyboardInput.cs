@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class KeyboardInput : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class KeyboardInput : MonoBehaviour
 
     private void Start()
     {
-        _attackClass = GetComponent<Attack>();
+        _attackClass = GetComponentInParent<Attack>();
     }
 
     // Update is called once per frame
@@ -59,13 +57,5 @@ public class KeyboardInput : MonoBehaviour
 
         animator.SetFloat(Constants.Vertical, verticalAxis);
         animator.SetFloat(Constants.Horizontal, horizontalAxis);
-    }
-
-    private void FixedUpdate()
-    {
-
-        Transform childTransform = transform.GetChild(0);
-        transform.position = childTransform.position;
-        childTransform.localPosition = Vector3.zero;
     }
 }

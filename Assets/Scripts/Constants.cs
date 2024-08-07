@@ -19,6 +19,9 @@ public static class Constants
     public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
     public static readonly int PutItemAwayTrigger = Animator.StringToHash("PutItemAwayTrigger");
     
+    public static readonly int TurnTrigger = Animator.StringToHash("TurnTrigger");
+    public static readonly int TurnAngle = Animator.StringToHash("TurnAngle");
+    
     //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 
 

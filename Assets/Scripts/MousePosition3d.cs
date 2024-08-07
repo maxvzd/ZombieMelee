@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class MousePosition3d : MonoBehaviour
 {
-    public float maxVerticalAngle;
-    public float sensitivity = 1f;
+    [SerializeField] private float maxVerticalAngle;
+    [SerializeField] private float maxHorizontalAngle;
+    [SerializeField] private float sensitivity = 1f;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
 
