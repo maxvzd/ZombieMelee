@@ -18,9 +18,11 @@ public static class Constants
     public static readonly int IsBackpackOut = Animator.StringToHash("IsBackpackOut");
     public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
     public static readonly int PutItemAwayTrigger = Animator.StringToHash("PutItemAwayTrigger");
-    
     public static readonly int TurnTrigger = Animator.StringToHash("TurnTrigger");
     public static readonly int TurnAngle = Animator.StringToHash("TurnAngle");
+    public static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
+    public static readonly int IsJumpLocationGrounded = Animator.StringToHash("IsJumpLocationGrounded");
+    public static readonly int JumpTrigger = Animator.StringToHash("JumpTrigger");
     
     //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 
@@ -39,6 +41,7 @@ public static class Constants
     public const string InputMouseScrollWheel = "Mouse ScrollWheel";
     public const string InputUse = "Use";
     public const string EquipToggle = "EquipToggle";
+    public const string Jump = "Jump";
     
     //Layers
     public const string HittableObjectLayer = "HittableObject";

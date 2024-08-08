@@ -15,6 +15,9 @@ public class AnimationEventListener : MonoBehaviour
     public delegate void OnFinishedTurningEvent(object sender, EventArgs e);
     public event OnFinishedTurningEvent OnFinishedTurning;
     
+    public delegate void OnJumpPeakEvent(object sender, EventArgs e);
+    public event OnJumpPeakEvent OnJumpPeak;
+    
     private void ToggleWeaponEquipped()
     {
         OnWeaponEquip?.Invoke(this, EventArgs.Empty);
@@ -33,5 +36,10 @@ public class AnimationEventListener : MonoBehaviour
     private void FinishedTurning()
     {
         OnFinishedTurning?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void JumpPeak()
+    {
+        OnJumpPeak?.Invoke(this, EventArgs.Empty);
     }
 }
