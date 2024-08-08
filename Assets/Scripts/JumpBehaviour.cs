@@ -1,48 +1,45 @@
 using System;
 using UnityEngine;
 
-public class JumpScript : MonoBehaviour
+public class JumpBehaviour : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Collider characterCollider;
     [SerializeField] private Rigidbody physicsObject;
     [SerializeField] private float jumpForce;
-    
+
     private bool _isGrounded;
     private AnimationEventListener _animationEventListener;
+    private CrouchBehaviour _crouchBehaviour;
 
     private void Start()
     {
         _animationEventListener = GetComponent<AnimationEventListener>();
         _animationEventListener.OnJumpPeak += OnJumpPeak;
+
+        _crouchBehaviour = GetComponent<CrouchBehaviour>();
     }
 
     //Fires off a ray at the peak of the jump to tell if there's ground where the player will land.
     //If there isn't we transition to the "falling state" otherwise we just carry on moving and complete the jump
     private void OnJumpPeak(object sender, EventArgs e)
     {
-        if (animator.GetCurrentAnimatorStateInfo(1).IsName("Jump"))
-        {
-            var up = transform.up;
-                 
-            //Get rough end point of jump (could this be improved?)
-            animator.SetTarget(AvatarTarget.Root, 1f);
-            animator.Update(0);
-            Vector3 characterRootPosition = animator.targetPosition;
-                
-            //Calculate character height and mid point of character
-            float halfCharacterHeight = characterCollider.bounds.extents.y;
-            Vector3 characterMidPoint = new Vector3(characterRootPosition.x, characterRootPosition.y + halfCharacterHeight, characterRootPosition.z);
-                
-            //Cast ray and see if the end point has ground
-            bool isJumpEndGrounded = Physics.Raycast(
-                characterMidPoint,
-                 -up * (halfCharacterHeight + 0.1f),
-                 halfCharacterHeight + 0.1f,
-                 LayerMask.GetMask("Terrain"));
-            
-            animator.SetBool(Constants.IsJumpLocationGrounded, isJumpEndGrounded);
-        }
+        Transform currentTransform = transform;
+        var up = currentTransform.up;
+        var forward = currentTransform.forward;
+        
+        Vector3 characterRootPosition = currentTransform.position;
+       
+       //Debug.DrawRay(characterRootPosition, (-up + forward * 2) * 2, Color.magenta, 3);
+       
+        //Cast ray forward and below to check for ground where character would land
+        bool isJumpEndGrounded = Physics.Raycast(
+            characterRootPosition,
+            (-up + forward * 2),
+            2,
+            LayerMask.GetMask("Terrain"));
+
+        animator.SetBool(Constants.IsJumpLocationGrounded, isJumpEndGrounded);
     }
 
     private void OnAnimatorMove()
@@ -53,11 +50,11 @@ public class JumpScript : MonoBehaviour
         if (_isGrounded && Time.deltaTime > 0)
         {
             Vector3 v = animator.deltaPosition / Time.deltaTime;
-        
+
             // we preserve the existing y part of the current velocity.
             v.y = physicsObject.velocity.y;
             physicsObject.velocity = v;
-            
+
             //Removing this breaks turning????? Gives strange zoomy rotation behaviour with some jump animations for some reason??
             transform.rotation = animator.targetRotation;
         }
@@ -106,13 +103,20 @@ public class JumpScript : MonoBehaviour
     {
         if (Input.GetButtonDown(Constants.JumpKey) && _isGrounded)
         {
-            float speed = animator.GetFloat(Constants.VerticalMovementKey);
-            if (speed > 0.99f)
+            if (!_crouchBehaviour.IsCrouched)
             {
-                var up = transform.up;
-                
-                animator.SetTrigger(Constants.JumpTrigger);
-                physicsObject.AddForce(up * Mathf.Sqrt(2 * 9.81f * jumpForce), ForceMode.VelocityChange);
+                float speed = animator.GetFloat(Constants.VerticalMovementKey);
+                if (speed > 0.99f)
+                {
+                    var up = transform.up;
+
+                    animator.SetTrigger(Constants.JumpTrigger);
+                    physicsObject.AddForce(up * Mathf.Sqrt(2 * 9.81f * jumpForce), ForceMode.VelocityChange);
+                }
+            }
+            else
+            {
+                _crouchBehaviour.UnCrouch();
             }
         }
     }
