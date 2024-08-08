@@ -86,7 +86,7 @@ public class GrabItem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonUp(Constants.InputUse) && !_inventoryMediator.IsWeaponWielded)
+        if (Input.GetButtonUp(Constants.InputUseKey) && !_inventoryMediator.IsWeaponWielded)
         {
             if (!IsHoldingItem && !_isReachingForItem && !ReferenceEquals(_reticule.CurrentlySelectedItem, null))
             {

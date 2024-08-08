@@ -40,7 +40,7 @@ public class AimingReticule : MonoBehaviour
             Debug.DrawRay(headLocation, -rayDirection, Color.green);
             reticule.transform.position = hitInfo.point;
             reticule.SetActive(true);
-            if (Input.GetButtonDown(Constants.InputUse))
+            if (Input.GetButtonDown(Constants.InputUseKey))
             {
                 ItemAtTimeOfSelection = CurrentlySelectedItem;
             }

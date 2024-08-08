@@ -1573,6 +1573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7568583366963607818}
+    - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2049080420286419662}
     - targetCorrespondingSourceObject: {fileID: 100186, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5839413877035142424}
@@ -1939,7 +1942,7 @@ CapsuleCollider:
   m_Radius: 0.29
   m_Height: 1.89
   m_Direction: 1
-  m_Center: {x: 0, y: 0.96, z: -0.06}
+  m_Center: {x: 0, y: 0.94, z: -0.06}
 --- !u!95 &3795571196154083222
 Animator:
   serializedVersion: 5
@@ -2247,3 +2250,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItemVisualTemplate: {fileID: 9197481963319205126, guid: c1c91d5e279c558438edcf193657e4fc, type: 3}
+--- !u!114 &2049080420286419662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850892155079636423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1784c9659337b1429b654277ff949bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3795571196154083222}
+  crouchSizePercentage: 0.7

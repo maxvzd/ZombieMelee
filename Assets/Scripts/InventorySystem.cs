@@ -48,7 +48,7 @@ public class InventorySystem : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.InputInventory) && !_inventoryIsOpen)
+        if (Input.GetButtonDown(Constants.InventoryKey) && !_inventoryIsOpen)
         {
             IsBackpackOpen = !IsBackpackOpen;
         }

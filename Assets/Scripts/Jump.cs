@@ -49,13 +49,17 @@ public class JumpScript : MonoBehaviour
     {
         // we implement this function to override the default root motion.
         // this allows us to modify the positional speed before it's applied.
+        //transform.SetPositionAndRotation(animator.targetPosition, animator.targetRotation);
         if (_isGrounded && Time.deltaTime > 0)
         {
             Vector3 v = animator.deltaPosition / Time.deltaTime;
-    
+        
             // we preserve the existing y part of the current velocity.
             v.y = physicsObject.velocity.y;
             physicsObject.velocity = v;
+            
+            //Removing this breaks turning????? Gives strange zoomy rotation behaviour with some jump animations for some reason??
+            transform.rotation = animator.targetRotation;
         }
     }
 
@@ -100,28 +104,15 @@ public class JumpScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.Jump) && _isGrounded)
+        if (Input.GetButtonDown(Constants.JumpKey) && _isGrounded)
         {
-            float speed = animator.GetFloat(Constants.InputVertical);
+            float speed = animator.GetFloat(Constants.VerticalMovementKey);
             if (speed > 0.99f)
             {
                 var up = transform.up;
                 
                 animator.SetTrigger(Constants.JumpTrigger);
                 physicsObject.AddForce(up * Mathf.Sqrt(2 * 9.81f * jumpForce), ForceMode.VelocityChange);
-
-                // if (animator.GetCurrentAnimatorStateInfo(1).IsName("Locomotion"))
-                // {
-                //     Debug.Log("Im locomotioning");
-                // }
-                //
-                // if (animator.GetCurrentAnimatorStateInfo(1).IsName("Landed"))
-                // {
-                //     Debug.Log("Im Landed");
-                // }
-                
-                
-
             }
         }
     }

@@ -34,8 +34,8 @@ public class MouseInput : MonoBehaviour
         Transform cameraTransform = firstPersonCamera.transform;
         cameraTransform.LookAt(mouseTargetPosition);
 
-        float inputY = Input.GetAxis(Constants.InputVertical);
-        float inputX = Input.GetAxis(Constants.InputHorizontal);
+        float inputY = Input.GetAxis(Constants.VerticalMovementKey);
+        float inputX = Input.GetAxis(Constants.HorizontalMovementKey);
 
         //If we're moving then automatically look in the direction of the camera
         if (inputY > 0.01f || inputY < -0.01f || inputX > 0.01f || inputX < -0.01f)
@@ -43,6 +43,7 @@ public class MouseInput : MonoBehaviour
             Vector3 relativePos = new Vector3(mouseTargetPosition.x, transform.position.y, mouseTargetPosition.z) - transform.position;
             Quaternion toRotation = Quaternion.LookRotation(relativePos);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
+            _isTurning = false;
         }
         else if (!_isTurning)
         {
@@ -51,14 +52,17 @@ public class MouseInput : MonoBehaviour
             {
                 angleBetweenCameraAndBody += 360;
             }
-            
-            //If the camera is past the turn radius then turn the body 
-            if ((angleBetweenCameraAndBody < 360f - turnToleranceDegrees && angleBetweenCameraAndBody > 180) ||
-                (angleBetweenCameraAndBody > 0f + turnToleranceDegrees && angleBetweenCameraAndBody < 180))
+
+            if (angleBetweenCameraAndBody > 0 + turnToleranceDegrees &&  angleBetweenCameraAndBody < 180)
             {
                 _isTurning = true;
-                animator.SetFloat(Constants.TurnAngle, angleBetweenCameraAndBody);
-                animator.SetTrigger(Constants.TurnTrigger);
+                animator.SetTrigger(Constants.TurnRightTrigger);
+            }
+
+            if (angleBetweenCameraAndBody > 180 && angleBetweenCameraAndBody < 360 - turnToleranceDegrees)
+            {
+                _isTurning = true;
+                animator.SetTrigger(Constants.TurnLeftTrigger);
             }
         }
     }

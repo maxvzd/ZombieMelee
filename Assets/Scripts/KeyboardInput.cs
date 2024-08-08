@@ -24,9 +24,9 @@ public class KeyboardInput : MonoBehaviour
     private void Movement()
     {
         // Get wasd held + sprint key
-        float verticalAxis = Input.GetAxis(Constants.InputVertical);
-        float horizontalAxis = Input.GetAxis(Constants.InputHorizontal);
-        float sprintAxis = Input.GetAxis(Constants.InputSprint);
+        float verticalAxis = Input.GetAxis(Constants.VerticalMovementKey);
+        float horizontalAxis = Input.GetAxis(Constants.HorizontalMovementKey);
+        float sprintAxis = Input.GetAxis(Constants.SprintKey);
 
 
         float maxSpeedModifier = 0.66f;
@@ -42,12 +42,8 @@ public class KeyboardInput : MonoBehaviour
         }
 
         _walkSpeedModifier = Mathf.Clamp(_walkSpeedModifier, 0.5f, maxSpeed * maxSpeedModifier);
-
-        //if (verticalAxis > 0.01f)
-        //{
-        verticalAxis *= _walkSpeedModifier;
-        //}
         
+        verticalAxis *= _walkSpeedModifier;
         
         if (_attackClass.IsWeaponRaised)
         {
