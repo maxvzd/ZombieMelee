@@ -2,34 +2,71 @@ using UnityEngine;
 
 public class CrouchBehaviour : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
     [SerializeField] private float crouchSizePercentage;
+    [SerializeField] private float rollWindow;
+
+    private Animator _animator;
     private float _oldColliderHeight;
     private Vector3 _oldColliderCentre;
     private CapsuleCollider _collider;
+    private PlayerCharacterState _playerState;
     
+    private float _timerWhenCrouchKeyPressed;
+    private bool _crouchedWasPressedDuringFall;
+
     public bool IsCrouched { get; private set; }
 
     private void Start()
     {
         _collider = GetComponent<CapsuleCollider>();
+        _playerState = GetComponent<PlayerCharacterState>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        //HACK ALERT FIX THIS
-        bool isGrounded = animator.GetBool(Constants.IsGrounded);
-        
-        if (isGrounded && Input.GetButtonDown(Constants.CrouchKey))
+        bool isGrounded = _playerState.IsGrounded;
+
+        if (Input.GetButtonDown(Constants.CrouchKey))
         {
-            if (!IsCrouched)
+            if (isGrounded)
             {
-                Crouch();
+                if (!IsCrouched)
+                {
+                    Crouch();
+                }
+                else
+                {
+                    UnCrouch();
+                }
             }
+            //If crouch is pressed while in the air then take note of when crouch was pressed
             else
             {
-                UnCrouch();
+                _timerWhenCrouchKeyPressed = _playerState.FallTimer;
+                _crouchedWasPressedDuringFall = true;
+            }
+        }
+        
+        if (_playerState.LastFrameWasGrounded && !_playerState.IsGrounded)
+        {
+            _timerWhenCrouchKeyPressed = -1f;
+            _crouchedWasPressedDuringFall = false;
+            _animator.SetBool("CrouchWasPressed", false);
+        }
+
+        if (!_playerState.LastFrameWasGrounded && _playerState.IsGrounded)
+        {
+            if (_crouchedWasPressedDuringFall)
+            {
+                float timerThreshold = _playerState.FallTimer - rollWindow;
+                Debug.Log("_timerWhenCrouchKeyPressed: " + _timerWhenCrouchKeyPressed + ", fallTimer: " + _playerState.FallTimer + ", timerThreshold: " + timerThreshold);
+                if (_timerWhenCrouchKeyPressed < _playerState.FallTimer && _timerWhenCrouchKeyPressed > timerThreshold)
+                {
+                    _animator.SetBool("CrouchWasPressed", true);
+                    _animator.SetTrigger(Constants.RollTrigger);
+                }
             }
         }
     }
@@ -49,7 +86,7 @@ public class CrouchBehaviour : MonoBehaviour
         }
         //else play bump head animation??
         
-        animator.SetBool(Constants.IsCrouched, IsCrouched);
+        _animator.SetBool(Constants.IsCrouched, IsCrouched);
     }
     
     private void Crouch()
@@ -66,6 +103,6 @@ public class CrouchBehaviour : MonoBehaviour
         _collider.center = center;
 
         IsCrouched = true;
-        animator.SetBool(Constants.IsCrouched, IsCrouched);
+        _animator.SetBool(Constants.IsCrouched, IsCrouched);
     }
 }
