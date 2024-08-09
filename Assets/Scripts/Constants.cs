@@ -27,9 +27,7 @@ public static class Constants
     public static readonly int RollTrigger = Animator.StringToHash("RollTrigger");
     public static readonly int FallIntensity = Animator.StringToHash("FallIntensity");
     public static readonly int CrouchWasPressed = Animator.StringToHash("CrouchWasPressed");
-    
-    //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
-
+    public static readonly int LowVaultTrigger = Animator.StringToHash("LowVaultTrigger");
 
     public const float
         AnimatorDampingCoefficient =

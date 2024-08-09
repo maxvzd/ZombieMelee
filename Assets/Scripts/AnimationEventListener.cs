@@ -18,6 +18,9 @@ public class AnimationEventListener : MonoBehaviour
     public delegate void OnJumpPeakEvent(object sender, EventArgs e);
     public event OnJumpPeakEvent OnJumpPeak;
     
+    public delegate void OnVaultingEvent(object sender, EventArgs e);
+    public event OnVaultingEvent OnVaulting;
+    
     private void ToggleWeaponEquipped()
     {
         OnWeaponEquip?.Invoke(this, EventArgs.Empty);
@@ -41,5 +44,11 @@ public class AnimationEventListener : MonoBehaviour
     private void JumpPeak()
     {
         OnJumpPeak?.Invoke(this, EventArgs.Empty);
+    } 
+    
+    //1 = starting, 0 = finishing
+    private void Vaulting(int isStartingVault)
+    {
+        OnVaulting?.Invoke(isStartingVault, EventArgs.Empty);
     }
 }

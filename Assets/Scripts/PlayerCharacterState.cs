@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerCharacterState : MonoBehaviour
@@ -9,13 +8,12 @@ public class PlayerCharacterState : MonoBehaviour
 
     //private JumpBehaviour _jumpBehaviour;
     private CrouchBehaviour _crouchBehaviour;
-
+    public Vector3 LeftFootMidHeightPosition { get; private set; }
+    public Vector3 RightFootMidHeightPosition { get; private set; }
 
     public bool IsGrounded { get; private set; }
     public bool LastFrameWasGrounded { get; private set; }
     public bool IsCrouched => _crouchBehaviour.IsCrouched;
-
-
     public float FallTimer { get; private set; }
 
     // Start is called before the first frame update
@@ -68,25 +66,25 @@ public class PlayerCharacterState : MonoBehaviour
         Vector3 characterMidPoint =
             new Vector3(position.x, position.y + halfCharacterHeight, position.z);
 
-        Vector3 characterRightFootWidth =
+        RightFootMidHeightPosition =
             new Vector3(position.x + halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
 
-        Vector3 characterLeftFootWidth =
+        LeftFootMidHeightPosition =
             new Vector3(position.x - halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
 
         Quaternion rotation = currentTransform.rotation;
-        Vector3 rightFootPoint = RotatePointAroundPoint(characterRightFootWidth, characterMidPoint, rotation);
-        Vector3 leftFootPoint = RotatePointAroundPoint(characterLeftFootWidth, characterMidPoint, rotation);
+        RightFootMidHeightPosition = RotatePointAroundPoint(RightFootMidHeightPosition, characterMidPoint, rotation);
+        LeftFootMidHeightPosition = RotatePointAroundPoint(LeftFootMidHeightPosition, characterMidPoint, rotation);
 
         IsGrounded =
             Physics.Raycast(
-                rightFootPoint,
+                RightFootMidHeightPosition,
                 -up * (halfCharacterHeight + 0.1f),
                 halfCharacterHeight + 0.1f,
                 LayerMask.GetMask("Terrain"))
             ||
             Physics.Raycast(
-                leftFootPoint,
+                LeftFootMidHeightPosition,
                 -up * (halfCharacterHeight + 0.1f),
                 halfCharacterHeight + 0.1f,
                 LayerMask.GetMask("Terrain"));

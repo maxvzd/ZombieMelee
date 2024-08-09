@@ -2170,6 +2170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 0.75
+  vaultDistanceTolerance: 1
 --- !u!114 &5241731334897015549
 MonoBehaviour:
   m_ObjectHideFlags: 0
