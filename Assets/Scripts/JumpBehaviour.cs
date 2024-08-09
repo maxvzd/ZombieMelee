@@ -7,10 +7,16 @@ public class JumpBehaviour : MonoBehaviour
     [SerializeField] private Collider characterCollider;
     [SerializeField] private Rigidbody physicsObject;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float rollWindow;
 
     private bool _isGrounded;
     private AnimationEventListener _animationEventListener;
     private CrouchBehaviour _crouchBehaviour;
+
+    private float _fallTimer;
+    private float _timerWhenCrouchKeyPressed;
+    private bool _lastFrameWasGrounded;
+    private bool _crouchedWasPressedDuringFall;
 
     private void Start()
     {
@@ -27,11 +33,11 @@ public class JumpBehaviour : MonoBehaviour
         Transform currentTransform = transform;
         var up = currentTransform.up;
         var forward = currentTransform.forward;
-        
+
         Vector3 characterRootPosition = currentTransform.position;
-       
-       //Debug.DrawRay(characterRootPosition, (-up + forward * 2) * 2, Color.magenta, 3);
-       
+
+        //Debug.DrawRay(characterRootPosition, (-up + forward * 2) * 2, Color.magenta, 3);
+
         //Cast ray forward and below to check for ground where character would land
         bool isJumpEndGrounded = Physics.Raycast(
             characterRootPosition,
@@ -96,6 +102,20 @@ public class JumpBehaviour : MonoBehaviour
                 halfCharacterHeight + 0.1f,
                 LayerMask.GetMask("Terrain"));
 
+
+        //
+        // if (_timerWhenCrouchKeyPressed != 0)
+        // {
+        //     Debug.Log("IsGrounded: " + _isGrounded + ", _lastFrameWasGrounded: " + _lastFrameWasGrounded + ", _fallTimer: " + _fallTimer + ", time when ctrl pressed: " + _timerWhenCrouchKeyPressed);
+        // }
+        //
+        // if (_isGrounded && !_lastFrameWasGrounded && _timerWhenCrouchKeyPressed < _fallTimer && _timerWhenCrouchKeyPressed > timerThreshold)
+        // {
+        //     animator.SetTrigger(Constants.RollTrigger);
+        //     //animator.SetBool("CrouchWasPressed", true);
+        // }
+
+
         animator.SetBool(Constants.IsGrounded, _isGrounded);
     }
 
@@ -119,6 +139,43 @@ public class JumpBehaviour : MonoBehaviour
                 _crouchBehaviour.UnCrouch();
             }
         }
+
+        //If crouch is pressed while in the air then take note of when crouch was pressed
+        if (Input.GetButtonDown(Constants.CrouchKey) && !_isGrounded)
+        {
+            _timerWhenCrouchKeyPressed = _fallTimer;
+            _crouchedWasPressedDuringFall = true;
+        }
+
+        // While in the keep track of velocity over time
+        //If the crouch key was pressed during the right window then trigger the roll
+        if (!_isGrounded)
+        {
+            _fallTimer += -physicsObject.velocity.y * Time.deltaTime;
+        }
+
+        if (_lastFrameWasGrounded && !_isGrounded)
+        {
+            _fallTimer = 0f;
+            _timerWhenCrouchKeyPressed = -1f;
+            _crouchedWasPressedDuringFall = false;
+            animator.SetBool("CrouchWasPressed", false);
+        }
+
+        if (!_lastFrameWasGrounded && _isGrounded)
+        {
+            if (_crouchedWasPressedDuringFall)
+            {
+                float timerThreshold = _fallTimer - rollWindow;
+                if (_timerWhenCrouchKeyPressed < _fallTimer && _timerWhenCrouchKeyPressed > timerThreshold)
+                {
+                    animator.SetBool("CrouchWasPressed", true);
+                    animator.SetTrigger(Constants.RollTrigger);
+                }
+            }
+        }
+
+        _lastFrameWasGrounded = _isGrounded;
     }
 
     private Vector3 RotatePointAroundPoint(Vector3 point, Vector3 centrePoint, Quaternion rotation)

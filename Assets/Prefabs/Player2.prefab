@@ -2157,7 +2157,8 @@ MonoBehaviour:
   animator: {fileID: 3795571196154083222}
   characterCollider: {fileID: 6544869047370839494}
   physicsObject: {fileID: 3161227880437359021}
-  jumpForce: 400
+  jumpForce: 0.75
+  rollWindow: 1.2
 --- !u!114 &5241731334897015549
 MonoBehaviour:
   m_ObjectHideFlags: 0

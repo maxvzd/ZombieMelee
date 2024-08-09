@@ -18,7 +18,10 @@ public class CrouchBehaviour : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.CrouchKey))
+        //HACK ALERT FIX THIS
+        bool isGrounded = animator.GetBool(Constants.IsGrounded);
+        
+        if (isGrounded && Input.GetButtonDown(Constants.CrouchKey))
         {
             if (!IsCrouched)
             {

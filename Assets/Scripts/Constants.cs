@@ -24,6 +24,7 @@ public static class Constants
     public static readonly int IsJumpLocationGrounded = Animator.StringToHash("IsJumpLocationGrounded");
     public static readonly int JumpTrigger = Animator.StringToHash("JumpTrigger");
     public static readonly int IsCrouched = Animator.StringToHash("IsCrouched");
+    public static readonly int RollTrigger = Animator.StringToHash("RollTrigger");
     
     //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 
