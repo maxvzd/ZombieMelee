@@ -25,6 +25,8 @@ public static class Constants
     public static readonly int JumpTrigger = Animator.StringToHash("JumpTrigger");
     public static readonly int IsCrouched = Animator.StringToHash("IsCrouched");
     public static readonly int RollTrigger = Animator.StringToHash("RollTrigger");
+    public static readonly int FallIntensity = Animator.StringToHash("FallIntensity");
+    public static readonly int CrouchWasPressed = Animator.StringToHash("CrouchWasPressed");
     
     //public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
 
@@ -50,4 +52,5 @@ public static class Constants
     public const string HittableObjectLayer = "HittableObject";
     public const string ItemObjectLayer = "Item";
     public const string WeaponObjectLayer = "WeaponItem";
+    
 }

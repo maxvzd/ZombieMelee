@@ -53,7 +53,7 @@ public class CrouchBehaviour : MonoBehaviour
         {
             _timerWhenCrouchKeyPressed = -1f;
             _crouchedWasPressedDuringFall = false;
-            _animator.SetBool("CrouchWasPressed", false);
+            _animator.SetBool(Constants.CrouchWasPressed, false);
         }
 
         if (!_playerState.LastFrameWasGrounded && _playerState.IsGrounded)
@@ -61,10 +61,9 @@ public class CrouchBehaviour : MonoBehaviour
             if (_crouchedWasPressedDuringFall)
             {
                 float timerThreshold = _playerState.FallTimer - rollWindow;
-                Debug.Log("_timerWhenCrouchKeyPressed: " + _timerWhenCrouchKeyPressed + ", fallTimer: " + _playerState.FallTimer + ", timerThreshold: " + timerThreshold);
                 if (_timerWhenCrouchKeyPressed < _playerState.FallTimer && _timerWhenCrouchKeyPressed > timerThreshold)
                 {
-                    _animator.SetBool("CrouchWasPressed", true);
+                    _animator.SetBool(Constants.CrouchWasPressed, true);
                     _animator.SetTrigger(Constants.RollTrigger);
                 }
             }

@@ -43,6 +43,12 @@ public class PlayerCharacterState : MonoBehaviour
         {
             FallTimer = 0f;
         }
+
+        // Set landing intensity animation
+        if (!LastFrameWasGrounded && IsGrounded)
+        {
+            _animator.SetFloat(Constants.FallIntensity, FallTimer);
+        }
     }
 
     private void LateUpdate()
