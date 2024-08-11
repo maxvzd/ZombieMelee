@@ -51,6 +51,9 @@ Bugs
     -Improve hit direction calculation in hit directions
 -Fix strange judder at end of sprint
 -Take a look at general locomotion to improve it (juddering camera)
+-Make hit detection use box cast 
 
+https://www.ramsterzanimations.com/store-buy/p/epic-megajam-2022-free-anims
+https://www.ramsterzanimations.com/store-buy/p/ultimate-traversal-anims-fbx-only
 
 	

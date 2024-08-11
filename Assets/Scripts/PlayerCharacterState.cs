@@ -1,17 +1,20 @@
+using System;
 using UnityEngine;
 
 public class PlayerCharacterState : MonoBehaviour
 {
     private Rigidbody _physicsObject;
     private Animator _animator;
-    private Collider _characterCollider;
+    private CapsuleCollider _characterCollider;
 
-    //private JumpBehaviour _jumpBehaviour;
+    private JumpBehaviour _jumpBehaviour;
     private CrouchBehaviour _crouchBehaviour;
     public Vector3 LeftFootMidHeightPosition { get; private set; }
     public Vector3 RightFootMidHeightPosition { get; private set; }
 
     public bool IsGrounded { get; private set; }
+    public bool IsClimbing => _jumpBehaviour.IsClimbing;
+
     public bool LastFrameWasGrounded { get; private set; }
     public bool IsCrouched => _crouchBehaviour.IsCrouched;
     public float FallTimer { get; private set; }
@@ -21,9 +24,9 @@ public class PlayerCharacterState : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _physicsObject = GetComponent<Rigidbody>();
-        _characterCollider = GetComponent<Collider>();
+        _characterCollider = GetComponent<CapsuleCollider>();
 
-        //_jumpBehaviour = GetComponent<JumpBehaviour>();
+        _jumpBehaviour = GetComponent<JumpBehaviour>();
         _crouchBehaviour = GetComponent<CrouchBehaviour>();
     }
 
@@ -56,58 +59,40 @@ public class PlayerCharacterState : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float boxHeight = 0.05f;
         Transform currentTransform = transform;
-        Vector3 position = currentTransform.position;
-        Vector3 up = currentTransform.up;
-        Bounds bounds = _characterCollider.bounds;
-        float halfCharacterHeight = bounds.extents.y;
-        float halfCharacterWidth = bounds.extents.x;
+        Vector3 playerPosition = currentTransform.position;
+        float halfPlayerWidthAndDepth = _characterCollider.radius;
+        Vector3 centreOfGroundCast = new Vector3(playerPosition.x, playerPosition.y - boxHeight * 0.5f, playerPosition.z);
+        Vector3 groundCastHalfExtent = new Vector3(halfPlayerWidthAndDepth, boxHeight, halfPlayerWidthAndDepth);
 
-        Vector3 characterMidPoint =
-            new Vector3(position.x, position.y + halfCharacterHeight, position.z);
-
-        RightFootMidHeightPosition =
-            new Vector3(position.x + halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
-
-        LeftFootMidHeightPosition =
-            new Vector3(position.x - halfCharacterWidth / 2f, position.y + halfCharacterHeight, position.z);
-
-        Quaternion rotation = currentTransform.rotation;
-        RightFootMidHeightPosition = RotatePointAroundPoint(RightFootMidHeightPosition, characterMidPoint, rotation);
-        LeftFootMidHeightPosition = RotatePointAroundPoint(LeftFootMidHeightPosition, characterMidPoint, rotation);
-
-        IsGrounded =
-            Physics.Raycast(
-                RightFootMidHeightPosition,
-                -up * (halfCharacterHeight + 0.1f),
-                halfCharacterHeight + 0.1f,
-                LayerMask.GetMask("Terrain"))
-            ||
-            Physics.Raycast(
-                LeftFootMidHeightPosition,
-                -up * (halfCharacterHeight + 0.1f),
-                halfCharacterHeight + 0.1f,
-                LayerMask.GetMask("Terrain"));
-
+        RaycastHit[] floorHit = new RaycastHit[1];
+        floorHit = Physics.BoxCastAll(centreOfGroundCast, groundCastHalfExtent, -currentTransform.up, currentTransform.rotation, boxHeight, LayerMask.GetMask("Terrain"));
+        //RayCastDebug.DrawBox(centreOfGroundCast, groundCastHalfExtent, transform.rotation, Color.cyan, 0.1f);
+        
+        IsGrounded = floorHit.Length > 0;
         _animator.SetBool(Constants.IsGrounded, IsGrounded);
     }
 
     private void OnAnimatorMove()
     {
-        // we implement this function to override the default root motion.
-        // this allows us to modify the positional speed before it's applied.
-        //transform.SetPositionAndRotation(animator.targetPosition, animator.targetRotation);
-        if (IsGrounded && Time.deltaTime > 0)
+        //Try and find more dynamic way to do this??
+        if (IsClimbing)
+        {
+            transform.position = _animator.targetPosition;
+            _physicsObject.velocity = Vector3.zero;
+        }
+        else if (IsGrounded)
         {
             Vector3 v = _animator.deltaPosition / Time.deltaTime;
-
-            // we preserve the existing y part of the current velocity.
             v.y = _physicsObject.velocity.y;
             _physicsObject.velocity = v;
-
-            //Removing this breaks turning????? Gives strange zoomy rotation behaviour with some jump animations for some reason??
-            transform.rotation = _animator.targetRotation;
         }
+
+        _physicsObject.MoveRotation(_animator.targetRotation);
+        
+        //This is what happens if we don't override it (just incase)
+        //transform.SetPositionAndRotation(_animator.targetPosition, _animator.targetRotation); 
     }
 
     private Vector3 RotatePointAroundPoint(Vector3 point, Vector3 centrePoint, Quaternion rotation)

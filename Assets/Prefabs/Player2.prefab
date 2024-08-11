@@ -2124,9 +2124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonCamera: {fileID: 3349649317979876978}
   mouseTarget: {fileID: 507150283334257760}
-  turnSpeed: 0.5
+  turnSpeed: 5
   animator: {fileID: 3795571196154083222}
-  turnToleranceDegrees: 45
+  turnToleranceDegrees: 75
 --- !u!114 &3010533847452304138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,7 +2170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 0.75
-  vaultDistanceTolerance: 1
+  vaultDistanceTolerance: 0.5
+  vaultVelocityMagnitudeModifier: 0.2
+  rayResolution: 0.2
 --- !u!114 &5241731334897015549
 MonoBehaviour:
   m_ObjectHideFlags: 0
