@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 public class HolsterUnHolsterWeapon : MonoBehaviour
 {
@@ -100,14 +99,15 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
             animator.SetTrigger(Constants.EquipWeaponTrigger);
         }
-        
-        if (_shouldChangeHandWeight)
-        {
-            animator.SetFloat(Constants.HandIKWeightAnimator, _targetIkWeight, _dampTime / Constants.AnimatorDampingCoefficient, Time.deltaTime);
-            float handWeight = animator.GetFloat(Constants.HandIKWeightAnimator);
-
-            equipArmIk.weight = handWeight;
-        }
+        // Disabled for now until I can look into it
+        // The hand twists to match an up orientation and I don't know why. Tried twisting the target but that doesn't work 
+        // if (_shouldChangeHandWeight)
+        // {
+        //     animator.SetFloat(Constants.HandIKWeightAnimator, _targetIkWeight, _dampTime / Constants.AnimatorDampingCoefficient, Time.deltaTime);
+        //     float handWeight = animator.GetFloat(Constants.HandIKWeightAnimator);
+        //
+        //     equipArmIk.weight = handWeight;
+        // }
     }
 
     public void EquipWeaponFromPickup(WeaponItem weaponItem)

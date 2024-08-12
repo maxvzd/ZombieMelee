@@ -104,6 +104,7 @@ public class GrabItem : MonoBehaviour
                 //}
 
                 ikHandTarget.transform.localPosition = Vector3.zero;
+                ikHandTarget.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 ikHandTarget.transform.localEulerAngles = _reticule.CurrentlySelectedItem.transform.rotation * rightArmIKConstraint.transform.forward;
                 
                 _isReachingForItem = true;
