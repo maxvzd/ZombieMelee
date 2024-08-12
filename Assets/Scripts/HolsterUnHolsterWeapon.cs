@@ -18,9 +18,9 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     private WeaponItem _weaponInHolster;
     private WeaponItem _weaponInHand;
     
-    private bool _shouldChangeHandWeight;
-    private readonly float _dampTime = 0.2f;
-    private float _targetIkWeight = 1f;
+    //private bool _shouldChangeHandWeight;
+    //private readonly float _dampTime = 0.2f;
+    //private float _targetIkWeight = 1f;
 
     public bool HasWeaponInHand => _weaponInHand != null;
     private bool HasWeaponInHolster => _weaponInHolster != null;
@@ -38,25 +38,25 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
     private void OnStartChangeWeaponIk(object sender, EventArgs e)
     {
-        if (sender is not int senderAsInt) return;
-
-        if (senderAsInt == 1)
-        {
-            _shouldChangeHandWeight = true;
-            _targetIkWeight = 1;
-        }
-        else if (senderAsInt == 0)
-        {
-            _targetIkWeight = 0;
-            StartCoroutine(WaitForDampTime(_dampTime));
-        }
+        // if (sender is not int senderAsInt) return;
+        //
+        // if (senderAsInt == 1)
+        // {
+        //     _shouldChangeHandWeight = true;
+        //     _targetIkWeight = 1;
+        // }
+        // else if (senderAsInt == 0)
+        // {
+        //     _targetIkWeight = 0;
+        //     StartCoroutine(WaitForDampTime(_dampTime));
+        // }
     }
 
-    private IEnumerator WaitForDampTime(float dampTime)
-    {
-        yield return new WaitForSeconds(dampTime);
-        _shouldChangeHandWeight = false;
-    }
+    // private IEnumerator WaitForDampTime(float dampTime)
+    // {
+    //     yield return new WaitForSeconds(dampTime);
+    //     _shouldChangeHandWeight = false;
+    // }
 
     private void OnEquipListenerSaysEquip(object sender, EventArgs e)
     {
