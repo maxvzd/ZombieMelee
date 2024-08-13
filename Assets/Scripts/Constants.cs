@@ -30,6 +30,8 @@ public static class Constants
     public static readonly int VaultTrigger = Animator.StringToHash("VaultTrigger");
     public static readonly int ClimbTrigger = Animator.StringToHash("ClimbTrigger");
     public static readonly int ClimbHeight = Animator.StringToHash("ClimbHeight");
+    public static readonly int IsSwimming = Animator.StringToHash("IsSwimming");
+    public static readonly int WaterHeight = Animator.StringToHash("WaterHeight");
 
     public const float
         AnimatorDampingCoefficient =
@@ -52,6 +54,4 @@ public static class Constants
     public const string HittableObjectLayer = "HittableObject";
     public const string ItemObjectLayer = "Item";
     public const string WeaponObjectLayer = "WeaponItem";
-
-    
 }

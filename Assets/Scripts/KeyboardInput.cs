@@ -30,6 +30,7 @@ public class KeyboardInput : MonoBehaviour
 
 
         float maxSpeedModifier = 0.66f;
+        
         //If sprint key is held and forward is held then add the sprint axis to the forward axis
         if (sprintAxis > 0.01f && verticalAxis > 0.01f && !_attackClass.IsWeaponRaised)
         {

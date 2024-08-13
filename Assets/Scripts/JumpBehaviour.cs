@@ -215,8 +215,9 @@ public class JumpBehaviour : MonoBehaviour
     // Proper 2m vault animation
     // Support for higher ledges?
     // Less magic number for size of gap to fit through
-    // Hanging if there's no space on edge of ledge - for rope sheets/player can jump if they want
-    // Better way to hand OnAnimatorMove in PlayerCharacterState.cs 
+    // Hanging if there's no contact on other side of ledge - for rope sheets/player can jump if they want
+    // Better way to hand OnAnimatorMove in PlayerCharacterState.cs (no flagging)
+    //Check normal of hit to tell if the thing in front of us is a wall.
     private ClimbType GetClimbEnvironmentInfo()
     {
         float rayCounter = 0;

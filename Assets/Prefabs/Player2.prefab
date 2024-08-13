@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.5
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 5850892155079600129}
     m_SourceObjects:
@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4108389547950931852
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
     m_TargetRotationWeight: 1
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 1
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &2818281587868480187
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 5850892155079600565}
     m_Mid: {fileID: 5850892155079600617}
@@ -961,7 +961,7 @@ MonoBehaviour:
     m_TargetRotationWeight: 1
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 1
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &7409117285431871366
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,8 +986,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7409117285431871366}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.003612507, y: -0.008825914, z: -0.22158979, w: 0.9750933}
-  m_LocalPosition: {x: 0.2285561, y: -0.109559365, z: 0.003957119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.078, y: 0.229, z: -0.106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.5
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 5850892155079600129}
     m_SourceObjects:
@@ -1627,6 +1627,9 @@ PrefabInstance:
       addedObject: {fileID: 7914641323358523311}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1847147990612961900}
+    - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1491906250471141918}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
@@ -2090,6 +2093,19 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!114 &1847147990612961900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850892155079636423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a47f96a5f054d47beb91079f15eb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swimHeightTolerance: 0.7
 --- !u!114 &1491906250471141918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2261,7 +2277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 0.75
-  vaultDistanceTolerance: 0.5
+  vaultDistanceTolerance: 0.7
   vaultVelocityMagnitudeModifier: 0.2
   rayResolution: 0.2
 --- !u!114 &5241731334897015549

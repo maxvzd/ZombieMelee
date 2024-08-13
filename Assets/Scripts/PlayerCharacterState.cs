@@ -9,14 +9,14 @@ public class PlayerCharacterState : MonoBehaviour
 
     private JumpBehaviour _jumpBehaviour;
     private CrouchBehaviour _crouchBehaviour;
-    public Vector3 LeftFootMidHeightPosition { get; private set; }
-    public Vector3 RightFootMidHeightPosition { get; private set; }
+    private WaterContactBehaviour _swimBehaviour;
 
     public bool IsGrounded { get; private set; }
     public bool IsClimbing => _jumpBehaviour.IsClimbing;
+    public bool IsSwimming => _swimBehaviour.IsSwimming;
+    public bool IsCrouched => _crouchBehaviour.IsCrouched;
 
     public bool LastFrameWasGrounded { get; private set; }
-    public bool IsCrouched => _crouchBehaviour.IsCrouched;
     public float FallTimer { get; private set; }
 
     // Start is called before the first frame update
@@ -28,6 +28,7 @@ public class PlayerCharacterState : MonoBehaviour
 
         _jumpBehaviour = GetComponent<JumpBehaviour>();
         _crouchBehaviour = GetComponent<CrouchBehaviour>();
+        _swimBehaviour = GetComponent<WaterContactBehaviour>();
     }
 
     // Update is called once per frame
@@ -82,13 +83,13 @@ public class PlayerCharacterState : MonoBehaviour
             transform.position = _animator.targetPosition;
             _physicsObject.velocity = Vector3.zero;
         }
-        else if (IsGrounded)
+        else if (IsGrounded || IsSwimming)
         {
             Vector3 v = _animator.deltaPosition / Time.deltaTime;
             v.y = _physicsObject.velocity.y;
             _physicsObject.velocity = v;
         }
-
+    
         _physicsObject.MoveRotation(_animator.targetRotation);
         
         //This is what happens if we don't override it (just incase)
