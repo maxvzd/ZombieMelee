@@ -123,6 +123,15 @@ public class GrabItem : MonoBehaviour
                 HeldItemGameObject = null;
             }
         }
+
+
+        if (_isReachingForItem)
+        {
+            if (!ReferenceEquals(_reticule.ItemAtTimeOfSelection, null))
+            {
+                _handIkHandler.RotateRightHandTowards(_reticule.ItemAtTimeOfSelection.transform.position);
+            }
+        }
     }
 
     public void DeactivateHeldItem()

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpBehaviour : MonoBehaviour
@@ -14,6 +13,11 @@ public class JumpBehaviour : MonoBehaviour
     private AnimationEventListener _animationEventListener;
     private PlayerCharacterState _playerState;
     private CapsuleCollider _playerCollider;
+    private HandIKHandler _handIKHandler;
+
+    private Vector3 _rightHandWallConnectionPoint;
+    private Vector3 _leftHandWallConnectionPoint;
+
     public bool IsClimbing { get; private set; }
 
     private void Start()
@@ -21,11 +25,42 @@ public class JumpBehaviour : MonoBehaviour
         _animationEventListener = GetComponent<AnimationEventListener>();
         _animationEventListener.OnJumpPeak += OnJumpPeak;
         _animationEventListener.OnVaulting += OnVaulting;
+        _animationEventListener.OnChangeAnimationIkPlacement += OnStartAnimationIkPlacement;
 
         _animator = GetComponent<Animator>();
         _playerState = GetComponent<PlayerCharacterState>();
         _playerCollider = GetComponent<CapsuleCollider>();
         _physicsObject = GetComponent<Rigidbody>();
+        _handIKHandler = GetComponent<HandIKHandler>();
+    }
+
+    private void OnStartAnimationIkPlacement(object sender, AnimationIKHandPlacementEventArgs e)
+    {
+        if (e.TurnOn)
+        {
+            if (e.HandPlacement.leftHand)
+            {
+                _handIKHandler.MoveLeftHandTo(_leftHandWallConnectionPoint);
+            }
+
+            if (e.HandPlacement.rightHand)
+            {
+                _handIKHandler.MoveRightHandTo(_rightHandWallConnectionPoint);
+            }
+        }
+
+        else
+        {
+            if (e.HandPlacement.leftHand)
+            {
+                _handIKHandler.PutLeftArmDown();
+            }
+
+            if (e.HandPlacement.rightHand)
+            {
+                _handIKHandler.PutRightArmDown();
+            }
+        }
     }
 
     private void OnVaulting(object sender, EventArgs e)
@@ -33,14 +68,12 @@ public class JumpBehaviour : MonoBehaviour
         int? isStartingVault = sender as int?;
         if (isStartingVault is 1)
         {
-            //Debug.Log("Starting");
             IsClimbing = true;
             _physicsObject.useGravity = false;
             _playerCollider.isTrigger = true;
         }
         else
         {
-            //Debug.Log("finished");
             IsClimbing = false;
             _physicsObject.useGravity = true;
             _playerCollider.isTrigger = false;
@@ -94,6 +127,13 @@ public class JumpBehaviour : MonoBehaviour
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        if (IsClimbing)
+        {
+            //Is this expensive??
+            _handIKHandler.RotateLeftHandTowards(_leftHandWallConnectionPoint);
+            _handIKHandler.RotateRightHandTowards(_rightHandWallConnectionPoint);
         }
     }
 
@@ -209,7 +249,11 @@ public class JumpBehaviour : MonoBehaviour
     private ClimbType GetClimbEnvironmentInfo()
     {
         float rayCounter = 0;
-        Vector3 lastRayHit = Vector3.zero;
+        RaycastHit lastRayHit = new RaycastHit
+        {
+            point = Vector3.zero
+        };
+
         float rayDistance = vaultDistanceTolerance;
         float playerHeight = _playerCollider.height;
         Transform playerTransform = transform;
@@ -223,7 +267,7 @@ public class JumpBehaviour : MonoBehaviour
             {
                 velocity.x *= -1;
             }
-            
+
             if (velocity.z < 0f)
             {
                 velocity.z *= -1;
@@ -237,25 +281,29 @@ public class JumpBehaviour : MonoBehaviour
             Ray ray = new Ray(origin, playerTransform.forward);
             bool rayHit = Physics.SphereCast(ray, rayResolution * 0.5f, out RaycastHit hit, modifiedRayDistance, LayerMask.GetMask("Terrain"));
 
-            Debug.DrawRay(origin, playerTransform.forward * modifiedRayDistance, Color.green, 5);
-
-            if (!rayHit && lastRayHit != Vector3.zero)
+            //Debug.DrawRay(origin, playerTransform.forward * modifiedRayDistance, Color.green, 5);
+            Vector3 lastRayHitPoint = lastRayHit.point;
+            if (!rayHit && lastRayHitPoint != Vector3.zero)
             {
                 //If there's a big enough gap then let's climb
-                if (origin.y - lastRayHit.y > playerHeight * 0.5f)
+                if (origin.y - lastRayHitPoint.y > playerHeight * 0.5f)
                 {
-                    _animator.SetFloat(Constants.ClimbHeight, lastRayHit.y - playerTransform.position.y);
+                    _animator.SetFloat(Constants.ClimbHeight, lastRayHitPoint.y - playerTransform.position.y);
+
+                    Vector3 objectRightOrientation = lastRayHit.collider.transform.forward;
+                    _rightHandWallConnectionPoint = lastRayHitPoint + objectRightOrientation * 0.5f;
+                    _leftHandWallConnectionPoint = lastRayHitPoint - objectRightOrientation * 0.5f;
 
                     // Shoot raydown ahead and a tiny bit above player...
                     Vector3 up = playerTransform.up;
-                    Vector3 downRayOrigin = lastRayHit + playerTransform.forward * rayDistance + up * 0.1f;
+                    Vector3 downRayOrigin = lastRayHitPoint + playerTransform.forward * rayDistance + up * 0.1f;
 
                     //Debug.DrawRay(downRayOrigin, -up * playerHeight, Color.red, 3);
 
                     //If there's a big enough gap (a quarter player height in this case)
                     if (Physics.Raycast(downRayOrigin, -up, out RaycastHit downHit, 2 * playerHeight, LayerMask.GetMask("Terrain")))
                     {
-                        return lastRayHit.y - downHit.point.y > playerHeight * 0.25f
+                        return lastRayHitPoint.y - downHit.point.y > playerHeight * 0.25f
                             ?
                             //we vault
                             ClimbType.Vault
@@ -272,7 +320,7 @@ public class JumpBehaviour : MonoBehaviour
 
             if (rayHit)
             {
-                lastRayHit = hit.point;
+                lastRayHit = hit;
             }
         }
 

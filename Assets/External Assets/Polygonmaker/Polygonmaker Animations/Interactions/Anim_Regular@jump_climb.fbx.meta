@@ -637,10 +637,31 @@ ModelImporter:
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
+      - time: 0.20970492
+        functionName: StartAnimationIkPlacement
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 1539902e0cb1d03469006f5ab085dbc7, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.55564123
         functionName: Vaulting
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.46016878
+        functionName: EndAnimationIkPlacement
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 05b3bac4b8d1e3548967bc72b8e74434, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5796478
+        functionName: EndAnimationIkPlacement
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 5f8e1e7c78c1df84c87cdc8e2701f0b1, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

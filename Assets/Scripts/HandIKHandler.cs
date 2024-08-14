@@ -42,7 +42,7 @@ public class HandIKHandler : MonoBehaviour
 
     public void MoveLeftHandTo(Vector3 position)
     {
-        MoveHandTo(position, leftArmTargetObject, SetAndStartLeftHandMoveToOne);
+        MoveHandTo(position,  leftArmTargetObject, SetAndStartLeftHandMoveToOne);
     }
 
     public void MoveRightHandTo(Vector3 position)
@@ -72,7 +72,9 @@ public class HandIKHandler : MonoBehaviour
 
     private void MoveHandTo(Vector3 position, GameObject targetObject, Action setCoroutineMethod)
     {
+        targetObject.transform.parent = null;
         targetObject.transform.position = position;
+        
         setCoroutineMethod();
     }
 
@@ -151,5 +153,17 @@ public class HandIKHandler : MonoBehaviour
         float weight = _animator.GetFloat(Constants.HandIKWeightAnimator);
         ikConstraint.weight = weight;
         return weight;
+    }
+
+    public void RotateLeftHandTowards(Vector3 targetPosition)
+    {
+        Transform currentTransform = transform;                                                                                // hand points left when told to point forward so rotate 90 degrees right
+        leftArmTargetObject.transform.rotation = Quaternion.LookRotation((targetPosition - currentTransform.position) + currentTransform.right * 90, currentTransform.up); 
+    }
+    
+    public void RotateRightHandTowards(Vector3 targetPosition)
+    {
+        Transform currentTransform = transform;                                                                                // hand points left when told to point forward so rotate 90 degrees right
+        rightArmTargetObject.transform.rotation = Quaternion.LookRotation((targetPosition - currentTransform.position) + currentTransform.right * 90, currentTransform.up); 
     }
 }

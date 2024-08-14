@@ -31,6 +31,7 @@ Shooting
         -Military bases however with better loot
         
 Clamp horizontal look angle until turn 
+Press w or s while against a wall to hug the wall to avoid player running into wall like a treadmill
 
 
 TODO NEXT
@@ -58,7 +59,9 @@ Swimming
     
 Climbing/Vaulting
         - Different speeds depending on velocity
-        - Hand IK
+        - Hand 
+            - mostly done but need to account for player direction when placing hands as it's fine in one direction but wrong in the other
+            - hand up orientation needs some work (works for 2m vault but not 1m vault) 
         - Better lining up and edge/height detection?
         - Proper 2m vault animation
         - Support for higher ledges - Jump to higher ledges?

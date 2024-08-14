@@ -1,4 +1,5 @@
 using System;
+using Data;
 using UnityEngine;
 
 public class AnimationEventListener : MonoBehaviour
@@ -20,6 +21,9 @@ public class AnimationEventListener : MonoBehaviour
     
     public delegate void OnVaultingEvent(object sender, EventArgs e);
     public event OnVaultingEvent OnVaulting;
+    
+    public delegate void OnChangeAnimationIkPlacementEvent(object sender, AnimationIKHandPlacementEventArgs e);
+    public event OnChangeAnimationIkPlacementEvent OnChangeAnimationIkPlacement;
     
     private void ToggleWeaponEquipped()
     {
@@ -50,5 +54,27 @@ public class AnimationEventListener : MonoBehaviour
     private void Vaulting(int isStartingVault)
     {
         OnVaulting?.Invoke(isStartingVault, EventArgs.Empty);
+    }
+
+    private void StartAnimationIkPlacement(AnimationHandIkPlacement handPlacement)
+    {
+        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, 1));
+    }
+    
+    private void EndAnimationIkPlacement(AnimationHandIkPlacement handPlacement)
+    {
+        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, 0));
+    }
+}
+
+public class AnimationIKHandPlacementEventArgs : EventArgs
+{
+    public  AnimationHandIkPlacement HandPlacement { get; }
+    public bool TurnOn { get; }
+
+    public AnimationIKHandPlacementEventArgs(AnimationHandIkPlacement handPlacement, int starting)
+    {
+        HandPlacement = handPlacement;
+        TurnOn = starting == 1;
     }
 }

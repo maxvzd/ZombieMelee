@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using Data;
+using UI;
 using UnityEngine;
 
 public static class ItemUIElementCreator

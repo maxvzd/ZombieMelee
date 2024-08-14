@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI
+namespace Data
 {
     [CreateAssetMenu]
     public class ItemUIElement : ScriptableObject
