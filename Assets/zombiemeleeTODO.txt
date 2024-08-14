@@ -11,10 +11,8 @@ Zombie hit impact
 	-Some kind of hit stop or (ish) x 
 Pushing
 Stomping
-Climbing over fences/big fences
-Hand Ik for climbing/pickig up items
+Hand Ik for climbing/picking up items
 Levels + experience
-Wading in water
 Opening/Closing doors
 Hunger/thirst/tiredness (pee + poo lol?)
 Foot IK
@@ -23,16 +21,16 @@ Shooting
     -Hold right click to aim weapon
     -Red dot appears on zombie (similar to pick up)
     -More skill = the more consistent the character hits the red dot
+-Walking across beams
+-Sound
+-Use animation events when turning on collider for attack
 
-
-
-Use animation events when turning on collider for attack
-
-Level creation
--Based on newcastle (tyne down the middle).
-    -South shields is more infested and you have to go over the bridge or through the tunnel to get there
-    -Military bases however with better loot
--Clamp horizontal look angle until turn 
+-Level creation
+    -Based on newcastle (tyne down the middle).
+        -South shields is more infested and you have to go over the bridge or through the tunnel to get there
+        -Military bases however with better loot
+        
+Clamp horizontal look angle until turn 
 
 
 TODO NEXT
@@ -46,12 +44,28 @@ TODO NEXT
 Bugs
 -item not being picked up sometimes?
 -Picking up zombies lol
--Fix Jumping
 -Fix Hit detection 
     -Improve hit direction calculation in hit directions
 -Fix strange judder at end of sprint
 -Take a look at general locomotion to improve it (juddering camera)
 -Make hit detection use box cast 
+
+Swimming
+    -Animations for 8? directional
+    -Turn directions for swimming
+    -Add wading animations
+    -Climb out of water
+    
+Climbing/Vaulting
+        - Different speeds depending on velocity
+        - Hand IK
+        - Better lining up and edge/height detection?
+        - Proper 2m vault animation
+        - Support for higher ledges - Jump to higher ledges?
+        - Less magic number for size of gap to fit through
+        - Hanging if there's no contact on other side of ledge - for rope sheets/player can jump if they want
+        - Better way to hand OnAnimatorMove in PlayerCharacterState.cs (no flagging)
+        - Check normal of hit to tell if the thing in front of us is a wall.
 
 https://www.ramsterzanimations.com/store-buy/p/epic-megajam-2022-free-anims
 https://www.ramsterzanimations.com/store-buy/p/ultimate-traversal-anims-fbx-only

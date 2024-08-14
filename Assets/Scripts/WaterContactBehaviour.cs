@@ -25,11 +25,6 @@ public class WaterContactBehaviour : MonoBehaviour
         _oldDrag = _physicsObject.drag;
     }
     
-    
-    //TO DO
-    //Animations for 8? directional
-    //Turn directions for swimming
-    //Add wading animations
     private void FixedUpdate()
     {
         if (IsSwimming)

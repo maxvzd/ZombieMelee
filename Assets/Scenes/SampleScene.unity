@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1590500991737819941, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
       propertyPath: m_Weight
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1590500991737819941, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 882587811}
     - target: {fileID: 2873105368867463159, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
       propertyPath: m_Weight
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2873105368867463159, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
