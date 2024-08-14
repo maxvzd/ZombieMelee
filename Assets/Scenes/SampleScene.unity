@@ -287,6 +287,14 @@ PrefabInstance:
       propertyPath: vaultDistanceTolerance
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7392853670148183665, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
+      propertyPath: leftArmTargetObject
+      value: 
+      objectReference: {fileID: 145349391}
+    - target: {fileID: 7392853670148183665, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
+      propertyPath: rightArmTargetObject
+      value: 
+      objectReference: {fileID: 885697375}
     - target: {fileID: 8140561627541018247, guid: a9a6ef79ca585f94580dfbbd9ebb3336, type: 3}
       propertyPath: ikHandTarget
       value: 

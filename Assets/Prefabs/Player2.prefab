@@ -1666,6 +1666,9 @@ PrefabInstance:
       addedObject: {fileID: 275787339726425859}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7392853670148183665}
+    - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6341727874712667709}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
@@ -2311,9 +2314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e235ea783158e448a4f4ade36b78032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikHandTarget: {fileID: 0}
   animator: {fileID: 3795571196154083222}
-  rightArmIKConstraint: {fileID: 5602808077800802840}
   handCollider: {fileID: 5839413877035142424}
   handSocket: {fileID: 3982919746611016991}
 --- !u!114 &1055805496406703339
@@ -2343,6 +2344,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13f6b9afcce524798f4a2bdb48f5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7392853670148183665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850892155079636423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba388b4c302948c29e7ce65f816167b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftArmIKConstraint: {fileID: 5407803012755897102}
+  rightArmIKConstraint: {fileID: 5602808077800802840}
+  leftArmTargetObject: {fileID: 0}
+  rightArmTargetObject: {fileID: 0}
 --- !u!114 &6341727874712667709
 MonoBehaviour:
   m_ObjectHideFlags: 0

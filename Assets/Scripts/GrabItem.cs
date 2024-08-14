@@ -6,9 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 public class GrabItem : MonoBehaviour
 {
-    [SerializeField] private GameObject ikHandTarget;
     [SerializeField] private Animator animator;
-    [SerializeField] private TwoBoneIKConstraint rightArmIKConstraint;
     [SerializeField] private Collider handCollider;
     [SerializeField] private GameObject handSocket;
 
@@ -17,17 +15,16 @@ public class GrabItem : MonoBehaviour
     private GameObject _heldItemGameObject;
     private Item _heldItem;
     private InventoryMediator _inventoryMediator;
-
-    private IEnumerator _reachCoroutine;
-    
-    private bool _isReachingForItem;// => rightArmIKConstraint.weight > 0.2f;
+    private LayerMask _itemLayerMask;
+    private bool _isReachingForItem;
+    private HandIKHandler _handIkHandler;
 
     public GameObject HeldItemGameObject
     {
         private set
         {
             _heldItemGameObject = value;
-            animator.SetBool(Constants.IsHoldingItem, value != null);
+            animator.SetBool(Constants.IsHoldingItem, !ReferenceEquals(value, null));
         }
         get => _heldItemGameObject;
     }
@@ -37,20 +34,22 @@ public class GrabItem : MonoBehaviour
 
     private void Start()
     {
+        _itemLayerMask = LayerMask.GetMask(Constants.WeaponObjectLayer, Constants.ItemObjectLayer);
+
         _reticule = GetComponent<AimingReticule>();
         handCollider.GetComponent<HandColliderListener>().OnTriggerEnterHeard += OnTriggerEnterHeard;
 
         _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
+        _handIkHandler = GetComponent<HandIKHandler>();
     }
 
     private void OnTriggerEnterHeard(Collider other)
     {
         GameObject itemInReticule = other.gameObject;
+        if (itemInReticule != _reticule.ItemAtTimeOfSelection || !_isReachingForItem || (_itemLayerMask & (1 << itemInReticule.layer)) == 0) return;
 
-        if (itemInReticule != _reticule.ItemAtTimeOfSelection || !_isReachingForItem) return;
-        
-        StopCoroutine(_reachCoroutine);
-
+        _handIkHandler.StopMovingRightHand();
+        //Better way to do this?
         HeldItemGameObject = itemInReticule.transform.parent.parent.gameObject;
         _heldItem = HeldItemGameObject.GetComponent<Item>();
 
@@ -58,7 +57,7 @@ public class GrabItem : MonoBehaviour
 
         SetIsBeingHeldOnCurrentItem(true);
 
-        rightArmIKConstraint.weight = 0;
+        _handIkHandler.TurnOffIKForRightArm();
         _isReachingForItem = false;
         animator.SetFloat(Constants.HandIKWeightAnimator, 0);
 
@@ -100,24 +99,17 @@ public class GrabItem : MonoBehaviour
                 // }
                 // else
                 // {
-                ikHandTarget.transform.parent = _reticule.CurrentlySelectedItem.transform;
                 //}
 
-                ikHandTarget.transform.localPosition = Vector3.zero;
-                ikHandTarget.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                ikHandTarget.transform.localEulerAngles = _reticule.CurrentlySelectedItem.transform.rotation * rightArmIKConstraint.transform.forward;
-                
-                _isReachingForItem = true;
-                _reachCoroutine = SmoothMoveIkWeightToOne();
+                if ((_itemLayerMask & (1 << _reticule.CurrentlySelectedItem.layer)) == 0) return;
 
-                StartCoroutine(_reachCoroutine);
+
+                _handIkHandler.MoveRightHandTo(_reticule.CurrentlySelectedItem);
+                _isReachingForItem = true;
             }
             else if (_isReachingForItem)
             {
-                StopCoroutine(_reachCoroutine);
-                _reachCoroutine = SmoothMoveIkWeightToZero();
-                StartCoroutine(_reachCoroutine);
-                
+                _handIkHandler.PutRightArmDown();
                 _isReachingForItem = false;
             }
             else if (IsHoldingItem)
@@ -130,32 +122,6 @@ public class GrabItem : MonoBehaviour
                 _heldItem = null;
                 HeldItemGameObject = null;
             }
-        }
-    }
-
-    private IEnumerator SmoothMoveIkWeightToOne()
-    {
-        float weight = rightArmIKConstraint.weight;
-        
-        while (weight < 1)
-        {
-            animator.SetFloat(Constants.HandIKWeightAnimator, 1, 1 / Constants.AnimatorDampingCoefficient, Time.deltaTime);
-            weight = animator.GetFloat(Constants.HandIKWeightAnimator);
-            rightArmIKConstraint.weight = weight;
-            yield return new WaitForEndOfFrame();
-        }
-    }
-    
-    private IEnumerator SmoothMoveIkWeightToZero()
-    {
-        float weight = rightArmIKConstraint.weight;
-        
-        while (weight > 0.01)
-        {
-            animator.SetFloat(Constants.HandIKWeightAnimator, 0, 1 / Constants.AnimatorDampingCoefficient, Time.deltaTime);
-            weight = animator.GetFloat(Constants.HandIKWeightAnimator);
-            rightArmIKConstraint.weight = weight;
-            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -172,7 +138,7 @@ public class GrabItem : MonoBehaviour
         if (handSocket.transform.childCount > 0)
         {
             _heldItem = handSocket.transform.GetChild(0).gameObject.GetComponent<Item>();
-             HeldItemGameObject = _heldItem.gameObject;
+            HeldItemGameObject = _heldItem.gameObject;
         }
         else
         {

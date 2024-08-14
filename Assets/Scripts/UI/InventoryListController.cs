@@ -27,12 +27,12 @@ namespace UI
                     _inventoryItems.Add(weaponUIElement);
                 }
             }
-            
+
             _inventoryItemTemplate = listElementTemplate;
             _inventoryListView = root.Q<ListView>("InventoryItems");
-            
+
             PopulateInventoryList();
-            
+
             _inventoryListView.selectionChanged += InventoryListViewOnSelectionChanged;
         }
 
@@ -53,15 +53,11 @@ namespace UI
                 return newItem;
             };
 
-            _inventoryListView.bindItem = (item, index) =>
-            {
-                (item.userData as InventoryItemController)?.SetModel(_inventoryItems[index]);
-            };
+            _inventoryListView.bindItem = (item, index) => { (item.userData as InventoryItemController)?.SetModel(_inventoryItems[index]); };
 
             _inventoryListView.fixedItemHeight = 100f;
-            
+
             _inventoryListView.itemsSource = _inventoryItems;
         }
-
     }
 }
