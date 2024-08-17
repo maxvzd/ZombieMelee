@@ -60,7 +60,7 @@ public class DealMeleeDamage : MonoBehaviour
 
     public void Setup(MeleeWeapon weapon)
     {
-        _weaponDamage = weapon.WeaponDamage;
+        _weaponDamage = weapon.WeaponProperties.Damage;
         _hitRecoilAmount = weapon.HitRecoilAmount;
         _hitPause = weapon.HitRecoilPause;
         _readyToDealDamage = false;

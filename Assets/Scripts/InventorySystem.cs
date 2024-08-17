@@ -59,7 +59,7 @@ public class InventorySystem : MonoBehaviour
             if (_inventoryMediator.IsHoldingItem)
             {
                 _puttingItemAway = true;
-                characterAnimator.SetTrigger(Constants.PutItemAwayTrigger);
+                characterAnimator.SetTrigger(Constants.UnEquipTwoHandedMeleeTrigger);
             }
             else
             {

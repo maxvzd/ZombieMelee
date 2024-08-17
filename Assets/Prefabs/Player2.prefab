@@ -1627,6 +1627,9 @@ PrefabInstance:
       addedObject: {fileID: 7914641323358523311}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8562560911694545298}
+    - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1847147990612961900}
     - targetCorrespondingSourceObject: {fileID: 100122, guid: 317a56890b5c8e74ab1d492a2c7fb608, type: 3}
       insertIndex: -1
@@ -2096,6 +2099,18 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!114 &8562560911694545298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850892155079636423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6a4350f3284118a158f9f04688e205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1847147990612961900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2265,7 +2280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b82a9892f14d14b8015f1d68e5d475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3795571196154083222}
   armAimConstraint: {fileID: 4096497841159990894}
 --- !u!114 &6198872249001640483
 MonoBehaviour:
@@ -2298,7 +2312,6 @@ MonoBehaviour:
   animator: {fileID: 3795571196154083222}
   characterWieldedSocket: {fileID: 3982919746611016991}
   characterHolsterSocket: {fileID: 9185480517576100249}
-  equipArmIk: {fileID: 5602808077800802840}
   equipArmTarget: {fileID: 7558951893754540176}
   ikTargetObject: {fileID: 0}
   animEventListener: {fileID: 214909530000112105}

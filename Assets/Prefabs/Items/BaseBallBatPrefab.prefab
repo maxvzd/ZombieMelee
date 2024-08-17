@@ -101,6 +101,10 @@ PrefabInstance:
       value: Baseball Bat
       objectReference: {fileID: 0}
     - target: {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: itemProperties.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       propertyPath: itemProperties.volume
       value: 0.01
       objectReference: {fileID: 0}
@@ -115,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       propertyPath: itemProperties.thumbnailPath
       value: ThumbNails/BaseballBat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: _weaponProperties.weaponDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       propertyPath: m_LocalPosition.x

@@ -6,9 +6,12 @@ namespace Items
     {
         protected Transform HeldSocket;
         protected Transform ActualItem;
+        
         public GameObject GetActualItem => ActualItem.gameObject;
+        public ItemProperties ItemProperties => itemProperties;
 
-        public ItemProperties itemProperties;
+        [SerializeField] private ItemProperties itemProperties;
+
 
         private void Start()
         {
@@ -25,7 +28,7 @@ namespace Items
                 HeldSocket = child;
                 break;
             }
-        
+
             foreach (Transform child in transform)
             {
                 if (child.gameObject.name != "Item") continue;
@@ -40,7 +43,7 @@ namespace Items
             currentTransform.parent = heldBy.transform;
             currentTransform.localPosition = Vector3.zero;
             currentTransform.localEulerAngles = Vector3.zero;
-        
+
             ActualItem.SetParent(HeldSocket);
             ResetItemPosition(ActualItem);
         }
@@ -57,7 +60,7 @@ namespace Items
             item.localEulerAngles = Vector3.zero;
 
             Transform childItem = item.GetChild(0);
-            if(!ReferenceEquals(childItem, null))
+            if (!ReferenceEquals(childItem, null))
             {
                 childItem.localPosition = Vector3.zero;
                 childItem.localEulerAngles = Vector3.zero;

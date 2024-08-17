@@ -8,18 +8,18 @@ public static class ItemUIElementCreator
     public static WeaponUIElement Create(MeleeWeapon weapon)
     {
         WeaponUIElement weaponUIElement = ScriptableObject.CreateInstance<WeaponUIElement>();
-        weaponUIElement.itemName = weapon.itemProperties.Name;
-        weaponUIElement.itemDescription = weapon.itemProperties.Description;
-        weaponUIElement.itemImagePath = weapon.itemProperties.ThumbnailPath;
+        weaponUIElement.itemName = weapon.ItemProperties.Name;
+        weaponUIElement.itemDescription = weapon.ItemProperties.Description;
+        weaponUIElement.itemImagePath = weapon.ItemProperties.ThumbnailPath;
         return weaponUIElement;
     }
 
     public static ItemUIElement Create(Item item)
     {
         ItemUIElement itemUiElement = ScriptableObject.CreateInstance<ItemUIElement>();
-        itemUiElement.itemName = item.itemProperties.Name;
-        itemUiElement.itemDescription = item.itemProperties.Description;
-        itemUiElement.itemImagePath = item.itemProperties.ThumbnailPath;
+        itemUiElement.itemName = item.ItemProperties.Name;
+        itemUiElement.itemDescription = item.ItemProperties.Description;
+        itemUiElement.itemImagePath = item.ItemProperties.ThumbnailPath;
 
         return itemUiElement;
     }

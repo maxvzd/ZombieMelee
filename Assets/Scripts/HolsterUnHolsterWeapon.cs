@@ -16,21 +16,21 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     
     private InventoryMediator _inventoryMediator;
     
-    private MeleeWeapon _meleeWeaponInHolster;
-    private MeleeWeapon _meleeWeaponInHand;
+    private WeaponItem _weaponInHolster;
+    private WeaponItem _weaponInHand;
     
     //private bool _shouldChangeHandWeight;
     //private readonly float _dampTime = 0.2f;
     //private float _targetIkWeight = 1f;
 
-    public bool HasWeaponInHand => _meleeWeaponInHand != null;
-    private bool HasWeaponInHolster => _meleeWeaponInHolster != null;
+    public bool HasWeaponInHand => _weaponInHand != null;
+    private bool HasWeaponInHolster => _weaponInHolster != null;
     private bool HasWeaponEquipped => characterWieldedSocket.transform.childCount > 0 || characterHolsterSocket.transform.childCount > 0;
 
 
     private void Awake()
     {
-        animator.SetBool(Constants.IsWeaponEquipped, HasWeaponInHand);
+        animator.SetBool(Constants.IsTwoHandedMeleeEquipped, HasWeaponInHand);
         animEventListener.OnWeaponEquip += OnEquipListenerSaysEquip;
         animEventListener.OnStartChangeWeaponIk += OnStartChangeWeaponIk;
 
@@ -66,9 +66,9 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
         
         if (hasWeaponInHand)
         {
-            _meleeWeaponInHand.HolsterItem();
+            _weaponInHand.HolsterItem();
 
-            var weaponInHandGameObject = _meleeWeaponInHand.gameObject;
+            var weaponInHandGameObject = _weaponInHand.gameObject;
             weaponInHandGameObject.transform.parent = characterHolsterSocket.transform;
             weaponInHandGameObject.transform.localPosition = Vector3.zero;
             weaponInHandGameObject.transform.localEulerAngles = Vector3.zero;
@@ -76,18 +76,18 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
         if (hasWeaponInHolster)
         {
-            _meleeWeaponInHolster.UnHolsterItem();
+            _weaponInHolster.UnHolsterItem();
 
-            var weaponInHolsterGameObject = _meleeWeaponInHolster.gameObject;
+            var weaponInHolsterGameObject = _weaponInHolster.gameObject;
             weaponInHolsterGameObject.transform.parent = characterWieldedSocket.transform;
             weaponInHolsterGameObject.transform.localPosition = Vector3.zero;
             weaponInHolsterGameObject.transform.localEulerAngles = Vector3.zero;
         }
         
-        (_meleeWeaponInHand, _meleeWeaponInHolster) = (_meleeWeaponInHolster, _meleeWeaponInHand);
+        (_weaponInHand, _weaponInHolster) = (_weaponInHolster, _weaponInHand);
         
         
-        animator.SetBool(Constants.IsWeaponEquipped, HasWeaponInHand);
+        animator.SetBool(Constants.IsTwoHandedMeleeEquipped, HasWeaponInHand);
         _inventoryMediator.UpdateHeldItem();
     }
 
@@ -98,7 +98,7 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
             ikTargetObject.transform.parent = equipArmTarget.transform;
             ikTargetObject.transform.localPosition = Vector3.zero;
 
-            animator.SetTrigger(Constants.EquipWeaponTrigger);
+            animator.SetTrigger(Constants.EquipTwoHandedMeleeTrigger);
         }
         // Disabled for now until I can look into it
         // The hand twists to match an up orientation and I don't know why. Tried twisting the target but that doesn't work 
@@ -111,15 +111,13 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
         // }
     }
 
-    public void EquipWeaponFromPickup(MeleeWeapon meleeWeapon)
+    public void EquipWeaponFromPickup(WeaponItem weapon)
     {
-        _meleeWeaponInHand = meleeWeapon;
-        animator.SetBool(Constants.IsWeaponEquipped, true);
+        _weaponInHand = weapon;
     }
 
     public void UnEquipWeaponFromHand()
     {
-        animator.SetBool(Constants.IsWeaponEquipped, false);
-        _meleeWeaponInHand = null;
+        _weaponInHand = null;
     }
 }

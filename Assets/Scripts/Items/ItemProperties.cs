@@ -11,11 +11,20 @@ namespace Items
         [SerializeField] private float weight;
         [SerializeField] private string description;
         [SerializeField] private string thumbnailPath;
-
+        [SerializeField] private ItemType type; 
+        
         public string Name => name;
         public float Volume => volume;
         public float Weight => weight;
         public string Description => description;
         public string ThumbnailPath => thumbnailPath;
+        public ItemType Type => type;
+    }
+
+    public enum ItemType
+    {
+        Cube,
+        Weapon,
+        Food
     }
 }

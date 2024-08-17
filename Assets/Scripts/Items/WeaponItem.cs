@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items
 {
     public class WeaponItem : Item
     {
-        [SerializeField] private float weaponDamage;
+        public WeaponProperties WeaponProperties => weaponProperties;
         
-        public float WeaponDamage => weaponDamage;
+        protected AudioSource WeaponAudioSource;
+        
+        [SerializeField] private WeaponProperties weaponProperties;
         
         private bool _isWielded;
-        protected Transform HolsteredSlot;
-        protected AudioSource WeaponAudioSource;
-
+        private Transform _holsteredSlot;
+     
         protected virtual void Start()
         {
             
@@ -20,7 +22,7 @@ namespace Items
             {
                 if (child.gameObject.name != "HolsteredSocket") continue;
 
-                HolsteredSlot = child;
+                _holsteredSlot = child;
                 break;
             }
         
@@ -29,7 +31,7 @@ namespace Items
         
         public void HolsterItem()
         {
-            ActualItem.transform.parent = HolsteredSlot;
+            ActualItem.transform.parent = _holsteredSlot;
             ResetItemPosition(ActualItem);
         }
 

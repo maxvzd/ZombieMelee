@@ -9,8 +9,9 @@ public class InventoryMediator : MonoBehaviour
     private HolsterUnHolsterWeapon _holsterController;
     private InventorySystem _inventory;
     private GrabItem _itemHeldController;
-    private Attack _attackController;
+    private MeleeAttackBehaviour _meleeAttackController;
     private InventoryMainView _mainView;
+    private GunAttackBehaviour _gunAttackController;
 
     public bool IsHoldingItem => _itemHeldController.IsHoldingItem;
     public bool IsBackPackOpen => _inventory.IsBackpackOpen;
@@ -24,11 +25,12 @@ public class InventoryMediator : MonoBehaviour
         _holsterController = GetComponentInParent<HolsterUnHolsterWeapon>();
         _inventory = GetComponentInParent<InventorySystem>();
         _itemHeldController = GetComponentInParent<GrabItem>();
-        _attackController = GetComponent<Attack>();
+        _meleeAttackController = GetComponent<MeleeAttackBehaviour>();
         _mainView = GetComponent<InventoryMainView>();
+        _gunAttackController = GetComponent<GunAttackBehaviour>();
         _mainView.HideInventory();
 
-        if (!_holsterController || !_inventory || !_itemHeldController || !_attackController)
+        if (!_holsterController || !_inventory || !_itemHeldController || !_meleeAttackController || !_gunAttackController)
         {
             throw new Exception("Couldn't find holster controller or inventory controller");
         }
@@ -37,12 +39,19 @@ public class InventoryMediator : MonoBehaviour
     public void DeactivateHeldItem()
     {
         _itemHeldController.DeactivateHeldItem();
+        _meleeAttackController.UnEquipWeapon();
         _holsterController.UnEquipWeaponFromHand();
     }
 
     public void EquipWeaponFromPickup(MeleeWeapon weapon)
     {
-        _attackController.SetEquippedWeapon(weapon);
+        _meleeAttackController.EquipWeapon(weapon);
+        _holsterController.EquipWeaponFromPickup(weapon);
+    }
+
+    public void EquipWeaponFromPickup(GunWeapon weapon)
+    {
+        _gunAttackController.EquipWeapon(weapon);
         _holsterController.EquipWeaponFromPickup(weapon);
     }
 

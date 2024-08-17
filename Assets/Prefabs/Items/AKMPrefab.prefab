@@ -75,6 +75,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6975497155788886916, guid: 67f716418f7ba2146a845739c7782755, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8486654825617209689}
+    - targetCorrespondingSourceObject: {fileID: 6975497155788886916, guid: 67f716418f7ba2146a845739c7782755, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6454220765949290555}
+    - targetCorrespondingSourceObject: {fileID: 6975497155788886916, guid: 67f716418f7ba2146a845739c7782755, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5035913146425806809}
   m_SourcePrefab: {fileID: 100100000, guid: 67f716418f7ba2146a845739c7782755, type: 3}
 --- !u!4 &6625588399673800401 stripped
 Transform:
@@ -98,6 +104,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2df2a8e6cc25c48b7a1af0b8d76358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6454220765949290555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901996912353969346}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 5.76, z: 20.48}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5035913146425806809
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901996912353969346}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &8606322687920284420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,9 +160,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.301
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.049
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2586725
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.4772635
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.612138
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5749741
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 27.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 103.324
+      objectReference: {fileID: 0}
+    - target: {fileID: 603223145108402051, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -97.542
+      objectReference: {fileID: 0}
     - target: {fileID: 1159365689679791612, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       propertyPath: m_Name
       value: AKMPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      propertyPath: itemProperties.type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5732380353183749229, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -150,16 +248,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3212891157764048993, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6133017575913900902, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6625588399673800401}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1159365689679791612, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 6548402397705184997}
   m_SourcePrefab: {fileID: 100100000, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
 --- !u!4 &2482352143458953314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6133017575913900902, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
   m_PrefabInstance: {fileID: 8606322687920284420}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7456034712272529144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1159365689679791612, guid: 1851fa894b6ce264990436dc3ff03cf3, type: 3}
+  m_PrefabInstance: {fileID: 8606322687920284420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6548402397705184997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456034712272529144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f503d79d152f47ce8f3419159ee0ffdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemProperties:
+    name: AKM
+    volume: 0
+    weight: 3.3
+    description: 8700
+    thumbnailPath: 
+    type: 1
+  weaponProperties:
+    damage: 25
+    grip: 0
+    type: 1

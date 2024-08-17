@@ -8,11 +8,11 @@ public class KeyboardInput : MonoBehaviour
     public float maxSpeed = 3f;
     public float weaponSlowDebuff = 0.5f;
 
-    private Attack _attackClass;
+    private MeleeAttackBehaviour _meleeAttackClass;
 
     private void Start()
     {
-        _attackClass = GetComponentInParent<Attack>();
+        _meleeAttackClass = GetComponentInParent<MeleeAttackBehaviour>();
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class KeyboardInput : MonoBehaviour
         float maxSpeedModifier = 0.66f;
         
         //If sprint key is held and forward is held then add the sprint axis to the forward axis
-        if (sprintAxis > 0.01f && verticalAxis > 0.01f && !_attackClass.IsWeaponRaised)
+        if (sprintAxis > 0.01f && verticalAxis > 0.01f && !_meleeAttackClass.IsWeaponRaised)
         {
             _walkSpeedModifier += sprintAcceleration * Time.deltaTime;
             maxSpeedModifier = 1f;
@@ -46,7 +46,7 @@ public class KeyboardInput : MonoBehaviour
         
         verticalAxis *= _walkSpeedModifier;
         
-        if (_attackClass.IsWeaponRaised)
+        if (_meleeAttackClass.IsWeaponRaised)
         {
             verticalAxis *= weaponSlowDebuff;
             horizontalAxis *= weaponSlowDebuff;

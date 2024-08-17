@@ -13,25 +13,27 @@ public class GrabItem : MonoBehaviour
 
     private AimingReticule _reticule;
     private bool _isHoldingItem;
-    private GameObject _heldItemGameObject;
     private Item _heldItem;
     private InventoryMediator _inventoryMediator;
     private LayerMask _itemLayerMask;
     private bool _isReachingForItem;
     private HandIKHandler _handIkHandler;
 
-    public GameObject HeldItemGameObject
-    {
+    public GameObject HeldItemGameObject { private set; get; }
+
+    //public bool IsHoldingItem => HeldItemGameObject != null;
+    public bool IsHoldingItem 
+    { 
+        get => _isHoldingItem;
         private set
         {
-            _heldItemGameObject = value;
-            animator.SetBool(Constants.IsHoldingItem, !ReferenceEquals(value, null));
+            _isHoldingItem = value;
+            animator.SetBool(Constants.IsHoldingItem, value);
         }
-        get => _heldItemGameObject;
     }
-
-    public bool IsHoldingItem => HeldItemGameObject != null;
-    public bool IsHoldingWeapon => _heldItem is MeleeWeapon;
+    
+    public bool IsHoldingWeapon { get; private set; }
+    //public bool IsHoldingWeapon => _heldItem is WeaponItem;
 
     private void Start()
     {
@@ -50,24 +52,50 @@ public class GrabItem : MonoBehaviour
         if (itemInReticule != _reticule.ItemAtTimeOfSelection || !_isReachingForItem || (_itemLayerMask & (1 << itemInReticule.layer)) == 0) return;
 
         _handIkHandler.StopMovingRightHand();
+                
         //Better way to do this?
-        HeldItemGameObject = itemInReticule.transform.parent.parent.gameObject;
-        _heldItem = HeldItemGameObject.GetComponent<Item>();
+        GameObject itemGameObject = itemInReticule.transform.parent.parent.gameObject;
+        Item item = itemGameObject.GetComponent<Item>();
 
-        if (_heldItem == null) return;
+        if (item == null) return;
 
+        //Add item to characters hand
+        HeldItemGameObject = itemGameObject;
+        _heldItem = item;
         SetIsBeingHeldOnCurrentItem(true);
-
+        
+        //Reset animations
         _handIkHandler.TurnOffIKForRightArm();
         _isReachingForItem = false;
         animator.SetFloat(Constants.HandIKWeightAnimator, 0);
 
+        //Turn of physics
         other.attachedRigidbody.isKinematic = true;
         other.isTrigger = true;
-
-        if (IsHoldingWeapon)
+        //
+        if (_heldItem.ItemProperties.Type == ItemType.Weapon)
         {
-            _inventoryMediator.EquipWeaponFromPickup(_heldItem as MeleeWeapon);
+            Debug.Log("I'm holding a weapon");
+            IsHoldingWeapon = true;
+            
+            WeaponItem itemAsWeapon = _heldItem as WeaponItem;
+            if (itemAsWeapon == null) return;
+            
+            WeaponType weaponType = itemAsWeapon.WeaponProperties.Type;
+            switch (weaponType)
+            {
+                case WeaponType.Melee:
+                    _inventoryMediator.EquipWeaponFromPickup(_heldItem as MeleeWeapon);
+                    break;
+                case WeaponType.Gun:
+                    Debug.Log("Its a gun");
+                    _inventoryMediator.EquipWeaponFromPickup(_heldItem as GunWeapon);
+                    break;
+            }
+        }
+        else
+        {
+            IsHoldingItem = true;
         }
     }
 
@@ -140,6 +168,7 @@ public class GrabItem : MonoBehaviour
         HeldItemGameObject.transform.SetParent(null);
         HeldItemGameObject.gameObject.SetActive(false);
         HeldItemGameObject = null;
+        IsHoldingItem = false;;
         _heldItem = null;
     }
 
@@ -149,11 +178,19 @@ public class GrabItem : MonoBehaviour
         {
             _heldItem = handSocket.transform.GetChild(0).gameObject.GetComponent<Item>();
             HeldItemGameObject = _heldItem.gameObject;
+            
+            if (_heldItem != null)
+            {
+                IsHoldingWeapon = _heldItem.ItemProperties.Type == ItemType.Weapon;
+                IsHoldingItem = _heldItem.ItemProperties.Type != ItemType.Weapon;
+            }
         }
         else
         {
             _heldItem = null;
             HeldItemGameObject = null;
+            IsHoldingWeapon = false;
+            IsHoldingItem = false;
         }
     }
 }

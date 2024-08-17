@@ -4,8 +4,6 @@ public static class Constants
 {
     //Animator
     public static readonly int HandIKWeightAnimator = Animator.StringToHash("HandIKWeight");
-    public static readonly int IsWeaponEquipped = Animator.StringToHash("IsWeaponEquipped");
-    public static readonly int EquipWeaponTrigger = Animator.StringToHash("EquipWeaponTrigger");
     public static readonly int IsMouseDown = Animator.StringToHash("IsMouseHeld");
     public static readonly int SwingSpeed = Animator.StringToHash("SwingSpeed");
     public static readonly int SwingImpact = Animator.StringToHash("SwingImpact");
@@ -17,7 +15,6 @@ public static class Constants
     public static readonly int Horizontal = Animator.StringToHash("Horizontal");
     public static readonly int IsBackpackOut = Animator.StringToHash("IsBackpackOut");
     public static readonly int IsHoldingItem = Animator.StringToHash("IsHoldingItem");
-    public static readonly int PutItemAwayTrigger = Animator.StringToHash("PutItemAwayTrigger");
     public static readonly int TurnRightTrigger = Animator.StringToHash("TurnRightTrigger");
     public static readonly int TurnLeftTrigger = Animator.StringToHash("TurnLeftTrigger");
     public static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
@@ -32,6 +29,16 @@ public static class Constants
     public static readonly int ClimbHeight = Animator.StringToHash("ClimbHeight");
     public static readonly int IsSwimming = Animator.StringToHash("IsSwimming");
     public static readonly int WaterHeight = Animator.StringToHash("WaterHeight");
+    public static readonly int IsTwoHandedMeleeEquipped = Animator.StringToHash("IsTwoHandedMeleeEquipped");
+    public static readonly int IsTwoHandedGunEquipped = Animator.StringToHash("IsTwoHandedGunEquipped");
+    public static readonly int IsAimingGun = Animator.StringToHash("IsAimingGun");
+    
+    
+    //Equip Triggers
+    public static readonly int EquipTwoHandedMeleeTrigger = Animator.StringToHash("EquipTwoHandedMeleeTrigger");
+    public static readonly int UnEquipTwoHandedMeleeTrigger = Animator.StringToHash("UnEquipTwoHandedMeleeTrigger");
+    public static readonly int EquipTwoHandedGunTrigger = Animator.StringToHash("EquipTwoHandedGunTrigger");
+    public static readonly int UnEquipTwoHandedGunTrigger = Animator.StringToHash("UnEquipTwoHandedGunTrigger");
 
     public const float
         AnimatorDampingCoefficient =
