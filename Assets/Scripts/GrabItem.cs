@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Items;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -30,7 +31,7 @@ public class GrabItem : MonoBehaviour
     }
 
     public bool IsHoldingItem => HeldItemGameObject != null;
-    public bool IsHoldingWeapon => _heldItem is WeaponItem;
+    public bool IsHoldingWeapon => _heldItem is MeleeWeapon;
 
     private void Start()
     {
@@ -66,7 +67,7 @@ public class GrabItem : MonoBehaviour
 
         if (IsHoldingWeapon)
         {
-            _inventoryMediator.EquipWeaponFromPickup(_heldItem as WeaponItem);
+            _inventoryMediator.EquipWeaponFromPickup(_heldItem as MeleeWeapon);
         }
     }
 

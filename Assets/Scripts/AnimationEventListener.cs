@@ -25,6 +25,9 @@ public class AnimationEventListener : MonoBehaviour
     public delegate void OnChangeAnimationIkPlacementEvent(object sender, AnimationIKHandPlacementEventArgs e);
     public event OnChangeAnimationIkPlacementEvent OnChangeAnimationIkPlacement;
     
+    public delegate void EnableMeleeWeaponDamageEvent(object sender, EventArgs e);
+    public event EnableMeleeWeaponDamageEvent MeleeWeaponDamageEnabled;
+    
     private void ToggleWeaponEquipped()
     {
         OnWeaponEquip?.Invoke(this, EventArgs.Empty);
@@ -58,23 +61,33 @@ public class AnimationEventListener : MonoBehaviour
 
     private void StartAnimationIkPlacement(AnimationHandIkPlacement handPlacement)
     {
-        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, 1));
+        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, true));
     }
     
     private void EndAnimationIkPlacement(AnimationHandIkPlacement handPlacement)
     {
-        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, 0));
+        OnChangeAnimationIkPlacement?.Invoke(handPlacement, new AnimationIKHandPlacementEventArgs(handPlacement, false));
     }
-}
+
+     private void EnableMeleeWeaponDamage()
+     {
+         MeleeWeaponDamageEnabled?.Invoke(true, EventArgs.Empty);
+     }
+     
+     private void DisableMeleeWeaponDamage()
+     {
+         MeleeWeaponDamageEnabled?.Invoke(false, EventArgs.Empty);
+     }
+ }
 
 public class AnimationIKHandPlacementEventArgs : EventArgs
 {
     public  AnimationHandIkPlacement HandPlacement { get; }
     public bool TurnOn { get; }
 
-    public AnimationIKHandPlacementEventArgs(AnimationHandIkPlacement handPlacement, int starting)
+    public AnimationIKHandPlacementEventArgs(AnimationHandIkPlacement handPlacement, bool turnOn)
     {
         HandPlacement = handPlacement;
-        TurnOn = starting == 1;
+        TurnOn = turnOn;
     }
 }

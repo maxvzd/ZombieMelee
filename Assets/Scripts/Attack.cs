@@ -1,55 +1,69 @@
+using System;
 using System.Collections;
+using Items;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
 public class Attack : MonoBehaviour
 {
-    public Animator animator;
     public bool IsWeaponRaised { get; private set; }
     
     private bool _isSwingingWeapon;
-    private WeaponItem _weapon;
+    private MeleeWeapon _meleeWeapon;
     private InventoryMediator _inventoryMediator;
+    private AnimationEventListener _animationEventListener;
+    private Animator _animator;
     
     [SerializeField] private MultiAimConstraint armAimConstraint;
     
     private void Update()
     {
-        if (!_inventoryMediator.IsWeaponWielded || ReferenceEquals(_weapon, null) || _inventoryMediator.IsBackPackOpen) return;
+        if (!_inventoryMediator.IsWeaponWielded || ReferenceEquals(_meleeWeapon, null) || _inventoryMediator.IsBackPackOpen) return;
         
         if (Input.GetMouseButton(0) && !_isSwingingWeapon)
         {
             IsWeaponRaised = true;
-            _weapon.ReadyWeaponForSwing();
         }
         else if(IsWeaponRaised && !_isSwingingWeapon)
         {
             IsWeaponRaised = false;
             _isSwingingWeapon = true;
-            _weapon.PlayWeaponSwing();
+            _meleeWeapon.PlayWeaponSwing();
             armAimConstraint.weight = 0.5f;
             StartCoroutine(WeaponSwingCooldown());
         }
-        animator.SetBool(Constants.IsMouseDown, IsWeaponRaised);
+        _animator.SetBool(Constants.IsMouseDown, IsWeaponRaised);
     }
 
     private void Start()
     {
         _inventoryMediator = InventoryMediator.GetInventoryMediator(this);
         armAimConstraint.weight = 0f;
+
+        _animator = GetComponent<Animator>();
+        _animationEventListener = GetComponent<AnimationEventListener>();
+        _animationEventListener.MeleeWeaponDamageEnabled += OnEnableMeleeWeapon;
+    }
+    
+    private void OnEnableMeleeWeapon(object sender, EventArgs e)
+    {
+        if (sender is bool readyToDealDamage)
+        {
+            _meleeWeapon.ReadyToDealDamage(readyToDealDamage);
+        } 
     }
 
     private IEnumerator WeaponSwingCooldown()
     {
-        yield return new WaitForSeconds(_weapon.WeaponSwingTime);
+        yield return new WaitForSeconds(_meleeWeapon.WeaponSwingTime);
         
         armAimConstraint.weight = 0f;
         _isSwingingWeapon = false;
     }
 
-    public void SetEquippedWeapon(WeaponItem weapon)
+    public void SetEquippedWeapon(MeleeWeapon weapon)
     {
-        weapon.SetAnimator(animator);
-        _weapon = weapon;
+        weapon.SetAnimator(_animator);
+        _meleeWeapon = weapon;
     }
 }

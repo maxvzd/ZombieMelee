@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Items;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -8,22 +9,22 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject characterWieldedSocket;
     [SerializeField] private GameObject characterHolsterSocket;
-    [SerializeField] private TwoBoneIKConstraint equipArmIk;
+    //[SerializeField] private TwoBoneIKConstraint equipArmIk;
     [SerializeField] private GameObject equipArmTarget;
     [SerializeField] private GameObject ikTargetObject;
     [SerializeField] private AnimationEventListener animEventListener;
     
     private InventoryMediator _inventoryMediator;
     
-    private WeaponItem _weaponInHolster;
-    private WeaponItem _weaponInHand;
+    private MeleeWeapon _meleeWeaponInHolster;
+    private MeleeWeapon _meleeWeaponInHand;
     
     //private bool _shouldChangeHandWeight;
     //private readonly float _dampTime = 0.2f;
     //private float _targetIkWeight = 1f;
 
-    public bool HasWeaponInHand => _weaponInHand != null;
-    private bool HasWeaponInHolster => _weaponInHolster != null;
+    public bool HasWeaponInHand => _meleeWeaponInHand != null;
+    private bool HasWeaponInHolster => _meleeWeaponInHolster != null;
     private bool HasWeaponEquipped => characterWieldedSocket.transform.childCount > 0 || characterHolsterSocket.transform.childCount > 0;
 
 
@@ -65,9 +66,9 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
         
         if (hasWeaponInHand)
         {
-            _weaponInHand.HolsterItem();
+            _meleeWeaponInHand.HolsterItem();
 
-            var weaponInHandGameObject = _weaponInHand.gameObject;
+            var weaponInHandGameObject = _meleeWeaponInHand.gameObject;
             weaponInHandGameObject.transform.parent = characterHolsterSocket.transform;
             weaponInHandGameObject.transform.localPosition = Vector3.zero;
             weaponInHandGameObject.transform.localEulerAngles = Vector3.zero;
@@ -75,15 +76,15 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
 
         if (hasWeaponInHolster)
         {
-            _weaponInHolster.UnHolsterItem();
+            _meleeWeaponInHolster.UnHolsterItem();
 
-            var weaponInHolsterGameObject = _weaponInHolster.gameObject;
+            var weaponInHolsterGameObject = _meleeWeaponInHolster.gameObject;
             weaponInHolsterGameObject.transform.parent = characterWieldedSocket.transform;
             weaponInHolsterGameObject.transform.localPosition = Vector3.zero;
             weaponInHolsterGameObject.transform.localEulerAngles = Vector3.zero;
         }
         
-        (_weaponInHand, _weaponInHolster) = (_weaponInHolster, _weaponInHand);
+        (_meleeWeaponInHand, _meleeWeaponInHolster) = (_meleeWeaponInHolster, _meleeWeaponInHand);
         
         
         animator.SetBool(Constants.IsWeaponEquipped, HasWeaponInHand);
@@ -110,15 +111,15 @@ public class HolsterUnHolsterWeapon : MonoBehaviour
         // }
     }
 
-    public void EquipWeaponFromPickup(WeaponItem weaponItem)
+    public void EquipWeaponFromPickup(MeleeWeapon meleeWeapon)
     {
-        _weaponInHand = weaponItem;
+        _meleeWeaponInHand = meleeWeapon;
         animator.SetBool(Constants.IsWeaponEquipped, true);
     }
 
     public void UnEquipWeaponFromHand()
     {
         animator.SetBool(Constants.IsWeaponEquipped, false);
-        _weaponInHand = null;
+        _meleeWeaponInHand = null;
     }
 }

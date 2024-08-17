@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data;
+using Items;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,7 +18,7 @@ namespace UI
         {
             foreach (Item item in items)
             {
-                if (item is WeaponItem weapon)
+                if (item is MeleeWeapon weapon)
                 {
                     WeaponUIElement weaponUIElement = ItemUIElementCreator.Create(weapon);
                     _inventoryItems.Add(weaponUIElement);

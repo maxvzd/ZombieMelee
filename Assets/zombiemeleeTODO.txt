@@ -70,8 +70,11 @@ Climbing/Vaulting
         - Better way to hand OnAnimatorMove in PlayerCharacterState.cs (no flagging)
         - Check normal of hit to tell if the thing in front of us is a wall.
 
-https://www.ramsterzanimations.com/store-buy/p/epic-megajam-2022-free-anims
-https://www.ramsterzanimations.com/store-buy/p/ultimate-traversal-anims-fbx-only
-https://www.youtube.com/watch?v=Vg0L9aCRWPE
+https://www.ramsterzanimations.com/store-buy/p/epic-megajam-2022-free-anims - push anim
+https://www.ramsterzanimations.com/store-buy/p/ultimate-traversal-anims-fbx-only - expanded climb anims
+https://www.youtube.com/watch?v= - water shader
+https://assetstore.unity.com/packages/tools/animation/motion-warping-climb-interact-270046 - motion warping for unity?
+
+MotionWarping????
 
 	

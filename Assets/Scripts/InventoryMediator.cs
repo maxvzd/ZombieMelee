@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Items;
 using UI;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class InventoryMediator : MonoBehaviour
         _holsterController.UnEquipWeaponFromHand();
     }
 
-    public void EquipWeaponFromPickup(WeaponItem weapon)
+    public void EquipWeaponFromPickup(MeleeWeapon weapon)
     {
         _attackController.SetEquippedWeapon(weapon);
         _holsterController.EquipWeaponFromPickup(weapon);
