@@ -35,8 +35,6 @@ public class DealMeleeDamage : MonoBehaviour
     {
         if(!_readyToDealDamage || other.CompareTag("IgnoreWeapon") || ReferenceEquals(_animator, null)) return;
         
-        Debug.Log("Colliding with: " + other.gameObject.name);
-        
         _readyToDealDamage = false;
         Vector3 closestPointOfWeapon = _weaponCollider.gameObject.transform.parent.transform.position;
             
